@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>업종별 영어 대화 지도</title>
+<style>
+  :root {
+    --primary: #2E6FF2;
+    --primary-dark: #1E4FBF;
+    --bg: #F5F7FA;
+    --card: #FFFFFF;
+    --ink: #1B2430;
+    --sub: #6B7684;
+    --line: #E4E8EE;
+    --accent: #FF8A3D;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  /* ---------- Layout: mobile = stacked column, desktop = sidebar + map ---------- */
+  .layout {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--card);
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar { display: flex; flex-direction: column; }
+
+  @media (min-width: 900px) {
+    .layout { max-width: none; margin: 0; height: 100vh; flex-direction: row; overflow: hidden; }
+    .sidebar { width: 380px; flex: none; height: 100vh; overflow-y: auto; border-right: 1px solid var(--line); }
+    #map-wrap { flex: 1; height: 100vh; min-height: auto; }
+  }
+
+  header {
+    background: var(--primary);
+    color: #fff;
+    padding: 18px 18px 14px;
+  }
+  .title { font-size: 19px; font-weight: 800; }
+  .subtitle { font-size: 12.5px; opacity: 0.9; margin-top: 4px; }
+
+  .category-bar {
+    display: flex;
+    gap: 8px;
+    padding: 12px 14px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--line);
+    background: var(--card);
+  }
+  .cat-btn {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--line);
+    background: #fff;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--sub);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .cat-btn.active { border-color: var(--primary); color: var(--primary); background: #EEF3FF; }
+  .cat-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .region-search { display: flex; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  .region-search input {
+    flex: 1;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 9px 12px;
+    font-size: 13.5px;
+    font-family: inherit;
+  }
+  .region-search button {
+    border: none;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .results-list { display: none; }
+  .result-item { padding: 10px 14px; border-bottom: 1px solid var(--line); cursor: pointer; }
+  .result-item:hover { background: #FAFBFD; }
+  .result-name { font-size: 13.5px; font-weight: 700; }
+  .result-addr { font-size: 11.5px; color: var(--sub); margin-top: 2px; }
+  @media (min-width: 900px) {
+    .results-list { display: block; flex: 1; }
+  }
+
+  #map-wrap { position: relative; flex: 1; min-height: 340px; }
+  #map { position: absolute; inset: 0; }
+
+  .locate-btn {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 5;
+  }
+
+  .map-hint {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    color: var(--sub);
+    z-index: 5;
+    max-width: 70%;
+  }
+
+  /* ---------- Bottom sheet ---------- */
+  .sheet-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20,26,34,0.45);
+    z-index: 20;
+    display: none;
+  }
+  .sheet-overlay.open { display: block; }
+  .sheet {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 100%);
+    width: 100%;
+    max-width: 480px;
+    max-height: 82vh;
+    background: var(--card);
+    border-radius: 20px 20px 0 0;
+    z-index: 21;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.28s ease;
+    box-shadow: 0 -8px 30px rgba(0,0,0,0.18);
+  }
+  .sheet.open { transform: translate(-50%, 0); }
+  .sheet-handle { width: 40px; height: 4px; background: var(--line); border-radius: 2px; margin: 10px auto 6px; flex: none; }
+  .sheet-head { padding: 4px 18px 12px; border-bottom: 1px solid var(--line); flex: none; }
+  .sheet-place-name { font-size: 16.5px; font-weight: 800; }
+  .sheet-place-addr { font-size: 12.5px; color: var(--sub); margin-top: 3px; }
+  .sheet-close { position: absolute; right: 14px; top: 14px; background: none; border: none; font-size: 20px; color: var(--sub); cursor: pointer; }
+
+  .sheet-tabs { display: flex; border-bottom: 1px solid var(--line); flex: none; }
+  .tab-btn {
+    flex: 1;
+    padding: 11px;
+    background: none;
+    border: none;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--sub);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+  }
+  .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+  .tab-panel { flex: 1; overflow-y: auto; }
+  .tab-panel.hidden { display: none; }
+
+  .direction-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 14px;
+    padding: 12px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .info-row { padding: 0 14px 14px; font-size: 13px; color: var(--sub); }
+
+  #roadview { width: 100%; height: 280px; background: #eee; }
+  .roadview-empty { display: none; padding: 40px 20px; text-align: center; color: var(--sub); font-size: 13px; }
+  .roadview-empty.show { display: block; }
+
+  .scene-list { padding: 10px 14px 18px; }
+  .scene-item {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+  .scene-item-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    cursor: pointer;
+    background: #FAFBFD;
+  }
+  .scene-title-ko { font-size: 14px; font-weight: 700; }
+  .scene-title-en { font-size: 11.5px; color: var(--sub); margin-top: 2px; }
+  .scene-arrow { font-size: 12px; color: var(--sub); transition: transform 0.2s ease; }
+  .scene-item.open .scene-arrow { transform: rotate(180deg); }
+
+  .scene-body { display: none; padding: 4px 14px 14px; }
+  .scene-item.open .scene-body { display: block; }
+
+  .line { display: flex; gap: 8px; margin-bottom: 10px; }
+  .line .who {
+    flex: none;
+    width: 44px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 4px 0;
+    height: fit-content;
+  }
+  .line.clerk .who { background: var(--primary); }
+  .line.customer .who { background: var(--accent); }
+  .line .bubble { flex: 1; }
+  .line .en { font-size: 14px; font-weight: 700; line-height: 1.4; }
+  .line .ko { font-size: 12.5px; color: var(--sub); margin-top: 2px; line-height: 1.4; }
+
+  footer { text-align: center; font-size: 11px; color: #9AA3AF; padding: 10px; flex: none; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="layout" id="layout">
+  <aside class="sidebar">
+    <header>
+      <div class="title">업종별 영어 대화 지도</div>
+      <div class="subtitle">지도에서 가게를 선택하면, 그 자리에서 쓸 수 있는 영어 대화가 나옵니다</div>
+    </header>
+
+    <div class="category-bar" id="categoryBar">
+      <button class="cat-btn active" data-cat="CS2">🏪 편의점</button>
+      <button class="cat-btn" disabled title="준비 중">🍚 식당</button>
+      <button class="cat-btn" disabled title="준비 중">🏛 관공서</button>
+      <button class="cat-btn" disabled title="준비 중">⛽ 주유소</button>
+    </div>
+
+    <div class="region-search">
+      <input type="text" id="regionInput" placeholder="지역·주소 검색 (예: 평택시청)">
+      <button id="regionSearchBtn">🔍</button>
+    </div>
+
+    <div class="results-list" id="resultsList"></div>
+
+    <footer>편의점 프로토타입 · 마커를 눌러 정보·로드뷰·대화를 확인하세요</footer>
+  </aside>
+
+  <div id="map-wrap">
+    <div class="map-hint" id="mapHint">현재 위치 주변 편의점을 찾고 있습니다…</div>
+    <div id="map"></div>
+    <button class="locate-btn" id="locateBtn" title="내 위치로 이동">📍</button>
+  </div>
+</div>
+
+<div class="sheet-overlay" id="sheetOverlay"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-handle"></div>
+  <button class="sheet-close" id="sheetClose">✕</button>
+  <div class="sheet-head">
+    <div class="sheet-place-name" id="placeName">편의점</div>
+    <div class="sheet-place-addr" id="placeAddr"></div>
+  </div>
+
+  <div class="sheet-tabs">
+    <button class="tab-btn active" data-tab="info">정보</button>
+    <button class="tab-btn" data-tab="roadview">로드뷰</button>
+    <button class="tab-btn" data-tab="dialogue">대화</button>
+  </div>
+
+  <div class="tab-panel" id="tab-info">
+    <a class="direction-btn" id="directionBtn" target="_blank" rel="noopener">🧭 길찾기 (카카오맵 앱으로 연결)</a>
+    <div class="info-row" id="infoPhone"></div>
+  </div>
+
+  <div class="tab-panel hidden" id="tab-roadview">
+    <div id="roadview"></div>
+    <div class="roadview-empty" id="roadviewEmpty">이 위치는 로드뷰를 제공하지 않습니다.</div>
+  </div>
+
+  <div class="tab-panel hidden" id="tab-dialogue">
+    <div class="scene-list" id="sceneList"></div>
+  </div>
+</div>
+
+<script>
+/* 편의점에서 자주 쓰는 상황별 한/영 대화. 업종이 늘어나면 이 구조를 그대로 복제해서 CS2 자리에 다른 카테고리 코드를 넣으면 됩니다. */
+const SCENES = {
+  CS2: [
+    {
+      titleKo: "계산할 때",
+      titleEn: "Paying at the counter",
+      lines: [
+        { who: "clerk", en: "Is this everything for you today?", ko: "오늘은 이게 다인가요?" },
+        { who: "customer", en: "Yes, that's all.", ko: "네, 이게 다예요." },
+        { who: "clerk", en: "That'll be 4,500 won.", ko: "4,500원입니다." }
+      ]
+    },
+    {
+      titleKo: "봉투가 필요할 때",
+      titleEn: "Asking for a bag",
+      lines: [
+        { who: "customer", en: "Can I get a bag, please?", ko: "봉투 하나 주시겠어요?" },
+        { who: "clerk", en: "Sure, that'll be 100 won extra.", ko: "네, 봉투는 100원 추가됩니다." }
+      ]
+    },
+    {
+      titleKo: "데워달라고 할 때",
+      titleEn: "Asking to heat food",
+      lines: [
+        { who: "customer", en: "Could you heat this up, please?", ko: "이거 좀 데워주시겠어요?" },
+        { who: "clerk", en: "Sure. It'll take about a minute.", ko: "네, 1분 정도 걸립니다." }
+      ]
+    },
+    {
+      titleKo: "화장실 위치 물어보기",
+      titleEn: "Asking for the restroom",
+      lines: [
+        { who: "customer", en: "Excuse me, is there a restroom here?", ko: "실례합니다, 화장실 있나요?" },
+        { who: "clerk", en: "Yes, it's around the corner on the left.", ko: "네, 저쪽 모퉁이 왼쪽에 있습니다." }
+      ]
+    },
+    {
+      titleKo: "적립카드/포인트",
+      titleEn: "Membership points",
+      lines: [
+        { who: "clerk", en: "Do you have a membership card?", ko: "적립 카드 있으신가요?" },
+        { who: "customer", en: "No, I don't have one.", ko: "아니요, 없어요." }
+      ]
+    },
+    {
+      titleKo: "신분증 확인 (담배·주류)",
+      titleEn: "ID check for age-restricted items",
+      lines: [
+        { who: "clerk", en: "Can I see your ID, please?", ko: "신분증 좀 보여주시겠어요?" },
+        { who: "customer", en: "Sure, here you go.", ko: "네, 여기 있습니다." }
+      ]
+    },
+    {
+      titleKo: "결제 수단",
+      titleEn: "How would you like to pay?",
+      lines: [
+        { who: "clerk", en: "Cash or card?", ko: "현금으로 하시나요, 카드로 하시나요?" },
+        { who: "customer", en: "Card, please.", ko: "카드로 할게요." }
+      ]
+    },
+    {
+      titleKo: "영수증 필요 여부",
+      titleEn: "Asking about a receipt",
+      lines: [
+        { who: "clerk", en: "Would you like a receipt?", ko: "영수증 필요하세요?" },
+        { who: "customer", en: "No, thank you.", ko: "아니요, 괜찮습니다." }
+      ]
+    },
+    {
+      titleKo: "우산 대여하기",
+      titleEn: "Renting an umbrella",
+      lines: [
+        { who: "customer", en: "It's raining. Can I rent an umbrella here?", ko: "비가 오네요. 여기서 우산 빌릴 수 있나요?" },
+        { who: "clerk", en: "Sure, it's a 2,000 won deposit.", ko: "네, 보증금 2,000원입니다." }
+      ]
+    },
+    {
+      titleKo: "택배 보내기",
+      titleEn: "Sending a parcel",
+      lines: [
+        { who: "customer", en: "I'd like to send this package.", ko: "이 택배를 보내고 싶어요." },
+        { who: "clerk", en: "Sure, please fill out this form.", ko: "네, 이 양식을 작성해주세요." }
+      ]
+    },
+    {
+      titleKo: "화장실 비밀번호 물어보기",
+      titleEn: "Asking for the restroom code",
+      lines: [
+        { who: "customer", en: "Is there a code for the restroom?", ko: "화장실에 비밀번호가 있나요?" },
+        { who: "clerk", en: "Yes, it's on your receipt.", ko: "네, 영수증에 적혀 있어요." }
+      ]
+    },
+    {
+      titleKo: "ATM 위치 물어보기",
+      titleEn: "Asking where the ATM is",
+      lines: [
+        { who: "customer", en: "Do you have an ATM here?", ko: "여기 ATM 있나요?" },
+        { who: "clerk", en: "Yes, it's right next to the entrance.", ko: "네, 입구 바로 옆에 있어요." }
+      ]
+    },
+    {
+      titleKo: "흡연구역 안내",
+      titleEn: "Asking about the smoking area",
+      lines: [
+        { who: "customer", en: "Is there a smoking area nearby?", ko: "근처에 흡연구역 있나요?" },
+        { who: "clerk", en: "Yes, it's outside to the right.", ko: "네, 밖으로 나가서 오른쪽에 있어요." }
+      ]
+    },
+    {
+      titleKo: "반품·교환하기",
+      titleEn: "Returning or exchanging an item",
+      lines: [
+        { who: "customer", en: "I'd like to return this. It's the wrong item.", ko: "이거 반품하고 싶어요. 잘못 샀어요." },
+        { who: "clerk", en: "Do you have the receipt?", ko: "영수증 가지고 계신가요?" }
+      ]
+    },
+    {
+      titleKo: "유통기한 확인하기",
+      titleEn: "Checking the expiration date",
+      lines: [
+        { who: "customer", en: "Could you check the expiration date on this?", ko: "이거 유통기한 좀 확인해주시겠어요?" },
+        { who: "clerk", en: "It's good until tomorrow.", ko: "내일까지 괜찮습니다." }
+      ]
+    }
+  ]
+};
+
+const CATEGORY_LABEL = { CS2: "편의점" };
+const CATEGORY_ICON = { CS2: { emoji: "🏪", color: "#2E6FF2" } };
+const DEFAULT_CENTER = { lat: 36.9922, lng: 127.1127 }; // 경기도 평택시 (위치 정보를 못 가져올 때 기본값)
+
+let map, placesService, geocoder;
+let markers = [];
+let currentCat = "CS2";
+let currentSheetPlace = null;
+let roadviewInstance = null;
+let roadviewLoadedForKey = null;
+
+function buildMarkerImage(catCode) {
+  const meta = CATEGORY_ICON[catCode] || { emoji: "📍", color: "#2E6FF2" };
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="44" viewBox="0 0 36 44">
+    <path d="M18 0C8 0 0 8 0 18c0 13 18 26 18 26s18-13 18-26C36 8 28 0 18 0z" fill="${meta.color}"/>
+    <circle cx="18" cy="17" r="12.5" fill="#fff"/>
+    <text x="18" y="23" font-size="15" text-anchor="middle">${meta.emoji}</text>
+  </svg>`;
+  return new kakao.maps.MarkerImage(
+    "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg),
+    new kakao.maps.Size(36, 44),
+    { offset: new kakao.maps.Point(18, 44) }
+  );
+}
+
+function initMap(center) {
+  const container = document.getElementById("map");
+  map = new kakao.maps.Map(container, {
+    center: new kakao.maps.LatLng(center.lat, center.lng),
+    level: 4
+  });
+  placesService = new kakao.maps.services.Places();
+  geocoder = new kakao.maps.services.Geocoder();
+
+  map.addControl(new kakao.maps.MapTypeControl(), kakao.maps.ControlPosition.TOPRIGHT);
+
+  // 카카오맵은 flex 레이아웃으로 컨테이너 높이가 늦게 확정되면 초기 크기로 굳어버린다.
+  // 레이아웃이 안정된 뒤 한 번 더 relayout해서 실제 컨테이너 크기에 맞춘다.
+  requestAnimationFrame(() => {
+    map.relayout();
+    map.setCenter(new kakao.maps.LatLng(center.lat, center.lng));
+  });
+  window.addEventListener("resize", () => map.relayout());
+
+  new kakao.maps.Marker({
+    map,
+    position: new kakao.maps.LatLng(center.lat, center.lng),
+    image: new kakao.maps.MarkerImage(
+      "data:image/svg+xml;base64," + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"><circle cx="9" cy="9" r="7" fill="#2E6FF2" stroke="#fff" stroke-width="3"/></svg>'),
+      new kakao.maps.Size(18, 18)
+    )
+  });
+
+  searchNearby(center, currentCat);
+
+  kakao.maps.event.addListener(map, "idle", () => {
+    const c = map.getCenter();
+    searchNearby({ lat: c.getLat(), lng: c.getLng() }, currentCat);
+  });
+}
+
+function clearMarkers() {
+  markers.forEach(m => m.setMap(null));
+  markers = [];
+}
+
+function searchNearby(center, catCode) {
+  document.getElementById("mapHint").textContent = `${CATEGORY_LABEL[catCode]} 찾는 중…`;
+  placesService.categorySearch(catCode, (results, status) => {
+    if (status !== kakao.maps.services.Status.OK) {
+      document.getElementById("mapHint").textContent = "주변에서 찾지 못했습니다. 지도를 움직여보세요.";
+      renderResultsList([], catCode);
+      return;
+    }
+    clearMarkers();
+    const limited = results.slice(0, 15);
+    limited.forEach(place => {
+      const marker = new kakao.maps.Marker({
+        map,
+        position: new kakao.maps.LatLng(place.y, place.x),
+        image: buildMarkerImage(catCode)
+      });
+      kakao.maps.event.addListener(marker, "click", () => openSheet(place, catCode));
+      markers.push(marker);
+    });
+    renderResultsList(limited, catCode);
+    document.getElementById("mapHint").textContent =
+      results.length ? `주변 ${CATEGORY_LABEL[catCode]} ${results.length}곳 표시됨` : "주변에 결과가 없습니다.";
+  }, { location: new kakao.maps.LatLng(center.lat, center.lng), radius: 1200, size: 15 });
+}
+
+function renderResultsList(results, catCode) {
+  const list = document.getElementById("resultsList");
+  list.innerHTML = "";
+  results.forEach(place => {
+    const item = document.createElement("div");
+    item.className = "result-item";
+    item.innerHTML = `
+      <div class="result-name">${place.place_name}</div>
+      <div class="result-addr">${place.road_address_name || place.address_name || ""}</div>
+    `;
+    item.addEventListener("click", () => {
+      map.setCenter(new kakao.maps.LatLng(place.y, place.x));
+      openSheet(place, catCode);
+    });
+    list.appendChild(item);
+  });
+}
+
+function searchRegion(query) {
+  if (!query || !query.trim()) return;
+  document.getElementById("mapHint").textContent = "지역 검색 중…";
+  geocoder.addressSearch(query, (result, status) => {
+    if (status === kakao.maps.services.Status.OK && result[0]) {
+      map.setCenter(new kakao.maps.LatLng(parseFloat(result[0].y), parseFloat(result[0].x)));
+      return;
+    }
+    placesService.keywordSearch(query, (data, kstatus) => {
+      if (kstatus === kakao.maps.services.Status.OK && data[0]) {
+        map.setCenter(new kakao.maps.LatLng(parseFloat(data[0].y), parseFloat(data[0].x)));
+      } else {
+        document.getElementById("mapHint").textContent = "검색 결과가 없습니다. 다른 지역명으로 시도해보세요.";
+      }
+    });
+  });
+}
+document.getElementById("regionSearchBtn").addEventListener("click", () => {
+  searchRegion(document.getElementById("regionInput").value);
+});
+document.getElementById("regionInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") searchRegion(e.target.value);
+});
+
+function buildDirectionUrl(place) {
+  return `https://map.kakao.com/link/to/${encodeURIComponent(place.place_name)},${place.y},${place.x}`;
+}
+
+function switchTab(tabName) {
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === tabName));
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.toggle("hidden", p.id !== `tab-${tabName}`));
+  if (tabName === "roadview") loadRoadview(currentSheetPlace);
+}
+document.querySelectorAll(".tab-btn").forEach(btn => btn.addEventListener("click", () => switchTab(btn.dataset.tab)));
+
+function loadRoadview(place) {
+  if (!place) return;
+  const key = `${place.x},${place.y}`;
+  if (roadviewLoadedForKey === key) return;
+  roadviewLoadedForKey = key;
+
+  const container = document.getElementById("roadview");
+  const emptyMsg = document.getElementById("roadviewEmpty");
+  container.classList.remove("hidden");
+  emptyMsg.classList.remove("show");
+
+  if (!roadviewInstance) roadviewInstance = new kakao.maps.Roadview(container);
+  const roadviewClient = new kakao.maps.RoadviewClient();
+  const position = new kakao.maps.LatLng(place.y, place.x);
+  roadviewClient.getNearestPanoId(position, 50, panoId => {
+    if (panoId === null) {
+      container.classList.add("hidden");
+      emptyMsg.classList.add("show");
+      return;
+    }
+    roadviewInstance.setPanoId(panoId, position);
+  });
+}
+
+function openSheet(place, catCode) {
+  currentSheetPlace = place;
+  roadviewLoadedForKey = null;
+  switchTab("info");
+
+  document.getElementById("placeName").textContent = place.place_name;
+  document.getElementById("placeAddr").textContent = place.road_address_name || place.address_name || "";
+  document.getElementById("infoPhone").textContent = place.phone ? `📞 ${place.phone}` : "전화번호 정보 없음";
+  document.getElementById("directionBtn").href = buildDirectionUrl(place);
+
+  const list = document.getElementById("sceneList");
+  list.innerHTML = "";
+  (SCENES[catCode] || []).forEach(scene => {
+    const item = document.createElement("div");
+    item.className = "scene-item";
+    item.innerHTML = `
+      <div class="scene-item-head">
+        <div>
+          <div class="scene-title-ko">${scene.titleKo}</div>
+          <div class="scene-title-en">${scene.titleEn}</div>
+        </div>
+        <div class="scene-arrow">▾</div>
+      </div>
+      <div class="scene-body">
+        ${scene.lines.map(l => `
+          <div class="line ${l.who === "clerk" ? "clerk" : "customer"}">
+            <div class="who">${l.who === "clerk" ? "점원" : "손님"}</div>
+            <div class="bubble">
+              <div class="en">${l.en}</div>
+              <div class="ko">${l.ko}</div>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+    item.querySelector(".scene-item-head").addEventListener("click", () => {
+      item.classList.toggle("open");
+    });
+    list.appendChild(item);
+  });
+
+  document.getElementById("sheet").classList.add("open");
+  document.getElementById("sheetOverlay").classList.add("open");
+}
+
+function closeSheet() {
+  document.getElementById("sheet").classList.remove("open");
+  document.getElementById("sheetOverlay").classList.remove("open");
+}
+document.getElementById("sheetClose").addEventListener("click", closeSheet);
+document.getElementById("sheetOverlay").addEventListener("click", closeSheet);
+
+document.getElementById("locateBtn").addEventListener("click", () => {
+  locateUser(true);
+});
+
+function locateUser(recenter) {
+  if (!navigator.geolocation) {
+    if (!map) initMap(DEFAULT_CENTER);
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const center = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      if (!map) {
+        initMap(center);
+      } else if (recenter) {
+        map.setCenter(new kakao.maps.LatLng(center.lat, center.lng));
+      }
+    },
+    () => {
+      if (!map) initMap(DEFAULT_CENTER);
+    },
+    { timeout: 5000 }
+  );
+}
+
+function loadKakaoSdk(appKey) {
+  const script = document.createElement("script");
+  script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${appKey}&autoload=false&libraries=services`;
+  script.onload = () => kakao.maps.load(() => locateUser(false));
+  document.head.appendChild(script);
+}
+
+loadKakaoSdk("c6f8e6e19945b387fd533e6e8d98735b");
+</script>
+</body>
+</html>
