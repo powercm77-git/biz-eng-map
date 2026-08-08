@@ -56,13 +56,14 @@
 
   .category-bar {
     display: flex;
+    align-items: center;
     gap: 8px;
     padding: 10px 14px;
-    overflow-x: auto;
     border-bottom: 1px solid var(--line);
     background: var(--card);
   }
-  .cat-btn {
+  .cat-row { display: flex; gap: 8px; overflow-x: auto; flex: 1; min-width: 0; }
+  .cat-chip {
     flex: none;
     display: flex;
     align-items: center;
@@ -77,8 +78,64 @@
     cursor: pointer;
     white-space: nowrap;
   }
-  .cat-btn.active { border-color: var(--primary); color: var(--primary); background: #EEF3FF; }
-  .cat-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .cat-chip.active { border-color: var(--primary); color: var(--primary); background: #EEF3FF; }
+
+  .cat-more-btn {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    border: 1.5px solid var(--line);
+    background: #fff;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--sub);
+    cursor: pointer;
+  }
+  .cat-more-btn .cat-ic { font-size: 16px; line-height: 1; }
+  .cat-more-btn.open { border-color: var(--primary); color: var(--primary); background: #EEF3FF; }
+
+  .cat-panel {
+    max-height: 0;
+    overflow: hidden;
+    border-bottom: 0 solid var(--line);
+    background: var(--card);
+    transition: max-height 0.2s ease;
+  }
+  .cat-panel.open { max-height: 400px; border-bottom-width: 1px; overflow-y: auto; }
+
+  .cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; padding: 12px 8px; }
+  .cat-grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 2px;
+    border-radius: 12px;
+    border: none;
+    background: none;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .cat-grid-ic {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    font-size: 17px;
+  }
+  .cat-grid-item.active .cat-grid-ic { border-color: var(--primary); background: #EEF3FF; }
+  .cat-grid-item.active { color: var(--primary); }
+  .cat-grid-item:disabled { opacity: 0.4; cursor: not-allowed; }
 
   /* 검색·내위치·지도·위성을 한 줄에: 지도 위에 떠다니는 컨트롤 대신 항상 보이는 툴바 */
   .toolbar-wrap { position: relative; border-bottom: 1px solid var(--line); }
@@ -225,7 +282,20 @@
     font-size: 14px;
     text-decoration: none;
   }
+  .direction-btn.secondary {
+    margin-top: -6px;
+    background: #fff;
+    color: var(--primary);
+    border: 1.5px solid var(--primary);
+  }
+
   .info-row { padding: 0 14px 14px; font-size: 13px; color: var(--sub); }
+
+  .lib-seats { margin: 0 14px 14px; padding: 12px; background: #F5F3FF; border: 1px solid #DCD3FA; border-radius: 12px; }
+  .lib-seats-title { font-weight: 700; font-size: 13px; margin-bottom: 8px; color: #5B3FC7; }
+  .lib-seat-row { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; padding: 6px 0; border-top: 1px solid #E7E1FA; }
+  .lib-seat-row:first-child { border-top: none; }
+  .lib-seat-empty { font-size: 13px; color: var(--sub); }
 
   #roadview { width: 100%; height: 280px; background: #eee; }
   .roadview-empty { display: none; padding: 40px 20px; text-align: center; color: var(--sub); font-size: 13px; }
@@ -284,10 +354,30 @@
     </header>
 
     <div class="category-bar" id="categoryBar">
-      <button class="cat-btn active" data-cat="CS2">🏪 편의점</button>
-      <button class="cat-btn" disabled title="준비 중">🍚 식당</button>
-      <button class="cat-btn" disabled title="준비 중">🏛 관공서</button>
-      <button class="cat-btn" disabled title="준비 중">⛽ 주유소</button>
+      <div class="cat-row" id="catRow">
+        <button class="cat-chip active" data-cat="CS2">🏪 편의점</button>
+        <button class="cat-chip" data-cat="OL7">⛽ 주유소</button>
+        <button class="cat-chip" data-cat="LIB">📚 도서관</button>
+        <button class="cat-chip" data-cat="FD6">🍽️ 음식점</button>
+      </div>
+      <button class="cat-more-btn" id="catMoreBtn"><span class="cat-ic">⋯</span><span>주변</span></button>
+    </div>
+    <div class="cat-panel" id="catPanel">
+      <div class="cat-grid" id="catGrid">
+        <button class="cat-grid-item active" data-cat="CS2"><span class="cat-grid-ic">🏪</span>편의점</button>
+        <button class="cat-grid-item" data-cat="OL7"><span class="cat-grid-ic">⛽</span>주유소</button>
+        <button class="cat-grid-item" data-cat="LIB"><span class="cat-grid-ic">📚</span>도서관</button>
+        <button class="cat-grid-item" data-cat="FD6"><span class="cat-grid-ic">🍽️</span>음식점</button>
+        <button class="cat-grid-item" data-cat="CE7" disabled title="준비 중"><span class="cat-grid-ic">☕</span>카페</button>
+        <button class="cat-grid-item" data-cat="HP8" disabled title="준비 중"><span class="cat-grid-ic">🏥</span>병원</button>
+        <button class="cat-grid-item" data-cat="PM9" disabled title="준비 중"><span class="cat-grid-ic">💊</span>약국</button>
+        <button class="cat-grid-item" data-cat="MT1" disabled title="준비 중"><span class="cat-grid-ic">🛒</span>대형마트</button>
+        <button class="cat-grid-item" data-cat="BK9" disabled title="준비 중"><span class="cat-grid-ic">🏦</span>은행</button>
+        <button class="cat-grid-item" data-cat="PK6" disabled title="준비 중"><span class="cat-grid-ic">🅿️</span>주차장</button>
+        <button class="cat-grid-item" data-cat="AD5" disabled title="준비 중"><span class="cat-grid-ic">🏨</span>숙박</button>
+        <button class="cat-grid-item" data-cat="SW8" disabled title="준비 중"><span class="cat-grid-ic">🚇</span>지하철</button>
+        <button class="cat-grid-item" data-cat="CT1" disabled title="준비 중"><span class="cat-grid-ic">🎭</span>문화시설</button>
+      </div>
     </div>
 
     <div class="toolbar-wrap">
@@ -333,7 +423,12 @@
 
   <div class="tab-panel" id="tab-info">
     <a class="direction-btn" id="directionBtn" target="_blank" rel="noopener">🧭 길찾기 (카카오맵 앱으로 연결)</a>
+    <a class="direction-btn secondary hidden" id="priceLinkBtn" target="_blank" rel="noopener">⛽ 실시간 유가 보기 (카카오맵)</a>
     <div class="info-row" id="infoPhone"></div>
+    <div class="lib-seats hidden" id="libSeats">
+      <div class="lib-seats-title">📖 실시간 열람실 좌석</div>
+      <div id="libSeatsBody"></div>
+    </div>
   </div>
 
   <div class="tab-panel hidden" id="tab-roadview">
@@ -471,11 +566,388 @@ const SCENES = {
         { who: "clerk", en: "It's good until tomorrow.", ko: "내일까지 괜찮습니다." }
       ]
     }
+  ],
+  OL7: [
+    {
+      titleKo: "가득 채워달라고 할 때",
+      titleEn: "Asking to fill it up",
+      lines: [
+        { who: "customer", en: "Fill it up, please.", ko: "가득 채워주세요." },
+        { who: "clerk", en: "Sure. Regular gasoline, right?", ko: "네. 일반 휘발유 맞으시죠?" },
+        { who: "customer", en: "Yes, that's right.", ko: "네, 맞아요." }
+      ]
+    },
+    {
+      titleKo: "금액을 정해서 주유할 때",
+      titleEn: "Asking for a fixed amount",
+      lines: [
+        { who: "customer", en: "Could I get 50,000 won worth, please?", ko: "5만원어치만 넣어주시겠어요?" },
+        { who: "clerk", en: "Sure, 50,000 won of gasoline coming up.", ko: "네, 휘발유 5만원어치 넣어드릴게요." }
+      ]
+    },
+    {
+      titleKo: "유종을 확인할 때",
+      titleEn: "Confirming the fuel type",
+      lines: [
+        { who: "clerk", en: "Is it gasoline or diesel?", ko: "휘발유예요, 경유예요?" },
+        { who: "customer", en: "Diesel, please.", ko: "경유로 넣어주세요." }
+      ]
+    },
+    {
+      titleKo: "셀프 주유를 이용할 때",
+      titleEn: "Using the self-service pump",
+      lines: [
+        { who: "customer", en: "Is this a self-service pump?", ko: "여기 셀프 주유인가요?" },
+        { who: "clerk", en: "Yes, just insert your card and follow the screen.", ko: "네, 카드 넣고 화면 안내대로 하시면 됩니다." }
+      ]
+    },
+    {
+      titleKo: "카드로 결제할 때",
+      titleEn: "Paying by card",
+      lines: [
+        { who: "clerk", en: "How would you like to pay?", ko: "결제는 어떻게 도와드릴까요?" },
+        { who: "customer", en: "By card, please.", ko: "카드로 할게요." },
+        { who: "clerk", en: "Okay, that'll be 45,000 won.", ko: "네, 45,000원입니다." }
+      ]
+    },
+    {
+      titleKo: "세차 서비스를 제안받을 때",
+      titleEn: "Being offered a car wash",
+      lines: [
+        { who: "clerk", en: "Would you like a car wash too? It's 5,000 won.", ko: "세차도 하시겠어요? 5천원입니다." },
+        { who: "customer", en: "No thanks, just the gas today.", ko: "아니요, 오늘은 주유만 할게요." }
+      ]
+    },
+    {
+      titleKo: "타이어 공기압을 확인해달라고 할 때",
+      titleEn: "Asking to check tire pressure",
+      lines: [
+        { who: "customer", en: "Could you check the tire pressure while you're at it?", ko: "겸사겸사 타이어 공기압도 좀 봐주시겠어요?" },
+        { who: "clerk", en: "Sure, give me a minute.", ko: "네, 잠시만요." }
+      ]
+    },
+    {
+      titleKo: "앞유리를 닦아달라고 할 때",
+      titleEn: "Asking to clean the windshield",
+      lines: [
+        { who: "customer", en: "Could you clean the windshield, please?", ko: "앞유리 좀 닦아주시겠어요?" },
+        { who: "clerk", en: "Of course, no problem.", ko: "네, 그럼요." }
+      ]
+    },
+    {
+      titleKo: "적립카드를 낼 때",
+      titleEn: "Using a membership card",
+      lines: [
+        { who: "customer", en: "I have a membership card. Can I use points here?", ko: "적립카드 있는데, 포인트 여기서 쓸 수 있나요?" },
+        { who: "clerk", en: "Yes, I'll scan it for you.", ko: "네, 스캔해드릴게요." }
+      ]
+    },
+    {
+      titleKo: "화장실 위치를 물어볼 때",
+      titleEn: "Asking where the restroom is",
+      lines: [
+        { who: "customer", en: "Is there a restroom I can use?", ko: "화장실 좀 써도 될까요?" },
+        { who: "clerk", en: "Yes, it's around the corner on the left.", ko: "네, 모퉁이 돌아서 왼쪽에 있어요." }
+      ]
+    },
+    {
+      titleKo: "영수증을 받을 때",
+      titleEn: "Getting a receipt",
+      lines: [
+        { who: "customer", en: "Can I get a receipt, please?", ko: "영수증 주시겠어요?" },
+        { who: "clerk", en: "Sure, here you go.", ko: "네, 여기 있습니다." }
+      ]
+    },
+    {
+      titleKo: "LPG 충전을 요청할 때",
+      titleEn: "Asking for LPG",
+      lines: [
+        { who: "customer", en: "Can you fill it up with LPG?", ko: "LPG로 가득 채워주시겠어요?" },
+        { who: "clerk", en: "Sure, please open the fuel door for me.", ko: "네, 주유구 좀 열어주시겠어요?" }
+      ]
+    },
+    {
+      titleKo: "워셔액을 보충해달라고 할 때",
+      titleEn: "Asking to refill washer fluid",
+      lines: [
+        { who: "customer", en: "Could you check the washer fluid too?", ko: "워셔액도 좀 봐주시겠어요?" },
+        { who: "clerk", en: "It's a bit low. I'll top it up.", ko: "조금 부족하네요. 채워드릴게요." }
+      ]
+    },
+    {
+      titleKo: "대기 중일 때",
+      titleEn: "Waiting in line",
+      lines: [
+        { who: "customer", en: "Is it going to take long? There's a line.", ko: "많이 기다려야 하나요? 줄이 있어서요." },
+        { who: "clerk", en: "Just a couple of minutes. Thanks for waiting.", ko: "2~3분이면 됩니다. 기다려주셔서 감사해요." }
+      ]
+    },
+    {
+      titleKo: "주유를 마치고 나갈 때",
+      titleEn: "Finishing up and leaving",
+      lines: [
+        { who: "clerk", en: "All done. Drive safely.", ko: "다 됐습니다. 안전 운전하세요." },
+        { who: "customer", en: "Thank you, have a good day.", ko: "감사합니다, 좋은 하루 되세요." }
+      ]
+    }
+  ],
+  LIB: [
+    {
+      titleKo: "도서관 회원증을 만들 때",
+      titleEn: "Making a library card",
+      lines: [
+        { who: "customer", en: "I'd like to make a library card, please.", ko: "도서관 회원증을 만들고 싶어요." },
+        { who: "clerk", en: "Sure, could I see your ID?", ko: "네, 신분증 좀 보여주시겠어요?" }
+      ]
+    },
+    {
+      titleKo: "책을 대출할 때",
+      titleEn: "Checking out a book",
+      lines: [
+        { who: "customer", en: "I'd like to check out these books.", ko: "이 책들 대출하고 싶어요." },
+        { who: "clerk", en: "Sure, please scan your card here.", ko: "네, 여기에 카드를 스캔해주세요." }
+      ]
+    },
+    {
+      titleKo: "반납 기한을 확인할 때",
+      titleEn: "Checking the due date",
+      lines: [
+        { who: "customer", en: "When is this due?", ko: "이거 반납 기한이 언제예요?" },
+        { who: "clerk", en: "It's due in two weeks, on the 22nd.", ko: "2주 후, 22일까지입니다." }
+      ]
+    },
+    {
+      titleKo: "대출 기간을 연장할 때",
+      titleEn: "Renewing a book",
+      lines: [
+        { who: "customer", en: "Can I renew this book?", ko: "이 책 연장할 수 있을까요?" },
+        { who: "clerk", en: "Let me check. Yes, it's been renewed for one more week.", ko: "확인해볼게요. 네, 일주일 더 연장됐습니다." }
+      ]
+    },
+    {
+      titleKo: "책 위치를 물어볼 때",
+      titleEn: "Asking where to find a book",
+      lines: [
+        { who: "customer", en: "Could you tell me where I can find this book?", ko: "이 책 어디서 찾을 수 있는지 알려주시겠어요?" },
+        { who: "clerk", en: "It's on the third floor, in the literature section.", ko: "3층 문학 코너에 있습니다." }
+      ]
+    },
+    {
+      titleKo: "예약한 책을 찾으러 왔을 때",
+      titleEn: "Picking up a reserved book",
+      lines: [
+        { who: "customer", en: "I reserved a book online. Is it ready?", ko: "온라인으로 책을 예약했는데, 준비됐나요?" },
+        { who: "clerk", en: "Yes, it's on the reserved shelf under your name.", ko: "네, 예약 도서 코너에 성함으로 있습니다." }
+      ]
+    },
+    {
+      titleKo: "열람실 좌석을 문의할 때",
+      titleEn: "Asking about reading room seats",
+      lines: [
+        { who: "customer", en: "Are there any seats available in the reading room?", ko: "열람실에 자리 있나요?" },
+        { who: "clerk", en: "Yes, there are a few open seats on the second floor.", ko: "네, 2층에 빈자리가 몇 개 있어요." }
+      ]
+    },
+    {
+      titleKo: "노트북 사용 여부를 물어볼 때",
+      titleEn: "Asking about using a laptop",
+      lines: [
+        { who: "customer", en: "Can I use my laptop in here?", ko: "여기서 노트북 써도 되나요?" },
+        { who: "clerk", en: "Yes, but please use headphones for sound.", ko: "네, 소리는 이어폰으로 들어주세요." }
+      ]
+    },
+    {
+      titleKo: "조용히 해달라는 안내를 받을 때",
+      titleEn: "Being asked to keep it down",
+      lines: [
+        { who: "clerk", en: "Could you keep your voice down a bit? This is a quiet zone.", ko: "목소리를 조금만 낮춰주시겠어요? 여긴 정숙 구역이라서요." },
+        { who: "customer", en: "Oh, sorry about that.", ko: "아, 죄송해요." }
+      ]
+    },
+    {
+      titleKo: "복사·프린트를 이용할 때",
+      titleEn: "Using the printer or copier",
+      lines: [
+        { who: "customer", en: "Is there a printer I can use here?", ko: "여기 프린트할 수 있는 곳 있나요?" },
+        { who: "clerk", en: "Yes, it's next to the front desk. It's 100 won per page.", ko: "네, 안내데스크 옆에 있어요. 한 장에 100원입니다." }
+      ]
+    },
+    {
+      titleKo: "무인 반납함 위치를 물어볼 때",
+      titleEn: "Asking about the book drop",
+      lines: [
+        { who: "customer", en: "Where's the book drop for after-hours returns?", ko: "폐관 후 반납할 수 있는 반납함이 어디 있나요?" },
+        { who: "clerk", en: "It's right outside the main entrance.", ko: "정문 바로 밖에 있습니다." }
+      ]
+    },
+    {
+      titleKo: "연체료를 안내받을 때",
+      titleEn: "Being told about a late fee",
+      lines: [
+        { who: "clerk", en: "This book is three days overdue, so there's a small late fee.", ko: "이 책이 3일 연체됐어요, 그래서 연체료가 조금 있습니다." },
+        { who: "customer", en: "Okay, how much is it?", ko: "네, 얼마인가요?" }
+      ]
+    },
+    {
+      titleKo: "스터디룸을 예약할 때",
+      titleEn: "Reserving a study room",
+      lines: [
+        { who: "customer", en: "I'd like to reserve a study room for two hours.", ko: "스터디룸을 2시간 예약하고 싶어요." },
+        { who: "clerk", en: "Sure, how many people will be using it?", ko: "네, 몇 명이서 이용하실 건가요?" }
+      ]
+    },
+    {
+      titleKo: "와이파이 비밀번호를 물어볼 때",
+      titleEn: "Asking for the Wi-Fi password",
+      lines: [
+        { who: "customer", en: "Could I get the Wi-Fi password?", ko: "와이파이 비밀번호 좀 알 수 있을까요?" },
+        { who: "clerk", en: "It's posted on the wall by the desk.", ko: "안내데스크 옆 벽에 붙어 있어요." }
+      ]
+    },
+    {
+      titleKo: "이용 시간을 물어볼 때",
+      titleEn: "Asking about opening hours",
+      lines: [
+        { who: "customer", en: "What time does the library close today?", ko: "오늘 도서관 몇 시에 닫나요?" },
+        { who: "clerk", en: "We close at 6 PM on weekdays.", ko: "평일엔 오후 6시에 닫습니다." }
+      ]
+    }
+  ],
+  FD6: [
+    {
+      titleKo: "자리 안내 받을 때",
+      titleEn: "Getting seated",
+      lines: [
+        { who: "clerk", en: "Table for how many?", ko: "몇 분이세요?" },
+        { who: "customer", en: "Two, please.", ko: "두 명이요." },
+        { who: "clerk", en: "This way, please.", ko: "이쪽으로 오세요." }
+      ]
+    },
+    {
+      titleKo: "메뉴를 추천받을 때",
+      titleEn: "Asking for a recommendation",
+      lines: [
+        { who: "customer", en: "What do you recommend here?", ko: "여기 뭐가 맛있어요?" },
+        { who: "clerk", en: "The bulgogi is our best seller.", ko: "불고기가 제일 잘 나가요." }
+      ]
+    },
+    {
+      titleKo: "주문할 때",
+      titleEn: "Placing an order",
+      lines: [
+        { who: "clerk", en: "Are you ready to order?", ko: "주문하시겠어요?" },
+        { who: "customer", en: "Yes, I'll have the kimchi stew.", ko: "네, 김치찌개 주세요." }
+      ]
+    },
+    {
+      titleKo: "맵기 조절을 요청할 때",
+      titleEn: "Asking for less spice",
+      lines: [
+        { who: "customer", en: "Could you make it less spicy, please?", ko: "덜 맵게 해주시겠어요?" },
+        { who: "clerk", en: "Sure, no problem.", ko: "네, 그렇게 해드릴게요." }
+      ]
+    },
+    {
+      titleKo: "알레르기를 말할 때",
+      titleEn: "Mentioning a food allergy",
+      lines: [
+        { who: "customer", en: "I'm allergic to peanuts. Does this dish have any?", ko: "저 땅콩 알레르기가 있는데, 이 음식에 들어가나요?" },
+        { who: "clerk", en: "No, it doesn't. You should be fine.", ko: "아니요, 안 들어가요. 괜찮으실 거예요." }
+      ]
+    },
+    {
+      titleKo: "반찬을 더 달라고 할 때",
+      titleEn: "Asking for more side dishes",
+      lines: [
+        { who: "customer", en: "Could we get more of this side dish, please?", ko: "이 반찬 좀 더 주시겠어요?" },
+        { who: "clerk", en: "Sure, I'll bring some right away.", ko: "네, 바로 가져다드릴게요." }
+      ]
+    },
+    {
+      titleKo: "물을 더 달라고 할 때",
+      titleEn: "Asking for more water",
+      lines: [
+        { who: "customer", en: "Could we get some more water, please?", ko: "물 좀 더 주시겠어요?" },
+        { who: "clerk", en: "Of course, one moment.", ko: "네, 잠시만요." }
+      ]
+    },
+    {
+      titleKo: "앞접시를 요청할 때",
+      titleEn: "Asking for extra plates",
+      lines: [
+        { who: "customer", en: "Could we get an extra plate?", ko: "앞접시 하나 더 주시겠어요?" },
+        { who: "clerk", en: "Sure, here you go.", ko: "네, 여기 있습니다." }
+      ]
+    },
+    {
+      titleKo: "남은 음식을 포장할 때",
+      titleEn: "Asking for a to-go box",
+      lines: [
+        { who: "customer", en: "Could I get this to go, please?", ko: "이거 포장해주시겠어요?" },
+        { who: "clerk", en: "Sure, I'll box it up for you.", ko: "네, 포장해드릴게요." }
+      ]
+    },
+    {
+      titleKo: "대기 시간을 물어볼 때",
+      titleEn: "Asking about the wait time",
+      lines: [
+        { who: "customer", en: "How long is the wait for a table?", ko: "자리 대기 시간이 얼마나 되나요?" },
+        { who: "clerk", en: "About 15 minutes right now.", ko: "지금은 15분 정도 걸려요." }
+      ]
+    },
+    {
+      titleKo: "아이 의자를 요청할 때",
+      titleEn: "Asking for a high chair",
+      lines: [
+        { who: "customer", en: "Could we get a high chair for our child?", ko: "아이 의자 하나 주시겠어요?" },
+        { who: "clerk", en: "Sure, I'll bring one over.", ko: "네, 가져다드릴게요." }
+      ]
+    },
+    {
+      titleKo: "주문이 잘못 나왔을 때",
+      titleEn: "Pointing out a wrong order",
+      lines: [
+        { who: "customer", en: "Excuse me, I think this isn't what I ordered.", ko: "저, 제가 주문한 게 아닌 것 같아요." },
+        { who: "clerk", en: "I'm so sorry, let me check and fix that right away.", ko: "정말 죄송합니다, 바로 확인해서 바꿔드릴게요." }
+      ]
+    },
+    {
+      titleKo: "계산서를 요청할 때",
+      titleEn: "Asking for the check",
+      lines: [
+        { who: "customer", en: "Could we get the check, please?", ko: "계산서 좀 주시겠어요?" },
+        { who: "clerk", en: "Sure, I'll bring it right over.", ko: "네, 바로 가져다드릴게요." }
+      ]
+    },
+    {
+      titleKo: "따로 계산할 때",
+      titleEn: "Splitting the bill",
+      lines: [
+        { who: "customer", en: "Could we pay separately, please?", ko: "따로따로 계산할 수 있을까요?" },
+        { who: "clerk", en: "Sure, that's no problem.", ko: "네, 가능합니다." }
+      ]
+    },
+    {
+      titleKo: "맛있었다고 인사할 때",
+      titleEn: "Thanking the staff on the way out",
+      lines: [
+        { who: "customer", en: "That was delicious, thank you.", ko: "정말 맛있었어요, 감사합니다." },
+        { who: "clerk", en: "Thank you, please come again.", ko: "감사합니다, 또 오세요." }
+      ]
+    }
   ]
 };
 
-const CATEGORY_LABEL = { CS2: "편의점" };
-const CATEGORY_ICON = { CS2: { emoji: "🏪", color: "#2E6FF2" } };
+const CATEGORY_LABEL = { CS2: "편의점", OL7: "주유소", LIB: "도서관", FD6: "음식점" };
+const CATEGORY_ICON = {
+  CS2: { emoji: "🏪", color: "#2E6FF2" },
+  OL7: { emoji: "⛽", color: "#F2872E" },
+  LIB: { emoji: "📚", color: "#7B4FE0" },
+  FD6: { emoji: "🍽️", color: "#E0483D" }
+};
+const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원" };
+const CUSTOMER_LABEL = { LIB: "이용자" };
+const LIB_API_KEY = "3582bad0344bcb07b95092507b88b3eadcaa1b501e04ee1548edeb58375ef009";
 const DEFAULT_CENTER = { lat: 36.9922, lng: 127.1127 }; // 경기도 평택시 (위치 정보를 못 가져올 때 기본값)
 
 let map, placesService, geocoder;
@@ -540,9 +1012,11 @@ function clearMarkers() {
 
 function searchNearby(center, catCode) {
   document.getElementById("mapHintText").textContent = `${CATEGORY_LABEL[catCode]} 찾는 중…`;
-  placesService.categorySearch(catCode, (results, status) => {
-    if (status !== kakao.maps.services.Status.OK) {
+
+  const handleResults = (results, status) => {
+    if (status !== kakao.maps.services.Status.OK || !results.length) {
       document.getElementById("mapHintText").textContent = "주변에서 찾지 못했습니다. 지도를 움직여보세요.";
+      clearMarkers();
       renderResultsList([], catCode);
       return;
     }
@@ -558,9 +1032,21 @@ function searchNearby(center, catCode) {
       markers.push(marker);
     });
     renderResultsList(limited, catCode);
-    document.getElementById("mapHintText").textContent =
-      results.length ? `주변 ${CATEGORY_LABEL[catCode]} ${results.length}곳 표시됨` : "주변에 결과가 없습니다.";
-  }, { location: new kakao.maps.LatLng(center.lat, center.lng), radius: 1200, size: 15 });
+    document.getElementById("mapHintText").textContent = `주변 ${CATEGORY_LABEL[catCode]} ${limited.length}곳 표시됨`;
+  };
+
+  const location = new kakao.maps.LatLng(center.lat, center.lng);
+  if (catCode === "LIB") {
+    // 도서관은 표준 카테고리 코드가 없어 키워드 검색 후 도서관 분류만 골라낸다.
+    placesService.keywordSearch("도서관", (data, status) => {
+      const filtered = status === kakao.maps.services.Status.OK
+        ? data.filter(p => p.category_name && p.category_name.includes("도서관"))
+        : [];
+      handleResults(filtered, filtered.length ? kakao.maps.services.Status.OK : kakao.maps.services.Status.ZERO_RESULT);
+    }, { location, radius: 1200 });
+  } else {
+    placesService.categorySearch(catCode, handleResults, { location, radius: 1200, size: 15 });
+  }
 }
 
 function renderResultsList(results, catCode) {
@@ -619,6 +1105,36 @@ function setMapType(type) {
 document.getElementById("roadmapBtn").addEventListener("click", () => setMapType("roadmap"));
 document.getElementById("skyviewBtn").addEventListener("click", () => setMapType("skyview"));
 
+function closeCatPanel() {
+  document.getElementById("catPanel").classList.remove("open");
+  document.getElementById("catMoreBtn").classList.remove("open");
+}
+
+function selectCategory(catCode) {
+  closeCatPanel();
+  if (catCode === currentCat) return;
+  currentCat = catCode;
+  document.querySelectorAll(".cat-chip, .cat-grid-item").forEach(b => {
+    b.classList.toggle("active", b.dataset.cat === catCode);
+  });
+  if (map) {
+    const c = map.getCenter();
+    searchNearby({ lat: c.getLat(), lng: c.getLng() }, currentCat);
+  }
+}
+
+document.querySelectorAll(".cat-chip, .cat-grid-item:not([disabled])").forEach(btn => {
+  btn.addEventListener("click", () => selectCategory(btn.dataset.cat));
+});
+
+document.getElementById("catMoreBtn").addEventListener("click", () => {
+  const panel = document.getElementById("catPanel");
+  const btn = document.getElementById("catMoreBtn");
+  const willOpen = !panel.classList.contains("open");
+  panel.classList.toggle("open", willOpen);
+  btn.classList.toggle("open", willOpen);
+});
+
 function buildDirectionUrl(place) {
   return `https://map.kakao.com/link/to/${encodeURIComponent(place.place_name)},${place.y},${place.x}`;
 }
@@ -654,6 +1170,89 @@ function loadRoadview(place) {
   });
 }
 
+let libraryIndexPromise = null;
+function fetchLibraryIndex() {
+  if (!libraryIndexPromise) {
+    libraryIndexPromise = fetch(
+      `https://apis.data.go.kr/B551982/plr_v2/info_v2?serviceKey=${encodeURIComponent(LIB_API_KEY)}&pageNo=1&numOfRows=300&resultType=json`
+    )
+      .then(res => res.json())
+      .then(data => (data.body && data.body.item) || [])
+      .catch(() => []);
+  }
+  return libraryIndexPromise;
+}
+
+function distanceMeters(lat1, lon1, lat2, lon2) {
+  const R = 6371000;
+  const toRad = d => (d * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+
+async function findMatchingLibrary(place) {
+  const index = await fetchLibraryIndex();
+  const placeLat = parseFloat(place.y);
+  const placeLng = parseFloat(place.x);
+  let best = null;
+  let bestDist = Infinity;
+  index.forEach(lib => {
+    const d = distanceMeters(placeLat, placeLng, parseFloat(lib.lat), parseFloat(lib.lot));
+    if (d < bestDist) {
+      bestDist = d;
+      best = lib;
+    }
+  });
+  return best && bestDist <= 400 ? best : null;
+}
+
+async function fetchLibrarySeatRows(lib) {
+  const url = `https://apis.data.go.kr/B551982/plr_v2/rlt_rdrm_info_v2?serviceKey=${encodeURIComponent(LIB_API_KEY)}&stdgCd=${encodeURIComponent(lib.stdgCd)}&numOfRows=50&resultType=json`;
+  const res = await fetch(url);
+  const data = await res.json();
+  const rows = (data.body && data.body.item) || [];
+  return rows.filter(r => r.pblibId === lib.pblibId);
+}
+
+let libSeatRequestToken = 0;
+async function loadLibrarySeatInfo(place) {
+  const panel = document.getElementById("libSeats");
+  const body = document.getElementById("libSeatsBody");
+  panel.classList.remove("hidden");
+  body.innerHTML = `<div class="lib-seat-empty">실시간 좌석 확인 중…</div>`;
+  const token = ++libSeatRequestToken;
+
+  const lib = await findMatchingLibrary(place);
+  if (token !== libSeatRequestToken) return;
+  if (!lib) {
+    body.innerHTML = `<div class="lib-seat-empty">이 도서관은 실시간 좌석 정보가 제공되지 않습니다.</div>`;
+    return;
+  }
+
+  let rows = [];
+  try {
+    rows = await fetchLibrarySeatRows(lib);
+  } catch (e) {
+    rows = [];
+  }
+  if (token !== libSeatRequestToken) return;
+  if (!rows.length) {
+    body.innerHTML = `<div class="lib-seat-empty">실시간 좌석 정보가 없습니다.</div>`;
+    return;
+  }
+  body.innerHTML = rows
+    .map(
+      r => `
+    <div class="lib-seat-row">
+      <span>${r.rdrmNm}${r.bldgFlrExpln ? ` (${r.bldgFlrExpln})` : ""}</span>
+      <span><b>${r.rmndSeatCnt || "-"}</b> / ${r.tseatCnt || "-"}석 남음</span>
+    </div>`
+    )
+    .join("");
+}
+
 function openSheet(place, catCode) {
   currentSheetPlace = place;
   roadviewLoadedForKey = null;
@@ -663,6 +1262,21 @@ function openSheet(place, catCode) {
   document.getElementById("placeAddr").textContent = place.road_address_name || place.address_name || "";
   document.getElementById("infoPhone").textContent = place.phone ? `📞 ${place.phone}` : "전화번호 정보 없음";
   document.getElementById("directionBtn").href = buildDirectionUrl(place);
+
+  const priceLinkBtn = document.getElementById("priceLinkBtn");
+  if (catCode === "OL7" && place.place_url) {
+    priceLinkBtn.href = place.place_url;
+    priceLinkBtn.classList.remove("hidden");
+  } else {
+    priceLinkBtn.classList.add("hidden");
+  }
+
+  const libSeats = document.getElementById("libSeats");
+  if (catCode === "LIB") {
+    loadLibrarySeatInfo(place);
+  } else {
+    libSeats.classList.add("hidden");
+  }
 
   const list = document.getElementById("sceneList");
   list.innerHTML = "";
@@ -680,7 +1294,7 @@ function openSheet(place, catCode) {
       <div class="scene-body">
         ${scene.lines.map(l => `
           <div class="line ${l.who === "clerk" ? "clerk" : "customer"}">
-            <div class="who">${l.who === "clerk" ? "점원" : "손님"}</div>
+            <div class="who">${l.who === "clerk" ? (STAFF_LABEL[catCode] || "직원") : (CUSTOMER_LABEL[catCode] || "손님")}</div>
             <div class="bubble">
               <div class="en">${l.en}</div>
               <div class="ko">${l.ko}</div>
