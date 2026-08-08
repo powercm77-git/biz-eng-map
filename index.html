@@ -359,6 +359,7 @@
         <button class="cat-chip" data-cat="OL7">⛽ 주유소</button>
         <button class="cat-chip" data-cat="LIB">📚 도서관</button>
         <button class="cat-chip" data-cat="FD6">🍽️ 음식점</button>
+        <button class="cat-chip" data-cat="CE7">☕ 카페</button>
       </div>
       <button class="cat-more-btn" id="catMoreBtn"><span class="cat-ic">⋯</span><span>주변</span></button>
     </div>
@@ -368,7 +369,7 @@
         <button class="cat-grid-item" data-cat="OL7"><span class="cat-grid-ic">⛽</span>주유소</button>
         <button class="cat-grid-item" data-cat="LIB"><span class="cat-grid-ic">📚</span>도서관</button>
         <button class="cat-grid-item" data-cat="FD6"><span class="cat-grid-ic">🍽️</span>음식점</button>
-        <button class="cat-grid-item" data-cat="CE7" disabled title="준비 중"><span class="cat-grid-ic">☕</span>카페</button>
+        <button class="cat-grid-item" data-cat="CE7"><span class="cat-grid-ic">☕</span>카페</button>
         <button class="cat-grid-item" data-cat="HP8" disabled title="준비 중"><span class="cat-grid-ic">🏥</span>병원</button>
         <button class="cat-grid-item" data-cat="PM9" disabled title="준비 중"><span class="cat-grid-ic">💊</span>약국</button>
         <button class="cat-grid-item" data-cat="MT1" disabled title="준비 중"><span class="cat-grid-ic">🛒</span>대형마트</button>
@@ -935,17 +936,140 @@ const SCENES = {
         { who: "clerk", en: "Thank you, please come again.", ko: "감사합니다, 또 오세요." }
       ]
     }
+  ],
+  CE7: [
+    {
+      titleKo: "음료를 주문할 때",
+      titleEn: "Ordering a drink",
+      lines: [
+        { who: "clerk", en: "What can I get for you?", ko: "무엇을 도와드릴까요?" },
+        { who: "customer", en: "I'll have an iced americano, please.", ko: "아이스 아메리카노 한 잔 주세요." }
+      ]
+    },
+    {
+      titleKo: "사이즈를 고를 때",
+      titleEn: "Choosing a size",
+      lines: [
+        { who: "clerk", en: "What size would you like, tall or grande?", ko: "사이즈는 톨로 하시겠어요, 그란데로 하시겠어요?" },
+        { who: "customer", en: "Grande, please.", ko: "그란데로 주세요." }
+      ]
+    },
+    {
+      titleKo: "온도를 정할 때",
+      titleEn: "Choosing hot or iced",
+      lines: [
+        { who: "clerk", en: "Would you like that hot or iced?", ko: "따뜻하게 드릴까요, 차갑게 드릴까요?" },
+        { who: "customer", en: "Iced, please.", ko: "아이스로 주세요." }
+      ]
+    },
+    {
+      titleKo: "우유 종류를 바꿀 때",
+      titleEn: "Changing the milk option",
+      lines: [
+        { who: "customer", en: "Could I get that with oat milk instead?", ko: "우유 대신 오트밀크로 바꿀 수 있을까요?" },
+        { who: "clerk", en: "Sure, that's an extra 700 won.", ko: "네, 700원 추가됩니다." }
+      ]
+    },
+    {
+      titleKo: "샷을 추가할 때",
+      titleEn: "Adding an extra shot",
+      lines: [
+        { who: "customer", en: "Could you add an extra shot, please?", ko: "샷 하나 추가해주시겠어요?" },
+        { who: "clerk", en: "Sure, no problem.", ko: "네, 알겠습니다." }
+      ]
+    },
+    {
+      titleKo: "디카페인을 요청할 때",
+      titleEn: "Asking for decaf",
+      lines: [
+        { who: "customer", en: "Can I get this in decaf?", ko: "이거 디카페인으로 될까요?" },
+        { who: "clerk", en: "Yes, we have decaf available.", ko: "네, 디카페인 가능합니다." }
+      ]
+    },
+    {
+      titleKo: "매장·포장을 확인할 때",
+      titleEn: "For here or to go",
+      lines: [
+        { who: "clerk", en: "Is this for here or to go?", ko: "매장에서 드시나요, 포장이신가요?" },
+        { who: "customer", en: "For here, please.", ko: "매장에서 마실게요." }
+      ]
+    },
+    {
+      titleKo: "주문한 음료를 찾을 때",
+      titleEn: "Picking up your order",
+      lines: [
+        { who: "clerk", en: "An iced latte for Jieun!", ko: "지은님, 아이스 라떼 나왔습니다!" },
+        { who: "customer", en: "That's me, thank you.", ko: "저예요, 감사합니다." }
+      ]
+    },
+    {
+      titleKo: "와이파이 비밀번호를 물어볼 때",
+      titleEn: "Asking for the Wi-Fi password",
+      lines: [
+        { who: "customer", en: "Could I get the Wi-Fi password?", ko: "와이파이 비밀번호 좀 알 수 있을까요?" },
+        { who: "clerk", en: "Sure, it's on the receipt.", ko: "네, 영수증에 적혀 있어요." }
+      ]
+    },
+    {
+      titleKo: "콘센트 자리를 물어볼 때",
+      titleEn: "Asking about power outlets",
+      lines: [
+        { who: "customer", en: "Are there any seats with outlets?", ko: "콘센트 있는 자리 있나요?" },
+        { who: "clerk", en: "Yes, they're by the window.", ko: "네, 창가 쪽에 있습니다." }
+      ]
+    },
+    {
+      titleKo: "빨대나 냅킨을 요청할 때",
+      titleEn: "Asking for a straw or napkins",
+      lines: [
+        { who: "customer", en: "Could I get a straw, please?", ko: "빨대 좀 주시겠어요?" },
+        { who: "clerk", en: "Sure, they're right over there.", ko: "네, 저쪽에 있어요." }
+      ]
+    },
+    {
+      titleKo: "음료 여러 잔을 담을 캐리어를 요청할 때",
+      titleEn: "Asking for a drink carrier",
+      lines: [
+        { who: "customer", en: "Could I get a carrier for these? I have four drinks.", ko: "이거 담을 캐리어 좀 주시겠어요? 네 잔이라서요." },
+        { who: "clerk", en: "Of course, here you go.", ko: "그럼요, 여기 있습니다." }
+      ]
+    },
+    {
+      titleKo: "자리가 있는지 물어볼 때",
+      titleEn: "Asking if a seat is available",
+      lines: [
+        { who: "customer", en: "Is this seat taken?", ko: "여기 자리 있나요?" },
+        { who: "clerk", en: "No, feel free to sit anywhere.", ko: "아니요, 아무 데나 앉으셔도 됩니다." }
+      ]
+    },
+    {
+      titleKo: "모바일 주문을 픽업할 때",
+      titleEn: "Picking up a mobile order",
+      lines: [
+        { who: "customer", en: "Hi, I have a mobile order under Kim.", ko: "안녕하세요, 김으로 모바일 주문했어요." },
+        { who: "clerk", en: "Let me check. It'll be ready in a minute.", ko: "확인해볼게요. 1분 정도면 준비됩니다." }
+      ]
+    },
+    {
+      titleKo: "텀블러 할인을 물어볼 때",
+      titleEn: "Asking about a tumbler discount",
+      lines: [
+        { who: "customer", en: "Do I get a discount if I use my own tumbler?", ko: "텀블러 가져오면 할인되나요?" },
+        { who: "clerk", en: "Yes, that's 300 won off.", ko: "네, 300원 할인됩니다." }
+      ]
+    }
   ]
 };
 
-const CATEGORY_LABEL = { CS2: "편의점", OL7: "주유소", LIB: "도서관", FD6: "음식점" };
+const CATEGORY_LABEL = { CS2: "편의점", OL7: "주유소", LIB: "도서관", FD6: "음식점", CE7: "카페" };
 const CATEGORY_ICON = {
   CS2: { emoji: "🏪", color: "#2E6FF2" },
   OL7: { emoji: "⛽", color: "#F2872E" },
   LIB: { emoji: "📚", color: "#7B4FE0" },
-  FD6: { emoji: "🍽️", color: "#E0483D" }
+  FD6: { emoji: "🍽️", color: "#E0483D" },
+  CE7: { emoji: "☕", color: "#8A5A3C" }
 };
-const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원" };
+const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원", CE7: "직원" };
 const CUSTOMER_LABEL = { LIB: "이용자" };
 const LIB_API_KEY = "3582bad0344bcb07b95092507b88b3eadcaa1b501e04ee1548edeb58375ef009";
 const DEFAULT_CENTER = { lat: 36.9922, lng: 127.1127 }; // 경기도 평택시 (위치 정보를 못 가져올 때 기본값)
