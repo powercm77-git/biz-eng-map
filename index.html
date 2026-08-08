@@ -364,6 +364,8 @@
         <button class="cat-chip" data-cat="PM9">💊 약국</button>
         <button class="cat-chip" data-cat="MT1">🛒 대형마트</button>
         <button class="cat-chip" data-cat="BK9">🏦 은행</button>
+        <button class="cat-chip" data-cat="PK6">🅿️ 주차장</button>
+        <button class="cat-chip" data-cat="AD5">🏨 숙박</button>
       </div>
       <button class="cat-more-btn" id="catMoreBtn"><span class="cat-ic">⋯</span><span>주변</span></button>
     </div>
@@ -378,8 +380,8 @@
         <button class="cat-grid-item" data-cat="PM9"><span class="cat-grid-ic">💊</span>약국</button>
         <button class="cat-grid-item" data-cat="MT1"><span class="cat-grid-ic">🛒</span>대형마트</button>
         <button class="cat-grid-item" data-cat="BK9"><span class="cat-grid-ic">🏦</span>은행</button>
-        <button class="cat-grid-item" data-cat="PK6" disabled title="준비 중"><span class="cat-grid-ic">🅿️</span>주차장</button>
-        <button class="cat-grid-item" data-cat="AD5" disabled title="준비 중"><span class="cat-grid-ic">🏨</span>숙박</button>
+        <button class="cat-grid-item" data-cat="PK6"><span class="cat-grid-ic">🅿️</span>주차장</button>
+        <button class="cat-grid-item" data-cat="AD5"><span class="cat-grid-ic">🏨</span>숙박</button>
         <button class="cat-grid-item" data-cat="SW8" disabled title="준비 중"><span class="cat-grid-ic">🚇</span>지하철</button>
         <button class="cat-grid-item" data-cat="CT1" disabled title="준비 중"><span class="cat-grid-ic">🎭</span>문화시설</button>
       </div>
@@ -1550,10 +1552,254 @@ const SCENES = {
         { who: "customer", en: "No, that's all. Thank you.", ko: "아니요, 이거면 됐어요. 감사합니다." }
       ]
     }
+  ],
+  PK6: [
+    {
+      titleKo: "빈자리가 있는지 물어볼 때",
+      titleEn: "Asking if there's a space available",
+      lines: [
+        { who: "customer", en: "Do you have any parking spaces left?", ko: "주차 공간 남아 있나요?" },
+        { who: "clerk", en: "Yes, there's space on the second floor.", ko: "네, 2층에 자리 있습니다." }
+      ]
+    },
+    {
+      titleKo: "요금을 확인할 때",
+      titleEn: "Checking the parking fee",
+      lines: [
+        { who: "customer", en: "How much is the parking fee per hour?", ko: "시간당 주차 요금이 얼마예요?" },
+        { who: "clerk", en: "It's 2,000 won for the first hour.", ko: "첫 시간은 2,000원입니다." }
+      ]
+    },
+    {
+      titleKo: "정산기 사용법을 물어볼 때",
+      titleEn: "Asking how to use the payment machine",
+      lines: [
+        { who: "customer", en: "How do I pay at this machine?", ko: "이 정산기 어떻게 쓰는 건가요?" },
+        { who: "clerk", en: "Just scan your ticket here first.", ko: "먼저 여기에 주차권을 스캔하세요." }
+      ]
+    },
+    {
+      titleKo: "정기권을 문의할 때",
+      titleEn: "Asking about a monthly pass",
+      lines: [
+        { who: "customer", en: "Do you offer a monthly parking pass?", ko: "정기 주차권도 있나요?" },
+        { who: "clerk", en: "Yes, it's 150,000 won a month.", ko: "네, 월 15만원입니다." }
+      ]
+    },
+    {
+      titleKo: "발렛파킹을 맡길 때",
+      titleEn: "Handing over your car for valet",
+      lines: [
+        { who: "clerk", en: "Would you like valet parking?", ko: "발렛파킹 하시겠어요?" },
+        { who: "customer", en: "Yes, please. Here are the keys.", ko: "네, 부탁드려요. 여기 키요." }
+      ]
+    },
+    {
+      titleKo: "출차 시간을 연장할 때",
+      titleEn: "Extending your parking time",
+      lines: [
+        { who: "customer", en: "Could I extend my parking by another hour?", ko: "주차 시간 한 시간 더 연장할 수 있을까요?" },
+        { who: "clerk", en: "Sure, that's no problem.", ko: "네, 가능합니다." }
+      ]
+    },
+    {
+      titleKo: "장애인 주차구역을 안내받을 때",
+      titleEn: "Asking about disabled parking",
+      lines: [
+        { who: "customer", en: "Where's the disabled parking area?", ko: "장애인 주차구역이 어디인가요?" },
+        { who: "clerk", en: "It's right near the elevator.", ko: "엘리베이터 바로 옆에 있습니다." }
+      ]
+    },
+    {
+      titleKo: "결제수단을 확인할 때",
+      titleEn: "Confirming the payment method",
+      lines: [
+        { who: "clerk", en: "How would you like to pay, cash or card?", ko: "결제는 현금으로 하시겠어요, 카드로 하시겠어요?" },
+        { who: "customer", en: "Card, please.", ko: "카드로 할게요." }
+      ]
+    },
+    {
+      titleKo: "주차권 할인 도장을 받을 때",
+      titleEn: "Getting your ticket validated",
+      lines: [
+        { who: "customer", en: "Could you stamp my parking ticket, please?", ko: "주차권 도장 좀 찍어주시겠어요?" },
+        { who: "clerk", en: "Sure, here you go.", ko: "네, 여기요." }
+      ]
+    },
+    {
+      titleKo: "출구 위치를 물어볼 때",
+      titleEn: "Asking where the exit is",
+      lines: [
+        { who: "customer", en: "Where's the exit?", ko: "출구가 어디예요?" },
+        { who: "clerk", en: "It's straight ahead, on your right.", ko: "직진하시면 오른쪽에 있어요." }
+      ]
+    },
+    {
+      titleKo: "발렛 맡긴 차를 찾을 때",
+      titleEn: "Retrieving your car from valet",
+      lines: [
+        { who: "customer", en: "Could I get my car, please? Here's the ticket.", ko: "차 좀 빼주시겠어요? 여기 표요." },
+        { who: "clerk", en: "Sure, it'll take about five minutes.", ko: "네, 5분 정도 걸립니다." }
+      ]
+    },
+    {
+      titleKo: "기계식 주차타워를 이용할 때",
+      titleEn: "Using a mechanical parking tower",
+      lines: [
+        { who: "customer", en: "How does this parking tower work?", ko: "이 기계식 주차 어떻게 이용하나요?" },
+        { who: "clerk", en: "Just park inside and press the button.", ko: "안에 주차하시고 버튼 누르시면 됩니다." }
+      ]
+    },
+    {
+      titleKo: "주차권을 잃어버렸을 때",
+      titleEn: "Losing your parking ticket",
+      lines: [
+        { who: "customer", en: "I lost my parking ticket. What should I do?", ko: "주차권을 잃어버렸는데 어떻게 해야 하나요?" },
+        { who: "clerk", en: "That's fine, I can look up your car by the plate number.", ko: "괜찮습니다, 차 번호로 확인해드릴게요." }
+      ]
+    },
+    {
+      titleKo: "야간 주차 요금을 물어볼 때",
+      titleEn: "Asking about overnight parking rates",
+      lines: [
+        { who: "customer", en: "How much is overnight parking?", ko: "야간 주차 요금은 얼마인가요?" },
+        { who: "clerk", en: "It's a flat rate of 10,000 won.", ko: "정액 만원입니다." }
+      ]
+    },
+    {
+      titleKo: "출차하며 인사할 때",
+      titleEn: "Leaving the parking lot",
+      lines: [
+        { who: "clerk", en: "Here's your change. Drive safely.", ko: "거스름돈 여기 있습니다. 안전 운전하세요." },
+        { who: "customer", en: "Thank you, have a good day.", ko: "감사합니다, 좋은 하루 되세요." }
+      ]
+    }
+  ],
+  AD5: [
+    {
+      titleKo: "체크인할 때",
+      titleEn: "Checking in",
+      lines: [
+        { who: "clerk", en: "Welcome. Do you have a reservation?", ko: "어서 오세요. 예약하셨나요?" },
+        { who: "customer", en: "Yes, under the name Kim.", ko: "네, 김으로 예약했어요." }
+      ]
+    },
+    {
+      titleKo: "예약을 확인할 때",
+      titleEn: "Confirming a reservation",
+      lines: [
+        { who: "clerk", en: "Let me check. Two nights, one room, is that right?", ko: "확인해볼게요. 2박, 방 하나 맞으시죠?" },
+        { who: "customer", en: "Yes, that's correct.", ko: "네, 맞아요." }
+      ]
+    },
+    {
+      titleKo: "조식 포함 여부를 확인할 때",
+      titleEn: "Asking if breakfast is included",
+      lines: [
+        { who: "customer", en: "Is breakfast included?", ko: "조식 포함인가요?" },
+        { who: "clerk", en: "Yes, it's served from 7 to 10 on the second floor.", ko: "네, 2층에서 7시부터 10시까지 제공됩니다." }
+      ]
+    },
+    {
+      titleKo: "체크아웃 시간을 물어볼 때",
+      titleEn: "Asking about checkout time",
+      lines: [
+        { who: "customer", en: "What time is checkout?", ko: "체크아웃 시간이 몇 시예요?" },
+        { who: "clerk", en: "It's 11 in the morning.", ko: "오전 11시입니다." }
+      ]
+    },
+    {
+      titleKo: "방을 업그레이드해달라고 할 때",
+      titleEn: "Asking for a room upgrade",
+      lines: [
+        { who: "customer", en: "Is it possible to upgrade to a bigger room?", ko: "더 큰 방으로 업그레이드가 가능할까요?" },
+        { who: "clerk", en: "Let me check availability for you.", ko: "빈 방 있는지 확인해볼게요." }
+      ]
+    },
+    {
+      titleKo: "와이파이 비밀번호를 물어볼 때",
+      titleEn: "Asking for the Wi-Fi password",
+      lines: [
+        { who: "customer", en: "Could I get the Wi-Fi password?", ko: "와이파이 비밀번호 좀 알 수 있을까요?" },
+        { who: "clerk", en: "Sure, it's on the card in your room.", ko: "네, 방 안에 있는 카드에 적혀 있어요." }
+      ]
+    },
+    {
+      titleKo: "짐을 맡길 때",
+      titleEn: "Leaving your luggage",
+      lines: [
+        { who: "customer", en: "Could I leave my luggage here for a while?", ko: "짐을 잠시 맡길 수 있을까요?" },
+        { who: "clerk", en: "Of course, we'll keep it safe.", ko: "그럼요, 잘 보관해드릴게요." }
+      ]
+    },
+    {
+      titleKo: "수건을 더 요청할 때",
+      titleEn: "Asking for extra towels",
+      lines: [
+        { who: "customer", en: "Could we get some extra towels, please?", ko: "수건 좀 더 주시겠어요?" },
+        { who: "clerk", en: "Sure, I'll send some up right away.", ko: "네, 바로 올려드릴게요." }
+      ]
+    },
+    {
+      titleKo: "늦은 체크아웃을 요청할 때",
+      titleEn: "Asking for a late checkout",
+      lines: [
+        { who: "customer", en: "Could I get a late checkout, until 1 o'clock?", ko: "체크아웃을 1시까지 늦출 수 있을까요?" },
+        { who: "clerk", en: "Sure, that's fine.", ko: "네, 가능합니다." }
+      ]
+    },
+    {
+      titleKo: "룸서비스를 이용할 때",
+      titleEn: "Ordering room service",
+      lines: [
+        { who: "customer", en: "I'd like to order room service, please.", ko: "룸서비스 주문하고 싶어요." },
+        { who: "clerk", en: "Sure, what would you like?", ko: "네, 무엇을 드릴까요?" }
+      ]
+    },
+    {
+      titleKo: "근처 관광지를 물어볼 때",
+      titleEn: "Asking about nearby attractions",
+      lines: [
+        { who: "customer", en: "Is there anything worth seeing nearby?", ko: "근처에 가볼 만한 곳 있나요?" },
+        { who: "clerk", en: "There's a nice park just five minutes away on foot.", ko: "걸어서 5분 거리에 괜찮은 공원이 있어요." }
+      ]
+    },
+    {
+      titleKo: "방 온도 조절을 문의할 때",
+      titleEn: "Asking about the room temperature",
+      lines: [
+        { who: "customer", en: "How do I adjust the temperature in the room?", ko: "방 온도는 어떻게 조절하나요?" },
+        { who: "clerk", en: "There's a control panel right by the door.", ko: "문 바로 옆에 조절기가 있습니다." }
+      ]
+    },
+    {
+      titleKo: "조식 시간을 물어볼 때",
+      titleEn: "Asking about breakfast hours",
+      lines: [
+        { who: "customer", en: "What time does breakfast start?", ko: "조식은 몇 시부터예요?" },
+        { who: "clerk", en: "It starts at 7 in the morning.", ko: "아침 7시부터입니다." }
+      ]
+    },
+    {
+      titleKo: "체크아웃할 때",
+      titleEn: "Checking out",
+      lines: [
+        { who: "customer", en: "I'd like to check out, please.", ko: "체크아웃하고 싶어요." },
+        { who: "clerk", en: "Sure, how was your stay?", ko: "네, 편안하게 지내셨나요?" }
+      ]
+    },
+    {
+      titleKo: "택시를 불러달라고 할 때",
+      titleEn: "Asking for a taxi",
+      lines: [
+        { who: "customer", en: "Could you call a taxi for me, please?", ko: "택시 좀 불러주시겠어요?" },
+        { who: "clerk", en: "Sure, it'll be here in about five minutes.", ko: "네, 5분 정도면 도착할 거예요." }
+      ]
+    }
   ]
 };
 
-const CATEGORY_LABEL = { CS2: "편의점", OL7: "주유소", LIB: "도서관", FD6: "음식점", CE7: "카페", HP8: "병원", PM9: "약국", MT1: "대형마트", BK9: "은행" };
+const CATEGORY_LABEL = { CS2: "편의점", OL7: "주유소", LIB: "도서관", FD6: "음식점", CE7: "카페", HP8: "병원", PM9: "약국", MT1: "대형마트", BK9: "은행", PK6: "주차장", AD5: "숙박" };
 const CATEGORY_ICON = {
   CS2: { emoji: "🏪", color: "#2E6FF2" },
   OL7: { emoji: "⛽", color: "#F2872E" },
@@ -1563,9 +1809,11 @@ const CATEGORY_ICON = {
   HP8: { emoji: "🏥", color: "#2FA968" },
   PM9: { emoji: "💊", color: "#2F9AA9" },
   MT1: { emoji: "🛒", color: "#C0392B" },
-  BK9: { emoji: "🏦", color: "#1E7A4C" }
+  BK9: { emoji: "🏦", color: "#1E7A4C" },
+  PK6: { emoji: "🅿️", color: "#4267B2" },
+  AD5: { emoji: "🏨", color: "#B8860B" }
 };
-const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원", CE7: "직원", HP8: "간호사", PM9: "약사", MT1: "직원", BK9: "은행원" };
+const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원", CE7: "직원", HP8: "간호사", PM9: "약사", MT1: "직원", BK9: "은행원", PK6: "관리인", AD5: "프런트 직원" };
 const CUSTOMER_LABEL = { LIB: "이용자" };
 const LIB_API_KEY = "3582bad0344bcb07b95092507b88b3eadcaa1b501e04ee1548edeb58375ef009";
 const DEFAULT_CENTER = { lat: 36.9922, lng: 127.1127 }; // 경기도 평택시 (위치 정보를 못 가져올 때 기본값)
