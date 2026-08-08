@@ -366,6 +366,8 @@
         <button class="cat-chip" data-cat="BK9">🏦 은행</button>
         <button class="cat-chip" data-cat="PK6">🅿️ 주차장</button>
         <button class="cat-chip" data-cat="AD5">🏨 숙박</button>
+        <button class="cat-chip" data-cat="SW8">🚇 지하철</button>
+        <button class="cat-chip" data-cat="CT1">🎭 문화시설</button>
       </div>
       <button class="cat-more-btn" id="catMoreBtn"><span class="cat-ic">⋯</span><span>주변</span></button>
     </div>
@@ -382,8 +384,8 @@
         <button class="cat-grid-item" data-cat="BK9"><span class="cat-grid-ic">🏦</span>은행</button>
         <button class="cat-grid-item" data-cat="PK6"><span class="cat-grid-ic">🅿️</span>주차장</button>
         <button class="cat-grid-item" data-cat="AD5"><span class="cat-grid-ic">🏨</span>숙박</button>
-        <button class="cat-grid-item" data-cat="SW8" disabled title="준비 중"><span class="cat-grid-ic">🚇</span>지하철</button>
-        <button class="cat-grid-item" data-cat="CT1" disabled title="준비 중"><span class="cat-grid-ic">🎭</span>문화시설</button>
+        <button class="cat-grid-item" data-cat="SW8"><span class="cat-grid-ic">🚇</span>지하철</button>
+        <button class="cat-grid-item" data-cat="CT1"><span class="cat-grid-ic">🎭</span>문화시설</button>
       </div>
     </div>
 
@@ -1796,10 +1798,254 @@ const SCENES = {
         { who: "clerk", en: "Sure, it'll be here in about five minutes.", ko: "네, 5분 정도면 도착할 거예요." }
       ]
     }
+  ],
+  SW8: [
+    {
+      titleKo: "교통카드를 충전할 때",
+      titleEn: "Topping up a transit card",
+      lines: [
+        { who: "customer", en: "Excuse me, where can I top up my transit card?", ko: "교통카드 충전은 어디서 하나요?" },
+        { who: "clerk", en: "There's a machine right over there.", ko: "저쪽에 충전기가 있어요." }
+      ]
+    },
+    {
+      titleKo: "노선을 안내받을 때",
+      titleEn: "Asking which line to take",
+      lines: [
+        { who: "customer", en: "Which line do I take to get to City Hall?", ko: "시청역 가려면 몇 호선을 타야 하나요?" },
+        { who: "clerk", en: "Take line 2, it's two stops from here.", ko: "2호선 타시면 여기서 두 정거장이에요." }
+      ]
+    },
+    {
+      titleKo: "환승 방법을 물어볼 때",
+      titleEn: "Asking how to transfer",
+      lines: [
+        { who: "customer", en: "How do I transfer to line 3 from here?", ko: "여기서 3호선으로 환승하려면 어떻게 하나요?" },
+        { who: "clerk", en: "Follow the signs down that hallway.", ko: "저 통로 따라가시면 표지판이 있어요." }
+      ]
+    },
+    {
+      titleKo: "분실물을 문의할 때",
+      titleEn: "Asking about a lost item",
+      lines: [
+        { who: "customer", en: "I think I left my umbrella on the train. What should I do?", ko: "지하철에 우산을 두고 내린 것 같아요. 어떻게 해야 하나요?" },
+        { who: "clerk", en: "Please fill out this lost and found form.", ko: "이 분실물 신고서를 작성해주세요." }
+      ]
+    },
+    {
+      titleKo: "요금이 부족해서 정산할 때",
+      titleEn: "Paying the fare balance",
+      lines: [
+        { who: "clerk", en: "Your card doesn't have enough balance.", ko: "카드 잔액이 부족합니다." },
+        { who: "customer", en: "Oh, sorry. Where can I top it up?", ko: "아, 죄송해요. 어디서 충전할 수 있나요?" }
+      ]
+    },
+    {
+      titleKo: "출구 번호를 물어볼 때",
+      titleEn: "Asking for the exit number",
+      lines: [
+        { who: "customer", en: "Which exit should I take for the museum?", ko: "박물관 가려면 몇 번 출구로 나가야 하나요?" },
+        { who: "clerk", en: "Exit 3 is the closest.", ko: "3번 출구가 제일 가까워요." }
+      ]
+    },
+    {
+      titleKo: "엘리베이터 위치를 물어볼 때",
+      titleEn: "Asking where the elevator is",
+      lines: [
+        { who: "customer", en: "Is there an elevator? I have a stroller.", ko: "엘리베이터 있나요? 유모차가 있어서요." },
+        { who: "clerk", en: "Yes, it's at the end of the platform.", ko: "네, 승강장 끝 쪽에 있습니다." }
+      ]
+    },
+    {
+      titleKo: "막차 시간을 물어볼 때",
+      titleEn: "Asking about the last train",
+      lines: [
+        { who: "customer", en: "What time is the last train tonight?", ko: "오늘 막차가 몇 시예요?" },
+        { who: "clerk", en: "It's around midnight.", ko: "자정쯤입니다." }
+      ]
+    },
+    {
+      titleKo: "1회용 교통카드를 구매할 때",
+      titleEn: "Buying a single-use ticket",
+      lines: [
+        { who: "customer", en: "I'd like to buy a single-use ticket, please.", ko: "1회용 교통카드 하나 사고 싶어요." },
+        { who: "clerk", en: "Sure, where are you headed?", ko: "네, 어디까지 가세요?" }
+      ]
+    },
+    {
+      titleKo: "정기권을 구매할 때",
+      titleEn: "Buying a monthly pass",
+      lines: [
+        { who: "customer", en: "I'd like to get a monthly pass, please.", ko: "정기권 하나 구매하고 싶어요." },
+        { who: "clerk", en: "Sure, that's 65,000 won.", ko: "네, 65,000원입니다." }
+      ]
+    },
+    {
+      titleKo: "반대 방향으로 잘못 탔을 때",
+      titleEn: "Realizing you took the wrong direction",
+      lines: [
+        { who: "customer", en: "I think I got on the wrong direction train. What should I do?", ko: "제가 반대 방향 열차를 탄 것 같아요. 어떻게 해야 하나요?" },
+        { who: "clerk", en: "Just get off at the next stop and cross to the other side.", ko: "다음 역에서 내려서 반대편으로 건너가시면 됩니다." }
+      ]
+    },
+    {
+      titleKo: "운행 지연을 문의할 때",
+      titleEn: "Asking about a delay",
+      lines: [
+        { who: "customer", en: "Is line 2 running late today?", ko: "오늘 2호선 지연되고 있나요?" },
+        { who: "clerk", en: "Yes, there's about a 10-minute delay.", ko: "네, 10분 정도 지연되고 있습니다." }
+      ]
+    },
+    {
+      titleKo: "분실물 센터를 찾을 때",
+      titleEn: "Finding the lost and found center",
+      lines: [
+        { who: "customer", en: "Where's the lost and found center?", ko: "분실물 센터가 어디예요?" },
+        { who: "clerk", en: "It's near exit 1, by the station office.", ko: "1번 출구 근처, 역무실 옆에 있습니다." }
+      ]
+    },
+    {
+      titleKo: "화장실 위치를 물어볼 때",
+      titleEn: "Asking where the restroom is",
+      lines: [
+        { who: "customer", en: "Is there a restroom in this station?", ko: "이 역에 화장실 있나요?" },
+        { who: "clerk", en: "Yes, it's before the gates, to your left.", ko: "네, 개찰구 통과 전 왼쪽에 있어요." }
+      ]
+    },
+    {
+      titleKo: "게이트가 안 열릴 때 도움을 요청할 때",
+      titleEn: "Asking for help when the gate won't open",
+      lines: [
+        { who: "customer", en: "The gate won't open for me. Could you help?", ko: "게이트가 안 열리는데 도와주시겠어요?" },
+        { who: "clerk", en: "Let me check your card. Please try again.", ko: "카드 좀 볼게요. 다시 한번 시도해보세요." }
+      ]
+    }
+  ],
+  CT1: [
+    {
+      titleKo: "입장권을 구매할 때",
+      titleEn: "Buying an admission ticket",
+      lines: [
+        { who: "customer", en: "One adult ticket, please.", ko: "성인 한 장 주세요." },
+        { who: "clerk", en: "Sure, that'll be 8,000 won.", ko: "네, 8,000원입니다." }
+      ]
+    },
+    {
+      titleKo: "할인 여부를 확인할 때",
+      titleEn: "Asking about a discount",
+      lines: [
+        { who: "customer", en: "Is there a student discount?", ko: "학생 할인 되나요?" },
+        { who: "clerk", en: "Yes, with a valid student ID.", ko: "네, 학생증 있으시면 됩니다." }
+      ]
+    },
+    {
+      titleKo: "관람 시간을 물어볼 때",
+      titleEn: "Asking about opening hours",
+      lines: [
+        { who: "customer", en: "What time do you close today?", ko: "오늘 몇 시에 닫나요?" },
+        { who: "clerk", en: "We close at 6 PM, last entry at 5:30.", ko: "오후 6시 폐관이고, 입장은 5시 30분까지입니다." }
+      ]
+    },
+    {
+      titleKo: "오디오 가이드를 대여할 때",
+      titleEn: "Renting an audio guide",
+      lines: [
+        { who: "customer", en: "Could I rent an audio guide, please?", ko: "오디오 가이드 대여할 수 있을까요?" },
+        { who: "clerk", en: "Sure, it's 3,000 won. Could I see your ID?", ko: "네, 3,000원입니다. 신분증 좀 보여주시겠어요?" }
+      ]
+    },
+    {
+      titleKo: "사진 촬영 가능 여부를 물어볼 때",
+      titleEn: "Asking if photos are allowed",
+      lines: [
+        { who: "customer", en: "Is it okay to take pictures here?", ko: "여기서 사진 찍어도 되나요?" },
+        { who: "clerk", en: "Yes, but no flash, please.", ko: "네, 플래시만 사용하지 말아주세요." }
+      ]
+    },
+    {
+      titleKo: "짐 보관함을 이용할 때",
+      titleEn: "Using a locker",
+      lines: [
+        { who: "customer", en: "Is there somewhere I can store my bag?", ko: "짐 보관할 수 있는 곳 있나요?" },
+        { who: "clerk", en: "Yes, the lockers are over there, free of charge.", ko: "네, 저쪽에 무료 보관함이 있습니다." }
+      ]
+    },
+    {
+      titleKo: "전시 설명을 요청할 때",
+      titleEn: "Asking about an exhibit",
+      lines: [
+        { who: "customer", en: "Could you tell me more about this piece?", ko: "이 작품에 대해 좀 더 설명해주시겠어요?" },
+        { who: "clerk", en: "Sure, it was painted in the 1920s.", ko: "네, 1920년대에 그려진 작품입니다." }
+      ]
+    },
+    {
+      titleKo: "기념품샵 위치를 물어볼 때",
+      titleEn: "Asking where the gift shop is",
+      lines: [
+        { who: "customer", en: "Where's the gift shop?", ko: "기념품샵이 어디 있나요?" },
+        { who: "clerk", en: "It's near the main exit.", ko: "정문 출구 근처에 있습니다." }
+      ]
+    },
+    {
+      titleKo: "도슨트 투어 시간을 물어볼 때",
+      titleEn: "Asking about a guided tour",
+      lines: [
+        { who: "customer", en: "What time is the next guided tour?", ko: "다음 도슨트 투어가 몇 시예요?" },
+        { who: "clerk", en: "It starts at 2 PM, right by the entrance.", ko: "오후 2시에 입구에서 시작합니다." }
+      ]
+    },
+    {
+      titleKo: "휠체어를 대여할 때",
+      titleEn: "Renting a wheelchair",
+      lines: [
+        { who: "customer", en: "Could I rent a wheelchair, please?", ko: "휠체어 대여할 수 있을까요?" },
+        { who: "clerk", en: "Sure, it's free. Just leave your ID with us.", ko: "네, 무료입니다. 신분증만 맡겨주세요." }
+      ]
+    },
+    {
+      titleKo: "화장실 위치를 물어볼 때",
+      titleEn: "Asking where the restroom is",
+      lines: [
+        { who: "customer", en: "Where's the restroom?", ko: "화장실이 어디예요?" },
+        { who: "clerk", en: "It's just around the corner.", ko: "모퉁이 돌면 바로 있습니다." }
+      ]
+    },
+    {
+      titleKo: "다음 공연 시간을 물어볼 때",
+      titleEn: "Asking about the next show",
+      lines: [
+        { who: "customer", en: "When's the next performance?", ko: "다음 공연이 언제예요?" },
+        { who: "clerk", en: "It starts in 30 minutes, in the main hall.", ko: "30분 후에 메인홀에서 시작합니다." }
+      ]
+    },
+    {
+      titleKo: "단체 할인을 문의할 때",
+      titleEn: "Asking about a group discount",
+      lines: [
+        { who: "customer", en: "Do you offer a group discount for 10 or more people?", ko: "10명 이상이면 단체 할인 되나요?" },
+        { who: "clerk", en: "Yes, that's a 20% discount.", ko: "네, 20% 할인됩니다." }
+      ]
+    },
+    {
+      titleKo: "재입장 가능 여부를 물어볼 때",
+      titleEn: "Asking about re-entry",
+      lines: [
+        { who: "customer", en: "Can I go out and come back in with the same ticket?", ko: "이 표로 나갔다가 다시 들어올 수 있나요?" },
+        { who: "clerk", en: "Yes, just show your ticket at the entrance.", ko: "네, 입구에서 표만 보여주시면 됩니다." }
+      ]
+    },
+    {
+      titleKo: "관람을 마치고 나갈 때",
+      titleEn: "Leaving after your visit",
+      lines: [
+        { who: "clerk", en: "I hope you enjoyed the exhibition.", ko: "전시 즐겁게 보셨길 바라요." },
+        { who: "customer", en: "Yes, it was wonderful. Thank you.", ko: "네, 정말 좋았어요. 감사합니다." }
+      ]
+    }
   ]
 };
 
-const CATEGORY_LABEL = { CS2: "편의점", OL7: "주유소", LIB: "도서관", FD6: "음식점", CE7: "카페", HP8: "병원", PM9: "약국", MT1: "대형마트", BK9: "은행", PK6: "주차장", AD5: "숙박" };
+const CATEGORY_LABEL = { CS2: "편의점", OL7: "주유소", LIB: "도서관", FD6: "음식점", CE7: "카페", HP8: "병원", PM9: "약국", MT1: "대형마트", BK9: "은행", PK6: "주차장", AD5: "숙박", SW8: "지하철", CT1: "문화시설" };
 const CATEGORY_ICON = {
   CS2: { emoji: "🏪", color: "#2E6FF2" },
   OL7: { emoji: "⛽", color: "#F2872E" },
@@ -1811,9 +2057,11 @@ const CATEGORY_ICON = {
   MT1: { emoji: "🛒", color: "#C0392B" },
   BK9: { emoji: "🏦", color: "#1E7A4C" },
   PK6: { emoji: "🅿️", color: "#4267B2" },
-  AD5: { emoji: "🏨", color: "#B8860B" }
+  AD5: { emoji: "🏨", color: "#B8860B" },
+  SW8: { emoji: "🚇", color: "#00A651" },
+  CT1: { emoji: "🎭", color: "#9B4F96" }
 };
-const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원", CE7: "직원", HP8: "간호사", PM9: "약사", MT1: "직원", BK9: "은행원", PK6: "관리인", AD5: "프런트 직원" };
+const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원", CE7: "직원", HP8: "간호사", PM9: "약사", MT1: "직원", BK9: "은행원", PK6: "관리인", AD5: "프런트 직원", SW8: "역무원", CT1: "안내원" };
 const CUSTOMER_LABEL = { LIB: "이용자" };
 const LIB_API_KEY = "3582bad0344bcb07b95092507b88b3eadcaa1b501e04ee1548edeb58375ef009";
 const DEFAULT_CENTER = { lat: 36.9922, lng: 127.1127 }; // 경기도 평택시 (위치 정보를 못 가져올 때 기본값)
