@@ -156,7 +156,11 @@
     color: var(--sub);
     border-bottom: 1px solid var(--line);
     background: var(--card);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+  .map-hint-help { color: #9AA3AF; }
 
   /* ---------- Bottom sheet ---------- */
   .sheet-overlay {
@@ -268,8 +272,6 @@
   .line .en { font-size: 14px; font-weight: 700; line-height: 1.4; }
   .line .ko { font-size: 12.5px; color: var(--sub); margin-top: 2px; line-height: 1.4; }
 
-  footer { text-align: center; font-size: 11px; color: #9AA3AF; padding: 10px; flex: none; }
-
   .hidden { display: none !important; }
 </style>
 </head>
@@ -301,11 +303,12 @@
       </div>
     </div>
 
-    <div class="map-hint" id="mapHint">현재 위치 주변 편의점을 찾고 있습니다…</div>
+    <div class="map-hint">
+      <span id="mapHintText">현재 위치 주변 편의점을 찾고 있습니다…</span>
+      <span class="map-hint-help">· 마커 눌러 확인</span>
+    </div>
 
     <div class="results-list" id="resultsList"></div>
-
-    <footer>편의점 프로토타입 · 마커를 눌러 정보·로드뷰·대화를 확인하세요</footer>
   </aside>
 
   <div id="map-wrap">
@@ -536,10 +539,10 @@ function clearMarkers() {
 }
 
 function searchNearby(center, catCode) {
-  document.getElementById("mapHint").textContent = `${CATEGORY_LABEL[catCode]} 찾는 중…`;
+  document.getElementById("mapHintText").textContent = `${CATEGORY_LABEL[catCode]} 찾는 중…`;
   placesService.categorySearch(catCode, (results, status) => {
     if (status !== kakao.maps.services.Status.OK) {
-      document.getElementById("mapHint").textContent = "주변에서 찾지 못했습니다. 지도를 움직여보세요.";
+      document.getElementById("mapHintText").textContent = "주변에서 찾지 못했습니다. 지도를 움직여보세요.";
       renderResultsList([], catCode);
       return;
     }
@@ -555,7 +558,7 @@ function searchNearby(center, catCode) {
       markers.push(marker);
     });
     renderResultsList(limited, catCode);
-    document.getElementById("mapHint").textContent =
+    document.getElementById("mapHintText").textContent =
       results.length ? `주변 ${CATEGORY_LABEL[catCode]} ${results.length}곳 표시됨` : "주변에 결과가 없습니다.";
   }, { location: new kakao.maps.LatLng(center.lat, center.lng), radius: 1200, size: 15 });
 }
@@ -580,7 +583,7 @@ function renderResultsList(results, catCode) {
 
 function searchRegion(query) {
   if (!query || !query.trim()) return;
-  document.getElementById("mapHint").textContent = "지역 검색 중…";
+  document.getElementById("mapHintText").textContent = "지역 검색 중…";
   geocoder.addressSearch(query, (result, status) => {
     if (status === kakao.maps.services.Status.OK && result[0]) {
       map.setCenter(new kakao.maps.LatLng(parseFloat(result[0].y), parseFloat(result[0].x)));
@@ -590,7 +593,7 @@ function searchRegion(query) {
       if (kstatus === kakao.maps.services.Status.OK && data[0]) {
         map.setCenter(new kakao.maps.LatLng(parseFloat(data[0].y), parseFloat(data[0].x)));
       } else {
-        document.getElementById("mapHint").textContent = "검색 결과가 없습니다. 다른 지역명으로 시도해보세요.";
+        document.getElementById("mapHintText").textContent = "검색 결과가 없습니다. 다른 지역명으로 시도해보세요.";
       }
     });
   });
