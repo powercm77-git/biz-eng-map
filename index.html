@@ -76,9 +76,22 @@
   .cat-btn.active { border-color: var(--primary); color: var(--primary); background: #EEF3FF; }
   .cat-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-  .region-search { display: flex; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  .region-search-row { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  .search-toggle-btn {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1.5px solid var(--line);
+    background: #fff;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .region-search { display: none; flex: 1; gap: 8px; }
+  .region-search.open { display: flex; }
   .region-search input {
     flex: 1;
+    min-width: 0;
     border: 1.5px solid var(--line);
     border-radius: 10px;
     padding: 9px 12px;
@@ -93,6 +106,10 @@
     padding: 0 14px;
     font-size: 15px;
     cursor: pointer;
+  }
+  @media (min-width: 900px) {
+    .search-toggle-btn { display: none; }
+    .region-search { display: flex; }
   }
 
   .results-list { display: none; }
@@ -266,9 +283,12 @@
       <button class="cat-btn" disabled title="준비 중">⛽ 주유소</button>
     </div>
 
-    <div class="region-search">
-      <input type="text" id="regionInput" placeholder="지역·주소 검색 (예: 평택시청)">
-      <button id="regionSearchBtn">🔍</button>
+    <div class="region-search-row">
+      <button class="search-toggle-btn" id="searchToggleBtn" title="지역 검색">🔍</button>
+      <div class="region-search" id="regionSearchBox">
+        <input type="text" id="regionInput" placeholder="지역·주소 검색 (예: 평택시청)">
+        <button id="regionSearchBtn">검색</button>
+      </div>
     </div>
 
     <div class="results-list" id="resultsList"></div>
@@ -567,6 +587,11 @@ function searchRegion(query) {
     });
   });
 }
+document.getElementById("searchToggleBtn").addEventListener("click", () => {
+  const box = document.getElementById("regionSearchBox");
+  box.classList.toggle("open");
+  if (box.classList.contains("open")) document.getElementById("regionInput").focus();
+});
 document.getElementById("regionSearchBtn").addEventListener("click", () => {
   searchRegion(document.getElementById("regionInput").value);
 });
