@@ -360,6 +360,8 @@
         <button class="cat-chip" data-cat="LIB">📚 도서관</button>
         <button class="cat-chip" data-cat="FD6">🍽️ 음식점</button>
         <button class="cat-chip" data-cat="CE7">☕ 카페</button>
+        <button class="cat-chip" data-cat="HP8">🏥 병원</button>
+        <button class="cat-chip" data-cat="PM9">💊 약국</button>
       </div>
       <button class="cat-more-btn" id="catMoreBtn"><span class="cat-ic">⋯</span><span>주변</span></button>
     </div>
@@ -370,8 +372,8 @@
         <button class="cat-grid-item" data-cat="LIB"><span class="cat-grid-ic">📚</span>도서관</button>
         <button class="cat-grid-item" data-cat="FD6"><span class="cat-grid-ic">🍽️</span>음식점</button>
         <button class="cat-grid-item" data-cat="CE7"><span class="cat-grid-ic">☕</span>카페</button>
-        <button class="cat-grid-item" data-cat="HP8" disabled title="준비 중"><span class="cat-grid-ic">🏥</span>병원</button>
-        <button class="cat-grid-item" data-cat="PM9" disabled title="준비 중"><span class="cat-grid-ic">💊</span>약국</button>
+        <button class="cat-grid-item" data-cat="HP8"><span class="cat-grid-ic">🏥</span>병원</button>
+        <button class="cat-grid-item" data-cat="PM9"><span class="cat-grid-ic">💊</span>약국</button>
         <button class="cat-grid-item" data-cat="MT1" disabled title="준비 중"><span class="cat-grid-ic">🛒</span>대형마트</button>
         <button class="cat-grid-item" data-cat="BK9" disabled title="준비 중"><span class="cat-grid-ic">🏦</span>은행</button>
         <button class="cat-grid-item" data-cat="PK6" disabled title="준비 중"><span class="cat-grid-ic">🅿️</span>주차장</button>
@@ -1058,18 +1060,264 @@ const SCENES = {
         { who: "clerk", en: "Yes, that's 300 won off.", ko: "네, 300원 할인됩니다." }
       ]
     }
+  ],
+  HP8: [
+    {
+      titleKo: "접수할 때",
+      titleEn: "Checking in at the front desk",
+      lines: [
+        { who: "clerk", en: "Have you visited us before?", ko: "저희 병원 처음이신가요?" },
+        { who: "customer", en: "No, this is my first time.", ko: "네, 처음이에요." }
+      ]
+    },
+    {
+      titleKo: "증상을 설명할 때",
+      titleEn: "Describing your symptoms",
+      lines: [
+        { who: "clerk", en: "What brings you in today?", ko: "오늘 어디가 불편해서 오셨어요?" },
+        { who: "customer", en: "I've had a sore throat and fever since yesterday.", ko: "어제부터 목이 아프고 열이 나요." }
+      ]
+    },
+    {
+      titleKo: "예약을 확인할 때",
+      titleEn: "Confirming an appointment",
+      lines: [
+        { who: "customer", en: "I have an appointment at 3 o'clock.", ko: "3시에 예약했는데요." },
+        { who: "clerk", en: "Let me check. Yes, please have a seat.", ko: "확인해볼게요. 네, 앉아서 기다려주세요." }
+      ]
+    },
+    {
+      titleKo: "보험증을 제출할 때",
+      titleEn: "Submitting your insurance card",
+      lines: [
+        { who: "clerk", en: "Could I see your insurance card, please?", ko: "보험증 좀 보여주시겠어요?" },
+        { who: "customer", en: "Sure, here it is.", ko: "네, 여기 있습니다." }
+      ]
+    },
+    {
+      titleKo: "진료실로 안내받을 때",
+      titleEn: "Being called into the exam room",
+      lines: [
+        { who: "clerk", en: "You can go into room 2 now.", ko: "2번 진료실로 들어가시면 됩니다." },
+        { who: "customer", en: "Thank you.", ko: "감사합니다." }
+      ]
+    },
+    {
+      titleKo: "대기 시간을 물어볼 때",
+      titleEn: "Asking about the wait time",
+      lines: [
+        { who: "customer", en: "How long is the wait right now?", ko: "지금 얼마나 기다려야 하나요?" },
+        { who: "clerk", en: "About 20 minutes.", ko: "20분 정도 걸려요." }
+      ]
+    },
+    {
+      titleKo: "처방전을 받을 때",
+      titleEn: "Getting a prescription",
+      lines: [
+        { who: "clerk", en: "Here's your prescription. Please take it to the pharmacy.", ko: "처방전 드릴게요. 약국에서 받아 가세요." },
+        { who: "customer", en: "Thank you.", ko: "감사합니다." }
+      ]
+    },
+    {
+      titleKo: "약 알레르기를 말할 때",
+      titleEn: "Mentioning a drug allergy",
+      lines: [
+        { who: "customer", en: "I'm allergic to penicillin.", ko: "저 페니실린 알레르기가 있어요." },
+        { who: "clerk", en: "Thanks for letting us know, we'll note that.", ko: "알려주셔서 감사합니다, 기록해둘게요." }
+      ]
+    },
+    {
+      titleKo: "다음 예약을 잡을 때",
+      titleEn: "Scheduling a follow-up",
+      lines: [
+        { who: "clerk", en: "Could you come back in a week for a follow-up?", ko: "일주일 후에 재진하러 오실 수 있나요?" },
+        { who: "customer", en: "Yes, that works for me.", ko: "네, 괜찮아요." }
+      ]
+    },
+    {
+      titleKo: "검사 결과를 물어볼 때",
+      titleEn: "Asking about test results",
+      lines: [
+        { who: "customer", en: "Are my test results ready?", ko: "제 검사 결과 나왔나요?" },
+        { who: "clerk", en: "Not yet, they'll be ready tomorrow.", ko: "아직이요, 내일 나올 예정이에요." }
+      ]
+    },
+    {
+      titleKo: "진료과를 안내받을 때",
+      titleEn: "Being directed to the right department",
+      lines: [
+        { who: "customer", en: "I have a stomachache. Which department should I go to?", ko: "배가 아픈데 어느 과로 가야 하나요?" },
+        { who: "clerk", en: "Please go to internal medicine, on the second floor.", ko: "내과로 가시면 됩니다, 2층이에요." }
+      ]
+    },
+    {
+      titleKo: "진료비를 결제할 때",
+      titleEn: "Paying for the visit",
+      lines: [
+        { who: "clerk", en: "Your total today is 18,000 won.", ko: "오늘 진료비는 18,000원입니다." },
+        { who: "customer", en: "I'll pay by card.", ko: "카드로 계산할게요." }
+      ]
+    },
+    {
+      titleKo: "진단서를 요청할 때",
+      titleEn: "Requesting a medical certificate",
+      lines: [
+        { who: "customer", en: "Could I get a medical certificate for work, please?", ko: "회사 제출용 진단서 좀 받을 수 있을까요?" },
+        { who: "clerk", en: "Sure, it'll take about 10 minutes.", ko: "네, 10분 정도 걸립니다." }
+      ]
+    },
+    {
+      titleKo: "어지러움을 호소할 때",
+      titleEn: "Explaining you feel dizzy",
+      lines: [
+        { who: "customer", en: "I feel dizzy and a bit nauseous.", ko: "어지럽고 속이 좀 메스꺼워요." },
+        { who: "clerk", en: "Let's have the doctor take a look right away.", ko: "바로 진료 보실 수 있게 해드릴게요." }
+      ]
+    },
+    {
+      titleKo: "진료를 마치고 나갈 때",
+      titleEn: "Finishing up the visit",
+      lines: [
+        { who: "clerk", en: "Take care, and rest well.", ko: "몸조리 잘하시고요." },
+        { who: "customer", en: "Thank you, I will.", ko: "네, 감사합니다." }
+      ]
+    }
+  ],
+  PM9: [
+    {
+      titleKo: "처방전을 제출할 때",
+      titleEn: "Submitting a prescription",
+      lines: [
+        { who: "customer", en: "Here's my prescription.", ko: "여기 처방전이요." },
+        { who: "clerk", en: "Okay, it'll take about five minutes.", ko: "네, 5분 정도 걸립니다." }
+      ]
+    },
+    {
+      titleKo: "복용법을 안내받을 때",
+      titleEn: "Getting dosage instructions",
+      lines: [
+        { who: "clerk", en: "Take this three times a day after meals.", ko: "이건 하루 세 번 식후에 드세요." },
+        { who: "customer", en: "Okay, got it.", ko: "네, 알겠습니다." }
+      ]
+    },
+    {
+      titleKo: "부작용을 물어볼 때",
+      titleEn: "Asking about side effects",
+      lines: [
+        { who: "customer", en: "Does this medicine have any side effects?", ko: "이 약 부작용이 있나요?" },
+        { who: "clerk", en: "It might make you a bit drowsy.", ko: "약간 졸릴 수 있어요." }
+      ]
+    },
+    {
+      titleKo: "감기약을 추천받을 때",
+      titleEn: "Asking for a cold medicine recommendation",
+      lines: [
+        { who: "customer", en: "Could you recommend something for a cold?", ko: "감기약 좀 추천해주시겠어요?" },
+        { who: "clerk", en: "Sure, this one works well for a sore throat.", ko: "네, 이게 목 아픈 데 잘 들어요." }
+      ]
+    },
+    {
+      titleKo: "두통약을 구매할 때",
+      titleEn: "Buying headache medicine",
+      lines: [
+        { who: "customer", en: "Could I get something for a headache?", ko: "두통약 좀 주시겠어요?" },
+        { who: "clerk", en: "Sure, here you go.", ko: "네, 여기 있습니다." }
+      ]
+    },
+    {
+      titleKo: "하루 복용 횟수를 확인할 때",
+      titleEn: "Checking how many times a day",
+      lines: [
+        { who: "customer", en: "How many times a day should I take this?", ko: "이거 하루에 몇 번 먹어야 하나요?" },
+        { who: "clerk", en: "Twice a day, morning and evening.", ko: "하루 두 번, 아침저녁으로 드세요." }
+      ]
+    },
+    {
+      titleKo: "소화제를 구매할 때",
+      titleEn: "Buying medicine for indigestion",
+      lines: [
+        { who: "customer", en: "I have an upset stomach. What would you recommend?", ko: "속이 안 좋은데 뭐가 좋을까요?" },
+        { who: "clerk", en: "This one should help.", ko: "이게 도움이 될 거예요." }
+      ]
+    },
+    {
+      titleKo: "밴드와 연고를 구매할 때",
+      titleEn: "Buying band-aids and ointment",
+      lines: [
+        { who: "customer", en: "Could I get some band-aids and ointment?", ko: "밴드하고 연고 좀 주시겠어요?" },
+        { who: "clerk", en: "Sure, anything else?", ko: "네, 더 필요한 거 있으세요?" }
+      ]
+    },
+    {
+      titleKo: "임신 중 복용 가능 여부를 물어볼 때",
+      titleEn: "Asking if it's safe during pregnancy",
+      lines: [
+        { who: "customer", en: "Is this safe to take while pregnant?", ko: "이거 임신 중에 먹어도 되나요?" },
+        { who: "clerk", en: "It's best to check with your doctor first.", ko: "의사 선생님께 먼저 확인해보시는 게 좋아요." }
+      ]
+    },
+    {
+      titleKo: "다른 약과 같이 먹어도 되는지 물어볼 때",
+      titleEn: "Asking about drug interactions",
+      lines: [
+        { who: "customer", en: "Can I take this with the medicine I'm already on?", ko: "지금 먹는 약이랑 같이 먹어도 되나요?" },
+        { who: "clerk", en: "What are you currently taking?", ko: "지금 어떤 약 드시고 계세요?" }
+      ]
+    },
+    {
+      titleKo: "영수증을 요청할 때",
+      titleEn: "Asking for a receipt",
+      lines: [
+        { who: "customer", en: "Could I get a receipt, please?", ko: "영수증 주시겠어요?" },
+        { who: "clerk", en: "Sure, here you go.", ko: "네, 여기 있습니다." }
+      ]
+    },
+    {
+      titleKo: "카드 결제 여부를 확인할 때",
+      titleEn: "Confirming card payment",
+      lines: [
+        { who: "clerk", en: "How would you like to pay?", ko: "결제는 어떻게 도와드릴까요?" },
+        { who: "customer", en: "By card, please.", ko: "카드로 할게요." }
+      ]
+    },
+    {
+      titleKo: "알레르기 약이 있는지 물어볼 때",
+      titleEn: "Asking about allergy medicine",
+      lines: [
+        { who: "customer", en: "Do you have anything for allergies?", ko: "알레르기 약 있나요?" },
+        { who: "clerk", en: "Yes, this one works well.", ko: "네, 이게 잘 들어요." }
+      ]
+    },
+    {
+      titleKo: "비타민을 구매할 때",
+      titleEn: "Buying vitamins",
+      lines: [
+        { who: "customer", en: "Could you recommend a good vitamin?", ko: "괜찮은 비타민 좀 추천해주시겠어요?" },
+        { who: "clerk", en: "This multivitamin is popular.", ko: "이 종합비타민이 인기 많아요." }
+      ]
+    },
+    {
+      titleKo: "약을 다 받고 나갈 때",
+      titleEn: "Finishing up at the pharmacy",
+      lines: [
+        { who: "clerk", en: "Here's your medicine. Get well soon.", ko: "약 나왔습니다. 얼른 나으세요." },
+        { who: "customer", en: "Thank you so much.", ko: "정말 감사합니다." }
+      ]
+    }
   ]
 };
 
-const CATEGORY_LABEL = { CS2: "편의점", OL7: "주유소", LIB: "도서관", FD6: "음식점", CE7: "카페" };
+const CATEGORY_LABEL = { CS2: "편의점", OL7: "주유소", LIB: "도서관", FD6: "음식점", CE7: "카페", HP8: "병원", PM9: "약국" };
 const CATEGORY_ICON = {
   CS2: { emoji: "🏪", color: "#2E6FF2" },
   OL7: { emoji: "⛽", color: "#F2872E" },
   LIB: { emoji: "📚", color: "#7B4FE0" },
   FD6: { emoji: "🍽️", color: "#E0483D" },
-  CE7: { emoji: "☕", color: "#8A5A3C" }
+  CE7: { emoji: "☕", color: "#8A5A3C" },
+  HP8: { emoji: "🏥", color: "#2FA968" },
+  PM9: { emoji: "💊", color: "#2F9AA9" }
 };
-const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원", CE7: "직원" };
+const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원", CE7: "직원", HP8: "간호사", PM9: "약사" };
 const CUSTOMER_LABEL = { LIB: "이용자" };
 const LIB_API_KEY = "3582bad0344bcb07b95092507b88b3eadcaa1b501e04ee1548edeb58375ef009";
 const DEFAULT_CENTER = { lat: 36.9922, lng: 127.1127 }; // 경기도 평택시 (위치 정보를 못 가져올 때 기본값)
