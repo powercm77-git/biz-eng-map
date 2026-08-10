@@ -296,6 +296,7 @@
   .lib-seat-row { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; padding: 6px 0; border-top: 1px solid #E7E1FA; }
   .lib-seat-row:first-child { border-top: none; }
   .lib-seat-empty { font-size: 13px; color: var(--sub); }
+  .lib-seat-time { font-size: 11px; color: var(--sub); margin-bottom: 6px; }
 
   #roadview { width: 100%; height: 280px; background: #eee; }
   .roadview-empty { display: none; padding: 40px 20px; text-align: center; color: var(--sub); font-size: 13px; }
@@ -339,7 +340,24 @@
   .line.clerk .who { background: var(--primary); }
   .line.customer .who { background: var(--accent); }
   .line .bubble { flex: 1; }
+  .line .en-row { display: flex; align-items: center; gap: 6px; }
   .line .en { font-size: 14px; font-weight: 700; line-height: 1.4; }
+  .speak-btn {
+    flex: none;
+    border: none;
+    background: #EEF2FF;
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 13px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  .speak-btn:active { transform: scale(0.92); }
   .line .pron { font-size: 12.5px; color: var(--primary); margin-top: 2px; line-height: 1.4; }
   .line .ko { font-size: 12.5px; color: var(--sub); margin-top: 2px; line-height: 1.4; }
 
@@ -2064,7 +2082,6 @@ const CATEGORY_ICON = {
 };
 const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원", CE7: "직원", HP8: "간호사", PM9: "약사", MT1: "직원", BK9: "은행원", PK6: "관리인", AD5: "프런트 직원", SW8: "역무원", CT1: "안내원" };
 const CUSTOMER_LABEL = { LIB: "이용자" };
-const LIB_API_KEY = "3582bad0344bcb07b95092507b88b3eadcaa1b501e04ee1548edeb58375ef009";
 const DEFAULT_CENTER = { lat: 36.9922, lng: 127.1127 }; // 경기도 평택시 (위치 정보를 못 가져올 때 기본값)
 
 let map, placesService, geocoder;
@@ -2298,17 +2315,29 @@ function loadRoadview(place) {
   });
 }
 
+// apis.data.go.kr은 브라우저 CORS를 허용하지 않아 직접 호출이 막힌다.
+// 대신 GitHub Actions가 주기적으로 이 API를 서버에서 호출해 같은 저장소의
+// data/lib-index.json, data/lib-seats.json으로 스냅샷을 남기고,
+// 여기서는 같은 오리진의 그 파일을 읽는다(20분 간격 갱신, 완전한 실시간은 아님).
 let libraryIndexPromise = null;
 function fetchLibraryIndex() {
   if (!libraryIndexPromise) {
-    libraryIndexPromise = fetch(
-      `https://apis.data.go.kr/B551982/plr_v2/info_v2?serviceKey=${encodeURIComponent(LIB_API_KEY)}&pageNo=1&numOfRows=300&resultType=json`
-    )
+    libraryIndexPromise = fetch("data/lib-index.json")
       .then(res => res.json())
-      .then(data => (data.body && data.body.item) || [])
+      .then(data => data.items || [])
       .catch(() => []);
   }
   return libraryIndexPromise;
+}
+
+let librarySeatsPromise = null;
+function fetchLibrarySeatSnapshot() {
+  if (!librarySeatsPromise) {
+    librarySeatsPromise = fetch("data/lib-seats.json")
+      .then(res => res.json())
+      .catch(() => ({ generatedAt: null, items: [] }));
+  }
+  return librarySeatsPromise;
 }
 
 function distanceMeters(lat1, lon1, lat2, lon2) {
@@ -2337,11 +2366,17 @@ async function findMatchingLibrary(place) {
 }
 
 async function fetchLibrarySeatRows(lib) {
-  const url = `https://apis.data.go.kr/B551982/plr_v2/rlt_rdrm_info_v2?serviceKey=${encodeURIComponent(LIB_API_KEY)}&stdgCd=${encodeURIComponent(lib.stdgCd)}&numOfRows=50&resultType=json`;
-  const res = await fetch(url);
-  const data = await res.json();
-  const rows = (data.body && data.body.item) || [];
-  return rows.filter(r => r.pblibId === lib.pblibId);
+  const snapshot = await fetchLibrarySeatSnapshot();
+  const rows = (snapshot.items || []).filter(r => r.pblibId === lib.pblibId);
+  return { rows, generatedAt: snapshot.generatedAt };
+}
+
+function formatSnapshotTime(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "";
+  const pad = n => String(n).padStart(2, "0");
+  return `${pad(d.getMonth() + 1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())} 기준`;
 }
 
 let libSeatRequestToken = 0;
@@ -2349,36 +2384,53 @@ async function loadLibrarySeatInfo(place) {
   const panel = document.getElementById("libSeats");
   const body = document.getElementById("libSeatsBody");
   panel.classList.remove("hidden");
-  body.innerHTML = `<div class="lib-seat-empty">실시간 좌석 확인 중…</div>`;
+  body.innerHTML = `<div class="lib-seat-empty">좌석 정보 불러오는 중…</div>`;
   const token = ++libSeatRequestToken;
 
   const lib = await findMatchingLibrary(place);
   if (token !== libSeatRequestToken) return;
   if (!lib) {
-    body.innerHTML = `<div class="lib-seat-empty">이 도서관은 실시간 좌석 정보가 제공되지 않습니다.</div>`;
+    body.innerHTML = `<div class="lib-seat-empty">이 도서관은 잔여 좌석 정보가 제공되지 않습니다.</div>`;
     return;
   }
 
   let rows = [];
+  let generatedAt = null;
   try {
-    rows = await fetchLibrarySeatRows(lib);
+    ({ rows, generatedAt } = await fetchLibrarySeatRows(lib));
   } catch (e) {
     rows = [];
   }
   if (token !== libSeatRequestToken) return;
   if (!rows.length) {
-    body.innerHTML = `<div class="lib-seat-empty">실시간 좌석 정보가 없습니다.</div>`;
+    body.innerHTML = `<div class="lib-seat-empty">잔여 좌석 정보가 없습니다.</div>`;
     return;
   }
-  body.innerHTML = rows
-    .map(
-      r => `
+  const timeLabel = formatSnapshotTime(generatedAt);
+  body.innerHTML =
+    (timeLabel ? `<div class="lib-seat-time">${timeLabel}</div>` : "") +
+    rows
+      .map(
+        r => `
     <div class="lib-seat-row">
       <span>${r.rdrmNm}${r.bldgFlrExpln ? ` (${r.bldgFlrExpln})` : ""}</span>
       <span><b>${r.rmndSeatCnt || "-"}</b> / ${r.tseatCnt || "-"}석 남음</span>
     </div>`
-    )
-    .join("");
+      )
+      .join("");
+}
+
+function escAttr(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+}
+
+function speakEnglish(text) {
+  if (!text || !("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "en-US";
+  utter.rate = 0.9;
+  speechSynthesis.speak(utter);
 }
 
 function openSheet(place, catCode) {
@@ -2424,7 +2476,10 @@ function openSheet(place, catCode) {
           <div class="line ${l.who === "clerk" ? "clerk" : "customer"}">
             <div class="who">${l.who === "clerk" ? (STAFF_LABEL[catCode] || "직원") : (CUSTOMER_LABEL[catCode] || "손님")}</div>
             <div class="bubble">
-              <div class="en">${l.en}</div>
+              <div class="en-row">
+                <div class="en">${l.en}</div>
+                <button type="button" class="speak-btn" data-en="${escAttr(l.en)}" aria-label="영어 발음 듣기">🔊</button>
+              </div>
               ${l.pron ? `<div class="pron">${l.pron}</div>` : ""}
               <div class="ko">${l.ko}</div>
             </div>
@@ -2434,6 +2489,12 @@ function openSheet(place, catCode) {
     `;
     item.querySelector(".scene-item-head").addEventListener("click", () => {
       item.classList.toggle("open");
+    });
+    item.querySelectorAll(".speak-btn").forEach(btn => {
+      btn.addEventListener("click", e => {
+        e.stopPropagation();
+        speakEnglish(btn.dataset.en);
+      });
     });
     list.appendChild(item);
   });
