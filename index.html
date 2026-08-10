@@ -3282,8 +3282,11 @@ translateGoBtn.addEventListener("click", async () => {
 
   const srcLang = translateSrcLang.value;
   const outMode = translateOutMode.value;
-  const wantEn = (outMode === "both" || outMode === "en") && srcLang !== "en";
+  const wantEnDisplay = (outMode === "both" || outMode === "en") && srcLang !== "en";
   const wantKo = (outMode === "both" || outMode === "ko") && srcLang !== "ko";
+  // 한국어가 필요하면 직접(모국어->한국어) 대신 영어를 한 번 거쳐서 변환한다(실사용 테스트로
+  // 확인: 손해는 없고 일본어 등 일부 언어에서 품질이 더 좋아짐). 영어 자체가 소스면 그대로 사용.
+  const needEnForPivot = wantKo && srcLang !== "en";
 
   translateError.classList.add("hidden");
   translateResult.classList.add("hidden");
@@ -3292,17 +3295,22 @@ translateGoBtn.addEventListener("click", async () => {
   translateGoBtn.disabled = true;
   translateGoBtn.textContent = "변환 중…";
 
-  // 둘 다 요청했을 때 한쪽이 실패해도 나머지 한쪽은 보여주기 위해 allSettled 사용
-  const [enResult, koResult] = await Promise.allSettled([
-    wantEn ? translateText(text, srcLang, "en") : Promise.resolve(null),
-    wantKo ? translateText(text, srcLang, "ko") : Promise.resolve(null)
-  ]);
+  let en = null;
+  if (wantEnDisplay || needEnForPivot) {
+    try { en = await translateText(text, srcLang, "en"); } catch (e) { en = null; }
+  }
 
-  const en = enResult.status === "fulfilled" ? enResult.value : null;
-  const ko = koResult.status === "fulfilled" ? koResult.value : null;
+  let ko = null;
+  if (wantKo) {
+    const koSourceText = srcLang === "en" ? text : en;
+    if (koSourceText) {
+      try { ko = await translateText(koSourceText, "en", "ko"); } catch (e) { ko = null; }
+    }
+  }
+
   let shownAny = false;
 
-  if (wantEn) {
+  if (wantEnDisplay) {
     const enOk = en && containsLatin(en);
     translateEn.textContent = enOk ? en : TRANSLATE_EN_FAILED_MSG;
     translateEn.classList.toggle("failed", !enOk);
