@@ -27,3 +27,4 @@ jobs:
           git add data/lib-index.json data/lib-seats.json
           git diff --cached --quiet && echo "no changes" || git commit -m "Update library seat snapshot"
           git push
+        
