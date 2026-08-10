@@ -2367,7 +2367,11 @@ async function findMatchingLibrary(place) {
 
 async function fetchLibrarySeatRows(lib) {
   const snapshot = await fetchLibrarySeatSnapshot();
-  const rows = (snapshot.items || []).filter(r => r.pblibId === lib.pblibId);
+  // pblibId는 전국 고유값이 아니라 지역(stdgCd)별로 재사용되는 번호라
+  // stdgCd까지 같이 맞아야 같은 도서관이다.
+  const rows = (snapshot.items || []).filter(
+    r => r.pblibId === lib.pblibId && r.stdgCd === lib.stdgCd
+  );
   return { rows, generatedAt: snapshot.generatedAt };
 }
 
