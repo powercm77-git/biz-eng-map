@@ -3086,13 +3086,20 @@ const PRON_WORD_DICT = {
   meeting: "미팅", work: "워크", job: "잡", team: "팀", "today's": "투데이즈", tomorrow: "터마로우",
   yesterday: "예스터데이", weekend: "위켄드", schedule: "스케줄", email: "이메일", call: "콜",
   computer: "컴퓨터", file: "파일", check: "첵", report: "리포트", deadline: "데드라인",
-  problem: "프라블럼"
+  problem: "프라블럼", around: "어라운드", area: "에어리어", nearby: "니어바이", walk: "워크",
+  find: "파인드", look: "룩", know: "노우", think: "씽크", come: "컴", back: "백", way: "웨이",
+  place: "플레이스", show: "쇼", tell: "텔", say: "세이", speak: "스피크", talk: "톡",
+  give: "기브", take: "테이크", make: "메이크", stay: "스테이", leave: "리브", start: "스타트",
+  finish: "피니시", late: "레이트", early: "얼리"
 };
 
 function transliterateWord(rawWord) {
   const clean = rawWord.toLowerCase().replace(/[^a-z']/g, "");
   if (!clean) return "";
   if (PRON_WORD_DICT[clean]) return PRON_WORD_DICT[clean];
+  // 사전에 없으면 복수형(-s, -es)을 벗겨서 한 번 더 찾아본다.
+  if (clean.endsWith("es") && PRON_WORD_DICT[clean.slice(0, -2)]) return PRON_WORD_DICT[clean.slice(0, -2)] + "즈";
+  if (clean.endsWith("s") && PRON_WORD_DICT[clean.slice(0, -1)]) return PRON_WORD_DICT[clean.slice(0, -1)] + "즈";
 
   const DIGRAPHS = [
     [/tion$/, "션"], [/sion$/, "젼"],
