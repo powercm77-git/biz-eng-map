@@ -340,6 +340,7 @@
   .line.customer .who { background: var(--accent); }
   .line .bubble { flex: 1; }
   .line .en { font-size: 14px; font-weight: 700; line-height: 1.4; }
+  .line .pron { font-size: 12.5px; color: var(--primary); margin-top: 2px; line-height: 1.4; }
   .line .ko { font-size: 12.5px; color: var(--sub); margin-top: 2px; line-height: 1.4; }
 
   .hidden { display: none !important; }
@@ -458,121 +459,121 @@ const SCENES = {
       titleKo: "계산할 때",
       titleEn: "Paying at the counter",
       lines: [
-        { who: "clerk", en: "Is this everything for you today?", ko: "오늘은 이게 다인가요?" },
-        { who: "customer", en: "Yes, that's all.", ko: "네, 이게 다예요." },
-        { who: "clerk", en: "That'll be 4,500 won.", ko: "4,500원입니다." }
+        { who: "clerk", en: "Is this everything for you today?", pron: "이즈 디스 에브리씽 포 유 투데이?", ko: "오늘은 이게 다인가요?" },
+        { who: "customer", en: "Yes, that's all.", pron: "예스, 댓츠 올.", ko: "네, 이게 다예요." },
+        { who: "clerk", en: "That'll be 4,500 won.", pron: "댓일 비 포 사우전드 파이브 헌드레드 원.", ko: "4,500원입니다." }
       ]
     },
     {
       titleKo: "봉투가 필요할 때",
       titleEn: "Asking for a bag",
       lines: [
-        { who: "customer", en: "Can I get a bag, please?", ko: "봉투 하나 주시겠어요?" },
-        { who: "clerk", en: "Sure, that'll be 100 won extra.", ko: "네, 봉투는 100원 추가됩니다." }
+        { who: "customer", en: "Can I get a bag, please?", pron: "캔 아이 겟 어 백, 플리즈?", ko: "봉투 하나 주시겠어요?" },
+        { who: "clerk", en: "Sure, that'll be 100 won extra.", pron: "슈어, 댓일 비 원 헌드레드 원 엑스트라.", ko: "네, 봉투는 100원 추가됩니다." }
       ]
     },
     {
       titleKo: "데워달라고 할 때",
       titleEn: "Asking to heat food",
       lines: [
-        { who: "customer", en: "Could you heat this up, please?", ko: "이거 좀 데워주시겠어요?" },
-        { who: "clerk", en: "Sure. It'll take about a minute.", ko: "네, 1분 정도 걸립니다." }
+        { who: "customer", en: "Could you heat this up, please?", pron: "쿠쥬 히트 디스 업, 플리즈?", ko: "이거 좀 데워주시겠어요?" },
+        { who: "clerk", en: "Sure. It'll take about a minute.", pron: "슈어. 잇일 테이크 어바웃 어 미닛.", ko: "네, 1분 정도 걸립니다." }
       ]
     },
     {
       titleKo: "화장실 위치 물어보기",
       titleEn: "Asking for the restroom",
       lines: [
-        { who: "customer", en: "Excuse me, is there a restroom here?", ko: "실례합니다, 화장실 있나요?" },
-        { who: "clerk", en: "Yes, it's around the corner on the left.", ko: "네, 저쪽 모퉁이 왼쪽에 있습니다." }
+        { who: "customer", en: "Excuse me, is there a restroom here?", pron: "익스큐즈 미, 이즈 데어 어 레스트룸 히어?", ko: "실례합니다, 화장실 있나요?" },
+        { who: "clerk", en: "Yes, it's around the corner on the left.", pron: "예스, 잇츠 어라운드 더 코너 온 더 레프트.", ko: "네, 저쪽 모퉁이 왼쪽에 있습니다." }
       ]
     },
     {
       titleKo: "적립카드/포인트",
       titleEn: "Membership points",
       lines: [
-        { who: "clerk", en: "Do you have a membership card?", ko: "적립 카드 있으신가요?" },
-        { who: "customer", en: "No, I don't have one.", ko: "아니요, 없어요." }
+        { who: "clerk", en: "Do you have a membership card?", pron: "두 유 해브 어 멤버십 카드?", ko: "적립 카드 있으신가요?" },
+        { who: "customer", en: "No, I don't have one.", pron: "노, 아이 돈트 해브 원.", ko: "아니요, 없어요." }
       ]
     },
     {
       titleKo: "신분증 확인 (담배·주류)",
       titleEn: "ID check for age-restricted items",
       lines: [
-        { who: "clerk", en: "Can I see your ID, please?", ko: "신분증 좀 보여주시겠어요?" },
-        { who: "customer", en: "Sure, here you go.", ko: "네, 여기 있습니다." }
+        { who: "clerk", en: "Can I see your ID, please?", pron: "캔 아이 씨 유어 아이디, 플리즈?", ko: "신분증 좀 보여주시겠어요?" },
+        { who: "customer", en: "Sure, here you go.", pron: "슈어, 히어 유 고.", ko: "네, 여기 있습니다." }
       ]
     },
     {
       titleKo: "결제 수단",
       titleEn: "How would you like to pay?",
       lines: [
-        { who: "clerk", en: "Cash or card?", ko: "현금으로 하시나요, 카드로 하시나요?" },
-        { who: "customer", en: "Card, please.", ko: "카드로 할게요." }
+        { who: "clerk", en: "Cash or card?", pron: "캐시 오어 카드?", ko: "현금으로 하시나요, 카드로 하시나요?" },
+        { who: "customer", en: "Card, please.", pron: "카드, 플리즈.", ko: "카드로 할게요." }
       ]
     },
     {
       titleKo: "영수증 필요 여부",
       titleEn: "Asking about a receipt",
       lines: [
-        { who: "clerk", en: "Would you like a receipt?", ko: "영수증 필요하세요?" },
-        { who: "customer", en: "No, thank you.", ko: "아니요, 괜찮습니다." }
+        { who: "clerk", en: "Would you like a receipt?", pron: "우쥬 라이크 어 리시트?", ko: "영수증 필요하세요?" },
+        { who: "customer", en: "No, thank you.", pron: "노, 땡큐.", ko: "아니요, 괜찮습니다." }
       ]
     },
     {
       titleKo: "우산 대여하기",
       titleEn: "Renting an umbrella",
       lines: [
-        { who: "customer", en: "It's raining. Can I rent an umbrella here?", ko: "비가 오네요. 여기서 우산 빌릴 수 있나요?" },
-        { who: "clerk", en: "Sure, it's a 2,000 won deposit.", ko: "네, 보증금 2,000원입니다." }
+        { who: "customer", en: "It's raining. Can I rent an umbrella here?", pron: "잇츠 레이닝. 캔 아이 렌트 언 엄브렐라 히어?", ko: "비가 오네요. 여기서 우산 빌릴 수 있나요?" },
+        { who: "clerk", en: "Sure, it's a 2,000 won deposit.", pron: "슈어, 잇츠 어 투 사우전드 원 디파짓.", ko: "네, 보증금 2,000원입니다." }
       ]
     },
     {
       titleKo: "택배 보내기",
       titleEn: "Sending a parcel",
       lines: [
-        { who: "customer", en: "I'd like to send this package.", ko: "이 택배를 보내고 싶어요." },
-        { who: "clerk", en: "Sure, please fill out this form.", ko: "네, 이 양식을 작성해주세요." }
+        { who: "customer", en: "I'd like to send this package.", pron: "아이드 라이크 투 센드 디스 패키지.", ko: "이 택배를 보내고 싶어요." },
+        { who: "clerk", en: "Sure, please fill out this form.", pron: "슈어, 플리즈 필 아웃 디스 폼.", ko: "네, 이 양식을 작성해주세요." }
       ]
     },
     {
       titleKo: "화장실 비밀번호 물어보기",
       titleEn: "Asking for the restroom code",
       lines: [
-        { who: "customer", en: "Is there a code for the restroom?", ko: "화장실에 비밀번호가 있나요?" },
-        { who: "clerk", en: "Yes, it's on your receipt.", ko: "네, 영수증에 적혀 있어요." }
+        { who: "customer", en: "Is there a code for the restroom?", pron: "이즈 데어 어 코드 포 더 레스트룸?", ko: "화장실에 비밀번호가 있나요?" },
+        { who: "clerk", en: "Yes, it's on your receipt.", pron: "예스, 잇츠 온 유어 리시트.", ko: "네, 영수증에 적혀 있어요." }
       ]
     },
     {
       titleKo: "ATM 위치 물어보기",
       titleEn: "Asking where the ATM is",
       lines: [
-        { who: "customer", en: "Do you have an ATM here?", ko: "여기 ATM 있나요?" },
-        { who: "clerk", en: "Yes, it's right next to the entrance.", ko: "네, 입구 바로 옆에 있어요." }
+        { who: "customer", en: "Do you have an ATM here?", pron: "두 유 해브 언 에이티엠 히어?", ko: "여기 ATM 있나요?" },
+        { who: "clerk", en: "Yes, it's right next to the entrance.", pron: "예스, 잇츠 라잇 넥스트 투 디 엔트런스.", ko: "네, 입구 바로 옆에 있어요." }
       ]
     },
     {
       titleKo: "흡연구역 안내",
       titleEn: "Asking about the smoking area",
       lines: [
-        { who: "customer", en: "Is there a smoking area nearby?", ko: "근처에 흡연구역 있나요?" },
-        { who: "clerk", en: "Yes, it's outside to the right.", ko: "네, 밖으로 나가서 오른쪽에 있어요." }
+        { who: "customer", en: "Is there a smoking area nearby?", pron: "이즈 데어 어 스모킹 에어리어 니어바이?", ko: "근처에 흡연구역 있나요?" },
+        { who: "clerk", en: "Yes, it's outside to the right.", pron: "예스, 잇츠 아웃사이드 투 더 라잇.", ko: "네, 밖으로 나가서 오른쪽에 있어요." }
       ]
     },
     {
       titleKo: "반품·교환하기",
       titleEn: "Returning or exchanging an item",
       lines: [
-        { who: "customer", en: "I'd like to return this. It's the wrong item.", ko: "이거 반품하고 싶어요. 잘못 샀어요." },
-        { who: "clerk", en: "Do you have the receipt?", ko: "영수증 가지고 계신가요?" }
+        { who: "customer", en: "I'd like to return this. It's the wrong item.", pron: "아이드 라이크 투 리턴 디스. 잇츠 더 롱 아이템.", ko: "이거 반품하고 싶어요. 잘못 샀어요." },
+        { who: "clerk", en: "Do you have the receipt?", pron: "두 유 해브 더 리시트?", ko: "영수증 가지고 계신가요?" }
       ]
     },
     {
       titleKo: "유통기한 확인하기",
       titleEn: "Checking the expiration date",
       lines: [
-        { who: "customer", en: "Could you check the expiration date on this?", ko: "이거 유통기한 좀 확인해주시겠어요?" },
-        { who: "clerk", en: "It's good until tomorrow.", ko: "내일까지 괜찮습니다." }
+        { who: "customer", en: "Could you check the expiration date on this?", pron: "쿠쥬 체크 디 익스퍼레이션 데이트 온 디스?", ko: "이거 유통기한 좀 확인해주시겠어요?" },
+        { who: "clerk", en: "It's good until tomorrow.", pron: "잇츠 굿 언틸 터마로우.", ko: "내일까지 괜찮습니다." }
       ]
     }
   ],
@@ -581,122 +582,122 @@ const SCENES = {
       titleKo: "가득 채워달라고 할 때",
       titleEn: "Asking to fill it up",
       lines: [
-        { who: "customer", en: "Fill it up, please.", ko: "가득 채워주세요." },
-        { who: "clerk", en: "Sure. Regular gasoline, right?", ko: "네. 일반 휘발유 맞으시죠?" },
-        { who: "customer", en: "Yes, that's right.", ko: "네, 맞아요." }
+        { who: "customer", en: "Fill it up, please.", pron: "필 잇 업, 플리즈.", ko: "가득 채워주세요." },
+        { who: "clerk", en: "Sure. Regular gasoline, right?", pron: "슈어. 레귤러 개솔린, 라잇?", ko: "네. 일반 휘발유 맞으시죠?" },
+        { who: "customer", en: "Yes, that's right.", pron: "예스, 댓츠 라잇.", ko: "네, 맞아요." }
       ]
     },
     {
       titleKo: "금액을 정해서 주유할 때",
       titleEn: "Asking for a fixed amount",
       lines: [
-        { who: "customer", en: "Could I get 50,000 won worth, please?", ko: "5만원어치만 넣어주시겠어요?" },
-        { who: "clerk", en: "Sure, 50,000 won of gasoline coming up.", ko: "네, 휘발유 5만원어치 넣어드릴게요." }
+        { who: "customer", en: "Could I get 50,000 won worth, please?", pron: "쿠다이 겟 피프티 싸우전드 원 워스, 플리즈?", ko: "5만원어치만 넣어주시겠어요?" },
+        { who: "clerk", en: "Sure, 50,000 won of gasoline coming up.", pron: "슈어, 피프티 싸우전드 원 오브 개솔린 커밍 업.", ko: "네, 휘발유 5만원어치 넣어드릴게요." }
       ]
     },
     {
       titleKo: "유종을 확인할 때",
       titleEn: "Confirming the fuel type",
       lines: [
-        { who: "clerk", en: "Is it gasoline or diesel?", ko: "휘발유예요, 경유예요?" },
-        { who: "customer", en: "Diesel, please.", ko: "경유로 넣어주세요." }
+        { who: "clerk", en: "Is it gasoline or diesel?", pron: "이즈 잇 개솔린 오어 디젤?", ko: "휘발유예요, 경유예요?" },
+        { who: "customer", en: "Diesel, please.", pron: "디젤, 플리즈.", ko: "경유로 넣어주세요." }
       ]
     },
     {
       titleKo: "셀프 주유를 이용할 때",
       titleEn: "Using the self-service pump",
       lines: [
-        { who: "customer", en: "Is this a self-service pump?", ko: "여기 셀프 주유인가요?" },
-        { who: "clerk", en: "Yes, just insert your card and follow the screen.", ko: "네, 카드 넣고 화면 안내대로 하시면 됩니다." }
+        { who: "customer", en: "Is this a self-service pump?", pron: "이즈 디스 어 셀프-서비스 펌프?", ko: "여기 셀프 주유인가요?" },
+        { who: "clerk", en: "Yes, just insert your card and follow the screen.", pron: "예스, 저스트 인서트 유어 카드 앤 팔로우 더 스크린.", ko: "네, 카드 넣고 화면 안내대로 하시면 됩니다." }
       ]
     },
     {
       titleKo: "카드로 결제할 때",
       titleEn: "Paying by card",
       lines: [
-        { who: "clerk", en: "How would you like to pay?", ko: "결제는 어떻게 도와드릴까요?" },
-        { who: "customer", en: "By card, please.", ko: "카드로 할게요." },
-        { who: "clerk", en: "Okay, that'll be 45,000 won.", ko: "네, 45,000원입니다." }
+        { who: "clerk", en: "How would you like to pay?", pron: "하우 우쥬 라이크 투 페이?", ko: "결제는 어떻게 도와드릴까요?" },
+        { who: "customer", en: "By card, please.", pron: "바이 카드, 플리즈.", ko: "카드로 할게요." },
+        { who: "clerk", en: "Okay, that'll be 45,000 won.", pron: "오케이, 댓일 비 포티파이브 싸우전드 원.", ko: "네, 45,000원입니다." }
       ]
     },
     {
       titleKo: "세차 서비스를 제안받을 때",
       titleEn: "Being offered a car wash",
       lines: [
-        { who: "clerk", en: "Would you like a car wash too? It's 5,000 won.", ko: "세차도 하시겠어요? 5천원입니다." },
-        { who: "customer", en: "No thanks, just the gas today.", ko: "아니요, 오늘은 주유만 할게요." }
+        { who: "clerk", en: "Would you like a car wash too? It's 5,000 won.", pron: "우쥬 라이크 어 카 워시 투? 잇츠 파이브 싸우전드 원.", ko: "세차도 하시겠어요? 5천원입니다." },
+        { who: "customer", en: "No thanks, just the gas today.", pron: "노 땡스, 저스트 더 개스 투데이.", ko: "아니요, 오늘은 주유만 할게요." }
       ]
     },
     {
       titleKo: "타이어 공기압을 확인해달라고 할 때",
       titleEn: "Asking to check tire pressure",
       lines: [
-        { who: "customer", en: "Could you check the tire pressure while you're at it?", ko: "겸사겸사 타이어 공기압도 좀 봐주시겠어요?" },
-        { who: "clerk", en: "Sure, give me a minute.", ko: "네, 잠시만요." }
+        { who: "customer", en: "Could you check the tire pressure while you're at it?", pron: "쿠쥬 체크 더 타이어 프레셔 와일 유어 앳 잇?", ko: "겸사겸사 타이어 공기압도 좀 봐주시겠어요?" },
+        { who: "clerk", en: "Sure, give me a minute.", pron: "슈어, 기브 미 어 미닛.", ko: "네, 잠시만요." }
       ]
     },
     {
       titleKo: "앞유리를 닦아달라고 할 때",
       titleEn: "Asking to clean the windshield",
       lines: [
-        { who: "customer", en: "Could you clean the windshield, please?", ko: "앞유리 좀 닦아주시겠어요?" },
-        { who: "clerk", en: "Of course, no problem.", ko: "네, 그럼요." }
+        { who: "customer", en: "Could you clean the windshield, please?", pron: "쿠쥬 클린 더 윈드쉴드, 플리즈?", ko: "앞유리 좀 닦아주시겠어요?" },
+        { who: "clerk", en: "Of course, no problem.", pron: "오브 코스, 노 프라블럼.", ko: "네, 그럼요." }
       ]
     },
     {
       titleKo: "적립카드를 낼 때",
       titleEn: "Using a membership card",
       lines: [
-        { who: "customer", en: "I have a membership card. Can I use points here?", ko: "적립카드 있는데, 포인트 여기서 쓸 수 있나요?" },
-        { who: "clerk", en: "Yes, I'll scan it for you.", ko: "네, 스캔해드릴게요." }
+        { who: "customer", en: "I have a membership card. Can I use points here?", pron: "아이 해브 어 멤버십 카드. 캔 아이 유즈 포인츠 히어?", ko: "적립카드 있는데, 포인트 여기서 쓸 수 있나요?" },
+        { who: "clerk", en: "Yes, I'll scan it for you.", pron: "예스, 아일 스캔 잇 포 유.", ko: "네, 스캔해드릴게요." }
       ]
     },
     {
       titleKo: "화장실 위치를 물어볼 때",
       titleEn: "Asking where the restroom is",
       lines: [
-        { who: "customer", en: "Is there a restroom I can use?", ko: "화장실 좀 써도 될까요?" },
-        { who: "clerk", en: "Yes, it's around the corner on the left.", ko: "네, 모퉁이 돌아서 왼쪽에 있어요." }
+        { who: "customer", en: "Is there a restroom I can use?", pron: "이즈 데어 어 레스트룸 아이 캔 유즈?", ko: "화장실 좀 써도 될까요?" },
+        { who: "clerk", en: "Yes, it's around the corner on the left.", pron: "예스, 잇츠 어라운드 더 코너 온 더 레프트.", ko: "네, 모퉁이 돌아서 왼쪽에 있어요." }
       ]
     },
     {
       titleKo: "영수증을 받을 때",
       titleEn: "Getting a receipt",
       lines: [
-        { who: "customer", en: "Can I get a receipt, please?", ko: "영수증 주시겠어요?" },
-        { who: "clerk", en: "Sure, here you go.", ko: "네, 여기 있습니다." }
+        { who: "customer", en: "Can I get a receipt, please?", pron: "캔 아이 겟 어 리시트, 플리즈?", ko: "영수증 주시겠어요?" },
+        { who: "clerk", en: "Sure, here you go.", pron: "슈어, 히어 유 고.", ko: "네, 여기 있습니다." }
       ]
     },
     {
       titleKo: "LPG 충전을 요청할 때",
       titleEn: "Asking for LPG",
       lines: [
-        { who: "customer", en: "Can you fill it up with LPG?", ko: "LPG로 가득 채워주시겠어요?" },
-        { who: "clerk", en: "Sure, please open the fuel door for me.", ko: "네, 주유구 좀 열어주시겠어요?" }
+        { who: "customer", en: "Can you fill it up with LPG?", pron: "캔 유 필 잇 업 위드 엘피지?", ko: "LPG로 가득 채워주시겠어요?" },
+        { who: "clerk", en: "Sure, please open the fuel door for me.", pron: "슈어, 플리즈 오픈 더 퓨얼 도어 포 미.", ko: "네, 주유구 좀 열어주시겠어요?" }
       ]
     },
     {
       titleKo: "워셔액을 보충해달라고 할 때",
       titleEn: "Asking to refill washer fluid",
       lines: [
-        { who: "customer", en: "Could you check the washer fluid too?", ko: "워셔액도 좀 봐주시겠어요?" },
-        { who: "clerk", en: "It's a bit low. I'll top it up.", ko: "조금 부족하네요. 채워드릴게요." }
+        { who: "customer", en: "Could you check the washer fluid too?", pron: "쿠쥬 체크 더 워셔 플루이드 투?", ko: "워셔액도 좀 봐주시겠어요?" },
+        { who: "clerk", en: "It's a bit low. I'll top it up.", pron: "잇츠 어 빗 로우. 아일 탑 잇 업.", ko: "조금 부족하네요. 채워드릴게요." }
       ]
     },
     {
       titleKo: "대기 중일 때",
       titleEn: "Waiting in line",
       lines: [
-        { who: "customer", en: "Is it going to take long? There's a line.", ko: "많이 기다려야 하나요? 줄이 있어서요." },
-        { who: "clerk", en: "Just a couple of minutes. Thanks for waiting.", ko: "2~3분이면 됩니다. 기다려주셔서 감사해요." }
+        { who: "customer", en: "Is it going to take long? There's a line.", pron: "이즈 잇 고잉 투 테이크 롱? 데얼즈 어 라인.", ko: "많이 기다려야 하나요? 줄이 있어서요." },
+        { who: "clerk", en: "Just a couple of minutes. Thanks for waiting.", pron: "저스트 어 커플 오브 미닛츠. 땡스 포 웨이팅.", ko: "2~3분이면 됩니다. 기다려주셔서 감사해요." }
       ]
     },
     {
       titleKo: "주유를 마치고 나갈 때",
       titleEn: "Finishing up and leaving",
       lines: [
-        { who: "clerk", en: "All done. Drive safely.", ko: "다 됐습니다. 안전 운전하세요." },
-        { who: "customer", en: "Thank you, have a good day.", ko: "감사합니다, 좋은 하루 되세요." }
+        { who: "clerk", en: "All done. Drive safely.", pron: "올 던. 드라이브 세이플리.", ko: "다 됐습니다. 안전 운전하세요." },
+        { who: "customer", en: "Thank you, have a good day.", pron: "땡큐, 해브 어 굿 데이.", ko: "감사합니다, 좋은 하루 되세요." }
       ]
     }
   ],
@@ -705,120 +706,120 @@ const SCENES = {
       titleKo: "도서관 회원증을 만들 때",
       titleEn: "Making a library card",
       lines: [
-        { who: "customer", en: "I'd like to make a library card, please.", ko: "도서관 회원증을 만들고 싶어요." },
-        { who: "clerk", en: "Sure, could I see your ID?", ko: "네, 신분증 좀 보여주시겠어요?" }
+        { who: "customer", en: "I'd like to make a library card, please.", pron: "아이드 라이크 투 메이크 어 라이브러리 카드, 플리즈.", ko: "도서관 회원증을 만들고 싶어요." },
+        { who: "clerk", en: "Sure, could I see your ID?", pron: "슈어, 쿠다이 씨 유어 아이디?", ko: "네, 신분증 좀 보여주시겠어요?" }
       ]
     },
     {
       titleKo: "책을 대출할 때",
       titleEn: "Checking out a book",
       lines: [
-        { who: "customer", en: "I'd like to check out these books.", ko: "이 책들 대출하고 싶어요." },
-        { who: "clerk", en: "Sure, please scan your card here.", ko: "네, 여기에 카드를 스캔해주세요." }
+        { who: "customer", en: "I'd like to check out these books.", pron: "아이드 라이크 투 체크 아웃 디즈 북스.", ko: "이 책들 대출하고 싶어요." },
+        { who: "clerk", en: "Sure, please scan your card here.", pron: "슈어, 플리즈 스캔 유어 카드 히어.", ko: "네, 여기에 카드를 스캔해주세요." }
       ]
     },
     {
       titleKo: "반납 기한을 확인할 때",
       titleEn: "Checking the due date",
       lines: [
-        { who: "customer", en: "When is this due?", ko: "이거 반납 기한이 언제예요?" },
-        { who: "clerk", en: "It's due in two weeks, on the 22nd.", ko: "2주 후, 22일까지입니다." }
+        { who: "customer", en: "When is this due?", pron: "웬 이즈 디스 듀?", ko: "이거 반납 기한이 언제예요?" },
+        { who: "clerk", en: "It's due in two weeks, on the 22nd.", pron: "잇츠 듀 인 투 윅스, 온 더 트웬티 세컨드.", ko: "2주 후, 22일까지입니다." }
       ]
     },
     {
       titleKo: "대출 기간을 연장할 때",
       titleEn: "Renewing a book",
       lines: [
-        { who: "customer", en: "Can I renew this book?", ko: "이 책 연장할 수 있을까요?" },
-        { who: "clerk", en: "Let me check. Yes, it's been renewed for one more week.", ko: "확인해볼게요. 네, 일주일 더 연장됐습니다." }
+        { who: "customer", en: "Can I renew this book?", pron: "캔 아이 리뉴 디스 북?", ko: "이 책 연장할 수 있을까요?" },
+        { who: "clerk", en: "Let me check. Yes, it's been renewed for one more week.", pron: "렛 미 체크. 예스, 잇츠 빈 리뉴드 포 원 모어 윅.", ko: "확인해볼게요. 네, 일주일 더 연장됐습니다." }
       ]
     },
     {
       titleKo: "책 위치를 물어볼 때",
       titleEn: "Asking where to find a book",
       lines: [
-        { who: "customer", en: "Could you tell me where I can find this book?", ko: "이 책 어디서 찾을 수 있는지 알려주시겠어요?" },
-        { who: "clerk", en: "It's on the third floor, in the literature section.", ko: "3층 문학 코너에 있습니다." }
+        { who: "customer", en: "Could you tell me where I can find this book?", pron: "쿠쥬 텔 미 웨어 아이 캔 파인드 디스 북?", ko: "이 책 어디서 찾을 수 있는지 알려주시겠어요?" },
+        { who: "clerk", en: "It's on the third floor, in the literature section.", pron: "잇츠 온 더 써드 플로어, 인 더 리터러처 섹션.", ko: "3층 문학 코너에 있습니다." }
       ]
     },
     {
       titleKo: "예약한 책을 찾으러 왔을 때",
       titleEn: "Picking up a reserved book",
       lines: [
-        { who: "customer", en: "I reserved a book online. Is it ready?", ko: "온라인으로 책을 예약했는데, 준비됐나요?" },
-        { who: "clerk", en: "Yes, it's on the reserved shelf under your name.", ko: "네, 예약 도서 코너에 성함으로 있습니다." }
+        { who: "customer", en: "I reserved a book online. Is it ready?", pron: "아이 리저브드 어 북 온라인. 이즈 잇 레디?", ko: "온라인으로 책을 예약했는데, 준비됐나요?" },
+        { who: "clerk", en: "Yes, it's on the reserved shelf under your name.", pron: "예스, 잇츠 온 더 리저브드 쉘프 언더 유어 네임.", ko: "네, 예약 도서 코너에 성함으로 있습니다." }
       ]
     },
     {
       titleKo: "열람실 좌석을 문의할 때",
       titleEn: "Asking about reading room seats",
       lines: [
-        { who: "customer", en: "Are there any seats available in the reading room?", ko: "열람실에 자리 있나요?" },
-        { who: "clerk", en: "Yes, there are a few open seats on the second floor.", ko: "네, 2층에 빈자리가 몇 개 있어요." }
+        { who: "customer", en: "Are there any seats available in the reading room?", pron: "아 데어 애니 시츠 어베일러블 인 더 리딩 룸?", ko: "열람실에 자리 있나요?" },
+        { who: "clerk", en: "Yes, there are a few open seats on the second floor.", pron: "예스, 데어 아 어 퓨 오픈 시츠 온 더 세컨드 플로어.", ko: "네, 2층에 빈자리가 몇 개 있어요." }
       ]
     },
     {
       titleKo: "노트북 사용 여부를 물어볼 때",
       titleEn: "Asking about using a laptop",
       lines: [
-        { who: "customer", en: "Can I use my laptop in here?", ko: "여기서 노트북 써도 되나요?" },
-        { who: "clerk", en: "Yes, but please use headphones for sound.", ko: "네, 소리는 이어폰으로 들어주세요." }
+        { who: "customer", en: "Can I use my laptop in here?", pron: "캔 아이 유즈 마이 랩탑 인 히어?", ko: "여기서 노트북 써도 되나요?" },
+        { who: "clerk", en: "Yes, but please use headphones for sound.", pron: "예스, 벗 플리즈 유즈 헤드폰즈 포 사운드.", ko: "네, 소리는 이어폰으로 들어주세요." }
       ]
     },
     {
       titleKo: "조용히 해달라는 안내를 받을 때",
       titleEn: "Being asked to keep it down",
       lines: [
-        { who: "clerk", en: "Could you keep your voice down a bit? This is a quiet zone.", ko: "목소리를 조금만 낮춰주시겠어요? 여긴 정숙 구역이라서요." },
-        { who: "customer", en: "Oh, sorry about that.", ko: "아, 죄송해요." }
+        { who: "clerk", en: "Could you keep your voice down a bit? This is a quiet zone.", pron: "쿠쥬 킵 유어 보이스 다운 어 빗? 디스 이즈 어 콰이엇 존.", ko: "목소리를 조금만 낮춰주시겠어요? 여긴 정숙 구역이라서요." },
+        { who: "customer", en: "Oh, sorry about that.", pron: "오, 쏘리 어바웃 댓.", ko: "아, 죄송해요." }
       ]
     },
     {
       titleKo: "복사·프린트를 이용할 때",
       titleEn: "Using the printer or copier",
       lines: [
-        { who: "customer", en: "Is there a printer I can use here?", ko: "여기 프린트할 수 있는 곳 있나요?" },
-        { who: "clerk", en: "Yes, it's next to the front desk. It's 100 won per page.", ko: "네, 안내데스크 옆에 있어요. 한 장에 100원입니다." }
+        { who: "customer", en: "Is there a printer I can use here?", pron: "이즈 데어 어 프린터 아이 캔 유즈 히어?", ko: "여기 프린트할 수 있는 곳 있나요?" },
+        { who: "clerk", en: "Yes, it's next to the front desk. It's 100 won per page.", pron: "예스, 잇츠 넥스트 투 더 프런트 데스크. 잇츠 원 헌드레드 원 퍼 페이지.", ko: "네, 안내데스크 옆에 있어요. 한 장에 100원입니다." }
       ]
     },
     {
       titleKo: "무인 반납함 위치를 물어볼 때",
       titleEn: "Asking about the book drop",
       lines: [
-        { who: "customer", en: "Where's the book drop for after-hours returns?", ko: "폐관 후 반납할 수 있는 반납함이 어디 있나요?" },
-        { who: "clerk", en: "It's right outside the main entrance.", ko: "정문 바로 밖에 있습니다." }
+        { who: "customer", en: "Where's the book drop for after-hours returns?", pron: "웨얼즈 더 북 드랍 포 애프터-아워즈 리턴즈?", ko: "폐관 후 반납할 수 있는 반납함이 어디 있나요?" },
+        { who: "clerk", en: "It's right outside the main entrance.", pron: "잇츠 라잇 아웃사이드 더 메인 엔트런스.", ko: "정문 바로 밖에 있습니다." }
       ]
     },
     {
       titleKo: "연체료를 안내받을 때",
       titleEn: "Being told about a late fee",
       lines: [
-        { who: "clerk", en: "This book is three days overdue, so there's a small late fee.", ko: "이 책이 3일 연체됐어요, 그래서 연체료가 조금 있습니다." },
-        { who: "customer", en: "Okay, how much is it?", ko: "네, 얼마인가요?" }
+        { who: "clerk", en: "This book is three days overdue, so there's a small late fee.", pron: "디스 북 이즈 쓰리 데이즈 오버듀, 쏘 데얼즈 어 스몰 레이트 피.", ko: "이 책이 3일 연체됐어요, 그래서 연체료가 조금 있습니다." },
+        { who: "customer", en: "Okay, how much is it?", pron: "오케이, 하우 머치 이즈 잇?", ko: "네, 얼마인가요?" }
       ]
     },
     {
       titleKo: "스터디룸을 예약할 때",
       titleEn: "Reserving a study room",
       lines: [
-        { who: "customer", en: "I'd like to reserve a study room for two hours.", ko: "스터디룸을 2시간 예약하고 싶어요." },
-        { who: "clerk", en: "Sure, how many people will be using it?", ko: "네, 몇 명이서 이용하실 건가요?" }
+        { who: "customer", en: "I'd like to reserve a study room for two hours.", pron: "아이드 라이크 투 리저브 어 스터디 룸 포 투 아워즈.", ko: "스터디룸을 2시간 예약하고 싶어요." },
+        { who: "clerk", en: "Sure, how many people will be using it?", pron: "슈어, 하우 매니 피플 윌 비 유징 잇?", ko: "네, 몇 명이서 이용하실 건가요?" }
       ]
     },
     {
       titleKo: "와이파이 비밀번호를 물어볼 때",
       titleEn: "Asking for the Wi-Fi password",
       lines: [
-        { who: "customer", en: "Could I get the Wi-Fi password?", ko: "와이파이 비밀번호 좀 알 수 있을까요?" },
-        { who: "clerk", en: "It's posted on the wall by the desk.", ko: "안내데스크 옆 벽에 붙어 있어요." }
+        { who: "customer", en: "Could I get the Wi-Fi password?", pron: "쿠다이 겟 더 와이파이 패스워드?", ko: "와이파이 비밀번호 좀 알 수 있을까요?" },
+        { who: "clerk", en: "It's posted on the wall by the desk.", pron: "잇츠 포스티드 온 더 월 바이 더 데스크.", ko: "안내데스크 옆 벽에 붙어 있어요." }
       ]
     },
     {
       titleKo: "이용 시간을 물어볼 때",
       titleEn: "Asking about opening hours",
       lines: [
-        { who: "customer", en: "What time does the library close today?", ko: "오늘 도서관 몇 시에 닫나요?" },
-        { who: "clerk", en: "We close at 6 PM on weekdays.", ko: "평일엔 오후 6시에 닫습니다." }
+        { who: "customer", en: "What time does the library close today?", pron: "왓 타임 더즈 더 라이브러리 클로즈 투데이?", ko: "오늘 도서관 몇 시에 닫나요?" },
+        { who: "clerk", en: "We close at 6 PM on weekdays.", pron: "위 클로즈 앳 식스 피엠 온 위크데이즈.", ko: "평일엔 오후 6시에 닫습니다." }
       ]
     }
   ],
@@ -827,121 +828,121 @@ const SCENES = {
       titleKo: "자리 안내 받을 때",
       titleEn: "Getting seated",
       lines: [
-        { who: "clerk", en: "Table for how many?", ko: "몇 분이세요?" },
-        { who: "customer", en: "Two, please.", ko: "두 명이요." },
-        { who: "clerk", en: "This way, please.", ko: "이쪽으로 오세요." }
+        { who: "clerk", en: "Table for how many?", pron: "테이블 포 하우 매니?", ko: "몇 분이세요?" },
+        { who: "customer", en: "Two, please.", pron: "투, 플리즈.", ko: "두 명이요." },
+        { who: "clerk", en: "This way, please.", pron: "디스 웨이, 플리즈.", ko: "이쪽으로 오세요." }
       ]
     },
     {
       titleKo: "메뉴를 추천받을 때",
       titleEn: "Asking for a recommendation",
       lines: [
-        { who: "customer", en: "What do you recommend here?", ko: "여기 뭐가 맛있어요?" },
-        { who: "clerk", en: "The bulgogi is our best seller.", ko: "불고기가 제일 잘 나가요." }
+        { who: "customer", en: "What do you recommend here?", pron: "왓 두 유 레커멘드 히어?", ko: "여기 뭐가 맛있어요?" },
+        { who: "clerk", en: "The bulgogi is our best seller.", pron: "더 불고기 이즈 아워 베스트 셀러.", ko: "불고기가 제일 잘 나가요." }
       ]
     },
     {
       titleKo: "주문할 때",
       titleEn: "Placing an order",
       lines: [
-        { who: "clerk", en: "Are you ready to order?", ko: "주문하시겠어요?" },
-        { who: "customer", en: "Yes, I'll have the kimchi stew.", ko: "네, 김치찌개 주세요." }
+        { who: "clerk", en: "Are you ready to order?", pron: "아 유 레디 투 오더?", ko: "주문하시겠어요?" },
+        { who: "customer", en: "Yes, I'll have the kimchi stew.", pron: "예스, 아일 해브 더 김치 스튜.", ko: "네, 김치찌개 주세요." }
       ]
     },
     {
       titleKo: "맵기 조절을 요청할 때",
       titleEn: "Asking for less spice",
       lines: [
-        { who: "customer", en: "Could you make it less spicy, please?", ko: "덜 맵게 해주시겠어요?" },
-        { who: "clerk", en: "Sure, no problem.", ko: "네, 그렇게 해드릴게요." }
+        { who: "customer", en: "Could you make it less spicy, please?", pron: "쿠쥬 메이크 잇 레스 스파이시, 플리즈?", ko: "덜 맵게 해주시겠어요?" },
+        { who: "clerk", en: "Sure, no problem.", pron: "슈어, 노 프라블럼.", ko: "네, 그렇게 해드릴게요." }
       ]
     },
     {
       titleKo: "알레르기를 말할 때",
       titleEn: "Mentioning a food allergy",
       lines: [
-        { who: "customer", en: "I'm allergic to peanuts. Does this dish have any?", ko: "저 땅콩 알레르기가 있는데, 이 음식에 들어가나요?" },
-        { who: "clerk", en: "No, it doesn't. You should be fine.", ko: "아니요, 안 들어가요. 괜찮으실 거예요." }
+        { who: "customer", en: "I'm allergic to peanuts. Does this dish have any?", pron: "아임 얼러직 투 피넛츠. 더즈 디스 디시 해브 애니?", ko: "저 땅콩 알레르기가 있는데, 이 음식에 들어가나요?" },
+        { who: "clerk", en: "No, it doesn't. You should be fine.", pron: "노, 잇 더즌트. 유 슈드 비 파인.", ko: "아니요, 안 들어가요. 괜찮으실 거예요." }
       ]
     },
     {
       titleKo: "반찬을 더 달라고 할 때",
       titleEn: "Asking for more side dishes",
       lines: [
-        { who: "customer", en: "Could we get more of this side dish, please?", ko: "이 반찬 좀 더 주시겠어요?" },
-        { who: "clerk", en: "Sure, I'll bring some right away.", ko: "네, 바로 가져다드릴게요." }
+        { who: "customer", en: "Could we get more of this side dish, please?", pron: "쿠드 위 겟 모어 오브 디스 사이드 디시, 플리즈?", ko: "이 반찬 좀 더 주시겠어요?" },
+        { who: "clerk", en: "Sure, I'll bring some right away.", pron: "슈어, 아일 브링 섬 라잇 어웨이.", ko: "네, 바로 가져다드릴게요." }
       ]
     },
     {
       titleKo: "물을 더 달라고 할 때",
       titleEn: "Asking for more water",
       lines: [
-        { who: "customer", en: "Could we get some more water, please?", ko: "물 좀 더 주시겠어요?" },
-        { who: "clerk", en: "Of course, one moment.", ko: "네, 잠시만요." }
+        { who: "customer", en: "Could we get some more water, please?", pron: "쿠드 위 겟 섬 모어 워터, 플리즈?", ko: "물 좀 더 주시겠어요?" },
+        { who: "clerk", en: "Of course, one moment.", pron: "오브 코스, 원 모먼트.", ko: "네, 잠시만요." }
       ]
     },
     {
       titleKo: "앞접시를 요청할 때",
       titleEn: "Asking for extra plates",
       lines: [
-        { who: "customer", en: "Could we get an extra plate?", ko: "앞접시 하나 더 주시겠어요?" },
-        { who: "clerk", en: "Sure, here you go.", ko: "네, 여기 있습니다." }
+        { who: "customer", en: "Could we get an extra plate?", pron: "쿠드 위 겟 언 엑스트라 플레이트?", ko: "앞접시 하나 더 주시겠어요?" },
+        { who: "clerk", en: "Sure, here you go.", pron: "슈어, 히어 유 고.", ko: "네, 여기 있습니다." }
       ]
     },
     {
       titleKo: "남은 음식을 포장할 때",
       titleEn: "Asking for a to-go box",
       lines: [
-        { who: "customer", en: "Could I get this to go, please?", ko: "이거 포장해주시겠어요?" },
-        { who: "clerk", en: "Sure, I'll box it up for you.", ko: "네, 포장해드릴게요." }
+        { who: "customer", en: "Could I get this to go, please?", pron: "쿠다이 겟 디스 투 고, 플리즈?", ko: "이거 포장해주시겠어요?" },
+        { who: "clerk", en: "Sure, I'll box it up for you.", pron: "슈어, 아일 박스 잇 업 포 유.", ko: "네, 포장해드릴게요." }
       ]
     },
     {
       titleKo: "대기 시간을 물어볼 때",
       titleEn: "Asking about the wait time",
       lines: [
-        { who: "customer", en: "How long is the wait for a table?", ko: "자리 대기 시간이 얼마나 되나요?" },
-        { who: "clerk", en: "About 15 minutes right now.", ko: "지금은 15분 정도 걸려요." }
+        { who: "customer", en: "How long is the wait for a table?", pron: "하우 롱 이즈 더 웨이트 포 어 테이블?", ko: "자리 대기 시간이 얼마나 되나요?" },
+        { who: "clerk", en: "About 15 minutes right now.", pron: "어바웃 피프틴 미닛츠 라잇 나우.", ko: "지금은 15분 정도 걸려요." }
       ]
     },
     {
       titleKo: "아이 의자를 요청할 때",
       titleEn: "Asking for a high chair",
       lines: [
-        { who: "customer", en: "Could we get a high chair for our child?", ko: "아이 의자 하나 주시겠어요?" },
-        { who: "clerk", en: "Sure, I'll bring one over.", ko: "네, 가져다드릴게요." }
+        { who: "customer", en: "Could we get a high chair for our child?", pron: "쿠드 위 겟 어 하이 체어 포 아워 차일드?", ko: "아이 의자 하나 주시겠어요?" },
+        { who: "clerk", en: "Sure, I'll bring one over.", pron: "슈어, 아일 브링 원 오버.", ko: "네, 가져다드릴게요." }
       ]
     },
     {
       titleKo: "주문이 잘못 나왔을 때",
       titleEn: "Pointing out a wrong order",
       lines: [
-        { who: "customer", en: "Excuse me, I think this isn't what I ordered.", ko: "저, 제가 주문한 게 아닌 것 같아요." },
-        { who: "clerk", en: "I'm so sorry, let me check and fix that right away.", ko: "정말 죄송합니다, 바로 확인해서 바꿔드릴게요." }
+        { who: "customer", en: "Excuse me, I think this isn't what I ordered.", pron: "익스큐즈 미, 아이 씽크 디스 이즌트 왓 아이 오더드.", ko: "저, 제가 주문한 게 아닌 것 같아요." },
+        { who: "clerk", en: "I'm so sorry, let me check and fix that right away.", pron: "아임 쏘 쏘리, 렛 미 체크 앤 픽스 댓 라잇 어웨이.", ko: "정말 죄송합니다, 바로 확인해서 바꿔드릴게요." }
       ]
     },
     {
       titleKo: "계산서를 요청할 때",
       titleEn: "Asking for the check",
       lines: [
-        { who: "customer", en: "Could we get the check, please?", ko: "계산서 좀 주시겠어요?" },
-        { who: "clerk", en: "Sure, I'll bring it right over.", ko: "네, 바로 가져다드릴게요." }
+        { who: "customer", en: "Could we get the check, please?", pron: "쿠드 위 겟 더 첵, 플리즈?", ko: "계산서 좀 주시겠어요?" },
+        { who: "clerk", en: "Sure, I'll bring it right over.", pron: "슈어, 아일 브링 잇 라잇 오버.", ko: "네, 바로 가져다드릴게요." }
       ]
     },
     {
       titleKo: "따로 계산할 때",
       titleEn: "Splitting the bill",
       lines: [
-        { who: "customer", en: "Could we pay separately, please?", ko: "따로따로 계산할 수 있을까요?" },
-        { who: "clerk", en: "Sure, that's no problem.", ko: "네, 가능합니다." }
+        { who: "customer", en: "Could we pay separately, please?", pron: "쿠드 위 페이 세퍼레이틀리, 플리즈?", ko: "따로따로 계산할 수 있을까요?" },
+        { who: "clerk", en: "Sure, that's no problem.", pron: "슈어, 댓츠 노 프라블럼.", ko: "네, 가능합니다." }
       ]
     },
     {
       titleKo: "맛있었다고 인사할 때",
       titleEn: "Thanking the staff on the way out",
       lines: [
-        { who: "customer", en: "That was delicious, thank you.", ko: "정말 맛있었어요, 감사합니다." },
-        { who: "clerk", en: "Thank you, please come again.", ko: "감사합니다, 또 오세요." }
+        { who: "customer", en: "That was delicious, thank you.", pron: "댓 워즈 딜리셔스, 땡큐.", ko: "정말 맛있었어요, 감사합니다." },
+        { who: "clerk", en: "Thank you, please come again.", pron: "땡큐, 플리즈 컴 어겐.", ko: "감사합니다, 또 오세요." }
       ]
     }
   ],
@@ -950,120 +951,120 @@ const SCENES = {
       titleKo: "음료를 주문할 때",
       titleEn: "Ordering a drink",
       lines: [
-        { who: "clerk", en: "What can I get for you?", ko: "무엇을 도와드릴까요?" },
-        { who: "customer", en: "I'll have an iced americano, please.", ko: "아이스 아메리카노 한 잔 주세요." }
+        { who: "clerk", en: "What can I get for you?", pron: "왓 캔 아이 겟 포 유?", ko: "무엇을 도와드릴까요?" },
+        { who: "customer", en: "I'll have an iced americano, please.", pron: "아일 해브 언 아이스드 아메리카노, 플리즈.", ko: "아이스 아메리카노 한 잔 주세요." }
       ]
     },
     {
       titleKo: "사이즈를 고를 때",
       titleEn: "Choosing a size",
       lines: [
-        { who: "clerk", en: "What size would you like, tall or grande?", ko: "사이즈는 톨로 하시겠어요, 그란데로 하시겠어요?" },
-        { who: "customer", en: "Grande, please.", ko: "그란데로 주세요." }
+        { who: "clerk", en: "What size would you like, tall or grande?", pron: "왓 사이즈 우쥬 라이크, 톨 오어 그란데?", ko: "사이즈는 톨로 하시겠어요, 그란데로 하시겠어요?" },
+        { who: "customer", en: "Grande, please.", pron: "그란데, 플리즈.", ko: "그란데로 주세요." }
       ]
     },
     {
       titleKo: "온도를 정할 때",
       titleEn: "Choosing hot or iced",
       lines: [
-        { who: "clerk", en: "Would you like that hot or iced?", ko: "따뜻하게 드릴까요, 차갑게 드릴까요?" },
-        { who: "customer", en: "Iced, please.", ko: "아이스로 주세요." }
+        { who: "clerk", en: "Would you like that hot or iced?", pron: "우쥬 라이크 댓 핫 오어 아이스드?", ko: "따뜻하게 드릴까요, 차갑게 드릴까요?" },
+        { who: "customer", en: "Iced, please.", pron: "아이스드, 플리즈.", ko: "아이스로 주세요." }
       ]
     },
     {
       titleKo: "우유 종류를 바꿀 때",
       titleEn: "Changing the milk option",
       lines: [
-        { who: "customer", en: "Could I get that with oat milk instead?", ko: "우유 대신 오트밀크로 바꿀 수 있을까요?" },
-        { who: "clerk", en: "Sure, that's an extra 700 won.", ko: "네, 700원 추가됩니다." }
+        { who: "customer", en: "Could I get that with oat milk instead?", pron: "쿠다이 겟 댓 위드 오트 밀크 인스테드?", ko: "우유 대신 오트밀크로 바꿀 수 있을까요?" },
+        { who: "clerk", en: "Sure, that's an extra 700 won.", pron: "슈어, 댓츠 언 엑스트라 세븐 헌드레드 원.", ko: "네, 700원 추가됩니다." }
       ]
     },
     {
       titleKo: "샷을 추가할 때",
       titleEn: "Adding an extra shot",
       lines: [
-        { who: "customer", en: "Could you add an extra shot, please?", ko: "샷 하나 추가해주시겠어요?" },
-        { who: "clerk", en: "Sure, no problem.", ko: "네, 알겠습니다." }
+        { who: "customer", en: "Could you add an extra shot, please?", pron: "쿠쥬 애드 언 엑스트라 샷, 플리즈?", ko: "샷 하나 추가해주시겠어요?" },
+        { who: "clerk", en: "Sure, no problem.", pron: "슈어, 노 프라블럼.", ko: "네, 알겠습니다." }
       ]
     },
     {
       titleKo: "디카페인을 요청할 때",
       titleEn: "Asking for decaf",
       lines: [
-        { who: "customer", en: "Can I get this in decaf?", ko: "이거 디카페인으로 될까요?" },
-        { who: "clerk", en: "Yes, we have decaf available.", ko: "네, 디카페인 가능합니다." }
+        { who: "customer", en: "Can I get this in decaf?", pron: "캔 아이 겟 디스 인 디카프?", ko: "이거 디카페인으로 될까요?" },
+        { who: "clerk", en: "Yes, we have decaf available.", pron: "예스, 위 해브 디카프 어베일러블.", ko: "네, 디카페인 가능합니다." }
       ]
     },
     {
       titleKo: "매장·포장을 확인할 때",
       titleEn: "For here or to go",
       lines: [
-        { who: "clerk", en: "Is this for here or to go?", ko: "매장에서 드시나요, 포장이신가요?" },
-        { who: "customer", en: "For here, please.", ko: "매장에서 마실게요." }
+        { who: "clerk", en: "Is this for here or to go?", pron: "이즈 디스 포 히어 오어 투 고?", ko: "매장에서 드시나요, 포장이신가요?" },
+        { who: "customer", en: "For here, please.", pron: "포 히어, 플리즈.", ko: "매장에서 마실게요." }
       ]
     },
     {
       titleKo: "주문한 음료를 찾을 때",
       titleEn: "Picking up your order",
       lines: [
-        { who: "clerk", en: "An iced latte for Jieun!", ko: "지은님, 아이스 라떼 나왔습니다!" },
-        { who: "customer", en: "That's me, thank you.", ko: "저예요, 감사합니다." }
+        { who: "clerk", en: "An iced latte for Jieun!", pron: "언 아이스드 라떼 포 지은!", ko: "지은님, 아이스 라떼 나왔습니다!" },
+        { who: "customer", en: "That's me, thank you.", pron: "댓츠 미, 땡큐.", ko: "저예요, 감사합니다." }
       ]
     },
     {
       titleKo: "와이파이 비밀번호를 물어볼 때",
       titleEn: "Asking for the Wi-Fi password",
       lines: [
-        { who: "customer", en: "Could I get the Wi-Fi password?", ko: "와이파이 비밀번호 좀 알 수 있을까요?" },
-        { who: "clerk", en: "Sure, it's on the receipt.", ko: "네, 영수증에 적혀 있어요." }
+        { who: "customer", en: "Could I get the Wi-Fi password?", pron: "쿠다이 겟 더 와이파이 패스워드?", ko: "와이파이 비밀번호 좀 알 수 있을까요?" },
+        { who: "clerk", en: "Sure, it's on the receipt.", pron: "슈어, 잇츠 온 더 리시트.", ko: "네, 영수증에 적혀 있어요." }
       ]
     },
     {
       titleKo: "콘센트 자리를 물어볼 때",
       titleEn: "Asking about power outlets",
       lines: [
-        { who: "customer", en: "Are there any seats with outlets?", ko: "콘센트 있는 자리 있나요?" },
-        { who: "clerk", en: "Yes, they're by the window.", ko: "네, 창가 쪽에 있습니다." }
+        { who: "customer", en: "Are there any seats with outlets?", pron: "아 데어 애니 시츠 위드 아웃렛츠?", ko: "콘센트 있는 자리 있나요?" },
+        { who: "clerk", en: "Yes, they're by the window.", pron: "예스, 데얼 바이 더 윈도우.", ko: "네, 창가 쪽에 있습니다." }
       ]
     },
     {
       titleKo: "빨대나 냅킨을 요청할 때",
       titleEn: "Asking for a straw or napkins",
       lines: [
-        { who: "customer", en: "Could I get a straw, please?", ko: "빨대 좀 주시겠어요?" },
-        { who: "clerk", en: "Sure, they're right over there.", ko: "네, 저쪽에 있어요." }
+        { who: "customer", en: "Could I get a straw, please?", pron: "쿠다이 겟 어 스트로, 플리즈?", ko: "빨대 좀 주시겠어요?" },
+        { who: "clerk", en: "Sure, they're right over there.", pron: "슈어, 데얼 라잇 오버 데어.", ko: "네, 저쪽에 있어요." }
       ]
     },
     {
       titleKo: "음료 여러 잔을 담을 캐리어를 요청할 때",
       titleEn: "Asking for a drink carrier",
       lines: [
-        { who: "customer", en: "Could I get a carrier for these? I have four drinks.", ko: "이거 담을 캐리어 좀 주시겠어요? 네 잔이라서요." },
-        { who: "clerk", en: "Of course, here you go.", ko: "그럼요, 여기 있습니다." }
+        { who: "customer", en: "Could I get a carrier for these? I have four drinks.", pron: "쿠다이 겟 어 캐리어 포 디즈? 아이 해브 포 드링크스.", ko: "이거 담을 캐리어 좀 주시겠어요? 네 잔이라서요." },
+        { who: "clerk", en: "Of course, here you go.", pron: "오브 코스, 히어 유 고.", ko: "그럼요, 여기 있습니다." }
       ]
     },
     {
       titleKo: "자리가 있는지 물어볼 때",
       titleEn: "Asking if a seat is available",
       lines: [
-        { who: "customer", en: "Is this seat taken?", ko: "여기 자리 있나요?" },
-        { who: "clerk", en: "No, feel free to sit anywhere.", ko: "아니요, 아무 데나 앉으셔도 됩니다." }
+        { who: "customer", en: "Is this seat taken?", pron: "이즈 디스 시트 테이큰?", ko: "여기 자리 있나요?" },
+        { who: "clerk", en: "No, feel free to sit anywhere.", pron: "노, 필 프리 투 싯 애니웨어.", ko: "아니요, 아무 데나 앉으셔도 됩니다." }
       ]
     },
     {
       titleKo: "모바일 주문을 픽업할 때",
       titleEn: "Picking up a mobile order",
       lines: [
-        { who: "customer", en: "Hi, I have a mobile order under Kim.", ko: "안녕하세요, 김으로 모바일 주문했어요." },
-        { who: "clerk", en: "Let me check. It'll be ready in a minute.", ko: "확인해볼게요. 1분 정도면 준비됩니다." }
+        { who: "customer", en: "Hi, I have a mobile order under Kim.", pron: "하이, 아이 해브 어 모바일 오더 언더 킴.", ko: "안녕하세요, 김으로 모바일 주문했어요." },
+        { who: "clerk", en: "Let me check. It'll be ready in a minute.", pron: "렛 미 체크. 잇일 비 레디 인 어 미닛.", ko: "확인해볼게요. 1분 정도면 준비됩니다." }
       ]
     },
     {
       titleKo: "텀블러 할인을 물어볼 때",
       titleEn: "Asking about a tumbler discount",
       lines: [
-        { who: "customer", en: "Do I get a discount if I use my own tumbler?", ko: "텀블러 가져오면 할인되나요?" },
-        { who: "clerk", en: "Yes, that's 300 won off.", ko: "네, 300원 할인됩니다." }
+        { who: "customer", en: "Do I get a discount if I use my own tumbler?", pron: "두 아이 겟 어 디스카운트 이프 아이 유즈 마이 오운 텀블러?", ko: "텀블러 가져오면 할인되나요?" },
+        { who: "clerk", en: "Yes, that's 300 won off.", pron: "예스, 댓츠 쓰리 헌드레드 원 오프.", ko: "네, 300원 할인됩니다." }
       ]
     }
   ],
@@ -1072,120 +1073,120 @@ const SCENES = {
       titleKo: "접수할 때",
       titleEn: "Checking in at the front desk",
       lines: [
-        { who: "clerk", en: "Have you visited us before?", ko: "저희 병원 처음이신가요?" },
-        { who: "customer", en: "No, this is my first time.", ko: "네, 처음이에요." }
+        { who: "clerk", en: "Have you visited us before?", pron: "해브 유 비지티드 어스 비포어?", ko: "저희 병원 처음이신가요?" },
+        { who: "customer", en: "No, this is my first time.", pron: "노, 디스 이즈 마이 퍼스트 타임.", ko: "네, 처음이에요." }
       ]
     },
     {
       titleKo: "증상을 설명할 때",
       titleEn: "Describing your symptoms",
       lines: [
-        { who: "clerk", en: "What brings you in today?", ko: "오늘 어디가 불편해서 오셨어요?" },
-        { who: "customer", en: "I've had a sore throat and fever since yesterday.", ko: "어제부터 목이 아프고 열이 나요." }
+        { who: "clerk", en: "What brings you in today?", pron: "왓 브링스 유 인 투데이?", ko: "오늘 어디가 불편해서 오셨어요?" },
+        { who: "customer", en: "I've had a sore throat and fever since yesterday.", pron: "아이브 해드 어 소어 쓰로트 앤 피버 신스 예스터데이.", ko: "어제부터 목이 아프고 열이 나요." }
       ]
     },
     {
       titleKo: "예약을 확인할 때",
       titleEn: "Confirming an appointment",
       lines: [
-        { who: "customer", en: "I have an appointment at 3 o'clock.", ko: "3시에 예약했는데요." },
-        { who: "clerk", en: "Let me check. Yes, please have a seat.", ko: "확인해볼게요. 네, 앉아서 기다려주세요." }
+        { who: "customer", en: "I have an appointment at 3 o'clock.", pron: "아이 해브 언 어포인트먼트 앳 쓰리 어클락.", ko: "3시에 예약했는데요." },
+        { who: "clerk", en: "Let me check. Yes, please have a seat.", pron: "렛 미 체크. 예스, 플리즈 해브 어 시트.", ko: "확인해볼게요. 네, 앉아서 기다려주세요." }
       ]
     },
     {
       titleKo: "보험증을 제출할 때",
       titleEn: "Submitting your insurance card",
       lines: [
-        { who: "clerk", en: "Could I see your insurance card, please?", ko: "보험증 좀 보여주시겠어요?" },
-        { who: "customer", en: "Sure, here it is.", ko: "네, 여기 있습니다." }
+        { who: "clerk", en: "Could I see your insurance card, please?", pron: "쿠다이 씨 유어 인슈어런스 카드, 플리즈?", ko: "보험증 좀 보여주시겠어요?" },
+        { who: "customer", en: "Sure, here it is.", pron: "슈어, 히어 잇 이즈.", ko: "네, 여기 있습니다." }
       ]
     },
     {
       titleKo: "진료실로 안내받을 때",
       titleEn: "Being called into the exam room",
       lines: [
-        { who: "clerk", en: "You can go into room 2 now.", ko: "2번 진료실로 들어가시면 됩니다." },
-        { who: "customer", en: "Thank you.", ko: "감사합니다." }
+        { who: "clerk", en: "You can go into room 2 now.", pron: "유 캔 고 인투 룸 투 나우.", ko: "2번 진료실로 들어가시면 됩니다." },
+        { who: "customer", en: "Thank you.", pron: "땡큐.", ko: "감사합니다." }
       ]
     },
     {
       titleKo: "대기 시간을 물어볼 때",
       titleEn: "Asking about the wait time",
       lines: [
-        { who: "customer", en: "How long is the wait right now?", ko: "지금 얼마나 기다려야 하나요?" },
-        { who: "clerk", en: "About 20 minutes.", ko: "20분 정도 걸려요." }
+        { who: "customer", en: "How long is the wait right now?", pron: "하우 롱 이즈 더 웨이트 라잇 나우?", ko: "지금 얼마나 기다려야 하나요?" },
+        { who: "clerk", en: "About 20 minutes.", pron: "어바웃 트웬티 미닛츠.", ko: "20분 정도 걸려요." }
       ]
     },
     {
       titleKo: "처방전을 받을 때",
       titleEn: "Getting a prescription",
       lines: [
-        { who: "clerk", en: "Here's your prescription. Please take it to the pharmacy.", ko: "처방전 드릴게요. 약국에서 받아 가세요." },
-        { who: "customer", en: "Thank you.", ko: "감사합니다." }
+        { who: "clerk", en: "Here's your prescription. Please take it to the pharmacy.", pron: "히얼즈 유어 프리스크립션. 플리즈 테이크 잇 투 더 파머시.", ko: "처방전 드릴게요. 약국에서 받아 가세요." },
+        { who: "customer", en: "Thank you.", pron: "땡큐.", ko: "감사합니다." }
       ]
     },
     {
       titleKo: "약 알레르기를 말할 때",
       titleEn: "Mentioning a drug allergy",
       lines: [
-        { who: "customer", en: "I'm allergic to penicillin.", ko: "저 페니실린 알레르기가 있어요." },
-        { who: "clerk", en: "Thanks for letting us know, we'll note that.", ko: "알려주셔서 감사합니다, 기록해둘게요." }
+        { who: "customer", en: "I'm allergic to penicillin.", pron: "아임 얼러직 투 페니실린.", ko: "저 페니실린 알레르기가 있어요." },
+        { who: "clerk", en: "Thanks for letting us know, we'll note that.", pron: "땡스 포 레팅 어스 노우, 위일 노트 댓.", ko: "알려주셔서 감사합니다, 기록해둘게요." }
       ]
     },
     {
       titleKo: "다음 예약을 잡을 때",
       titleEn: "Scheduling a follow-up",
       lines: [
-        { who: "clerk", en: "Could you come back in a week for a follow-up?", ko: "일주일 후에 재진하러 오실 수 있나요?" },
-        { who: "customer", en: "Yes, that works for me.", ko: "네, 괜찮아요." }
+        { who: "clerk", en: "Could you come back in a week for a follow-up?", pron: "쿠쥬 컴 백 인 어 윅 포 어 팔로우-업?", ko: "일주일 후에 재진하러 오실 수 있나요?" },
+        { who: "customer", en: "Yes, that works for me.", pron: "예스, 댓 웍스 포 미.", ko: "네, 괜찮아요." }
       ]
     },
     {
       titleKo: "검사 결과를 물어볼 때",
       titleEn: "Asking about test results",
       lines: [
-        { who: "customer", en: "Are my test results ready?", ko: "제 검사 결과 나왔나요?" },
-        { who: "clerk", en: "Not yet, they'll be ready tomorrow.", ko: "아직이요, 내일 나올 예정이에요." }
+        { who: "customer", en: "Are my test results ready?", pron: "아 마이 테스트 리절츠 레디?", ko: "제 검사 결과 나왔나요?" },
+        { who: "clerk", en: "Not yet, they'll be ready tomorrow.", pron: "낫 옛, 데일 비 레디 터마로우.", ko: "아직이요, 내일 나올 예정이에요." }
       ]
     },
     {
       titleKo: "진료과를 안내받을 때",
       titleEn: "Being directed to the right department",
       lines: [
-        { who: "customer", en: "I have a stomachache. Which department should I go to?", ko: "배가 아픈데 어느 과로 가야 하나요?" },
-        { who: "clerk", en: "Please go to internal medicine, on the second floor.", ko: "내과로 가시면 됩니다, 2층이에요." }
+        { who: "customer", en: "I have a stomachache. Which department should I go to?", pron: "아이 해브 어 스터먹에이크. 위치 디파트먼트 슈드 아이 고 투?", ko: "배가 아픈데 어느 과로 가야 하나요?" },
+        { who: "clerk", en: "Please go to internal medicine, on the second floor.", pron: "플리즈 고 투 인터널 메디슨, 온 더 세컨드 플로어.", ko: "내과로 가시면 됩니다, 2층이에요." }
       ]
     },
     {
       titleKo: "진료비를 결제할 때",
       titleEn: "Paying for the visit",
       lines: [
-        { who: "clerk", en: "Your total today is 18,000 won.", ko: "오늘 진료비는 18,000원입니다." },
-        { who: "customer", en: "I'll pay by card.", ko: "카드로 계산할게요." }
+        { who: "clerk", en: "Your total today is 18,000 won.", pron: "유어 토탈 투데이 이즈 에잇틴 싸우전드 원.", ko: "오늘 진료비는 18,000원입니다." },
+        { who: "customer", en: "I'll pay by card.", pron: "아일 페이 바이 카드.", ko: "카드로 계산할게요." }
       ]
     },
     {
       titleKo: "진단서를 요청할 때",
       titleEn: "Requesting a medical certificate",
       lines: [
-        { who: "customer", en: "Could I get a medical certificate for work, please?", ko: "회사 제출용 진단서 좀 받을 수 있을까요?" },
-        { who: "clerk", en: "Sure, it'll take about 10 minutes.", ko: "네, 10분 정도 걸립니다." }
+        { who: "customer", en: "Could I get a medical certificate for work, please?", pron: "쿠다이 겟 어 메디컬 서티피킷 포 워크, 플리즈?", ko: "회사 제출용 진단서 좀 받을 수 있을까요?" },
+        { who: "clerk", en: "Sure, it'll take about 10 minutes.", pron: "슈어, 잇일 테이크 어바웃 텐 미닛츠.", ko: "네, 10분 정도 걸립니다." }
       ]
     },
     {
       titleKo: "어지러움을 호소할 때",
       titleEn: "Explaining you feel dizzy",
       lines: [
-        { who: "customer", en: "I feel dizzy and a bit nauseous.", ko: "어지럽고 속이 좀 메스꺼워요." },
-        { who: "clerk", en: "Let's have the doctor take a look right away.", ko: "바로 진료 보실 수 있게 해드릴게요." }
+        { who: "customer", en: "I feel dizzy and a bit nauseous.", pron: "아이 필 디지 앤 어 빗 노셔스.", ko: "어지럽고 속이 좀 메스꺼워요." },
+        { who: "clerk", en: "Let's have the doctor take a look right away.", pron: "렛츠 해브 더 닥터 테이크 어 룩 라잇 어웨이.", ko: "바로 진료 보실 수 있게 해드릴게요." }
       ]
     },
     {
       titleKo: "진료를 마치고 나갈 때",
       titleEn: "Finishing up the visit",
       lines: [
-        { who: "clerk", en: "Take care, and rest well.", ko: "몸조리 잘하시고요." },
-        { who: "customer", en: "Thank you, I will.", ko: "네, 감사합니다." }
+        { who: "clerk", en: "Take care, and rest well.", pron: "테이크 케어, 앤 레스트 웰.", ko: "몸조리 잘하시고요." },
+        { who: "customer", en: "Thank you, I will.", pron: "땡큐, 아이 윌.", ko: "네, 감사합니다." }
       ]
     }
   ],
@@ -1194,120 +1195,120 @@ const SCENES = {
       titleKo: "처방전을 제출할 때",
       titleEn: "Submitting a prescription",
       lines: [
-        { who: "customer", en: "Here's my prescription.", ko: "여기 처방전이요." },
-        { who: "clerk", en: "Okay, it'll take about five minutes.", ko: "네, 5분 정도 걸립니다." }
+        { who: "customer", en: "Here's my prescription.", pron: "히얼즈 마이 프리스크립션.", ko: "여기 처방전이요." },
+        { who: "clerk", en: "Okay, it'll take about five minutes.", pron: "오케이, 잇일 테이크 어바웃 파이브 미닛츠.", ko: "네, 5분 정도 걸립니다." }
       ]
     },
     {
       titleKo: "복용법을 안내받을 때",
       titleEn: "Getting dosage instructions",
       lines: [
-        { who: "clerk", en: "Take this three times a day after meals.", ko: "이건 하루 세 번 식후에 드세요." },
-        { who: "customer", en: "Okay, got it.", ko: "네, 알겠습니다." }
+        { who: "clerk", en: "Take this three times a day after meals.", pron: "테이크 디스 쓰리 타임즈 어 데이 애프터 밀즈.", ko: "이건 하루 세 번 식후에 드세요." },
+        { who: "customer", en: "Okay, got it.", pron: "오케이, 갓 잇.", ko: "네, 알겠습니다." }
       ]
     },
     {
       titleKo: "부작용을 물어볼 때",
       titleEn: "Asking about side effects",
       lines: [
-        { who: "customer", en: "Does this medicine have any side effects?", ko: "이 약 부작용이 있나요?" },
-        { who: "clerk", en: "It might make you a bit drowsy.", ko: "약간 졸릴 수 있어요." }
+        { who: "customer", en: "Does this medicine have any side effects?", pron: "더즈 디스 메디슨 해브 애니 사이드 이펙츠?", ko: "이 약 부작용이 있나요?" },
+        { who: "clerk", en: "It might make you a bit drowsy.", pron: "잇 마잇 메이크 유 어 빗 드라우지.", ko: "약간 졸릴 수 있어요." }
       ]
     },
     {
       titleKo: "감기약을 추천받을 때",
       titleEn: "Asking for a cold medicine recommendation",
       lines: [
-        { who: "customer", en: "Could you recommend something for a cold?", ko: "감기약 좀 추천해주시겠어요?" },
-        { who: "clerk", en: "Sure, this one works well for a sore throat.", ko: "네, 이게 목 아픈 데 잘 들어요." }
+        { who: "customer", en: "Could you recommend something for a cold?", pron: "쿠쥬 레커멘드 섬씽 포 어 콜드?", ko: "감기약 좀 추천해주시겠어요?" },
+        { who: "clerk", en: "Sure, this one works well for a sore throat.", pron: "슈어, 디스 원 웍스 웰 포 어 소어 쓰로트.", ko: "네, 이게 목 아픈 데 잘 들어요." }
       ]
     },
     {
       titleKo: "두통약을 구매할 때",
       titleEn: "Buying headache medicine",
       lines: [
-        { who: "customer", en: "Could I get something for a headache?", ko: "두통약 좀 주시겠어요?" },
-        { who: "clerk", en: "Sure, here you go.", ko: "네, 여기 있습니다." }
+        { who: "customer", en: "Could I get something for a headache?", pron: "쿠다이 겟 섬씽 포 어 헤드에이크?", ko: "두통약 좀 주시겠어요?" },
+        { who: "clerk", en: "Sure, here you go.", pron: "슈어, 히어 유 고.", ko: "네, 여기 있습니다." }
       ]
     },
     {
       titleKo: "하루 복용 횟수를 확인할 때",
       titleEn: "Checking how many times a day",
       lines: [
-        { who: "customer", en: "How many times a day should I take this?", ko: "이거 하루에 몇 번 먹어야 하나요?" },
-        { who: "clerk", en: "Twice a day, morning and evening.", ko: "하루 두 번, 아침저녁으로 드세요." }
+        { who: "customer", en: "How many times a day should I take this?", pron: "하우 매니 타임즈 어 데이 슈다이 테이크 디스?", ko: "이거 하루에 몇 번 먹어야 하나요?" },
+        { who: "clerk", en: "Twice a day, morning and evening.", pron: "트와이스 어 데이, 모닝 앤 이브닝.", ko: "하루 두 번, 아침저녁으로 드세요." }
       ]
     },
     {
       titleKo: "소화제를 구매할 때",
       titleEn: "Buying medicine for indigestion",
       lines: [
-        { who: "customer", en: "I have an upset stomach. What would you recommend?", ko: "속이 안 좋은데 뭐가 좋을까요?" },
-        { who: "clerk", en: "This one should help.", ko: "이게 도움이 될 거예요." }
+        { who: "customer", en: "I have an upset stomach. What would you recommend?", pron: "아이 해브 언 업셋 스터먹. 왓 우쥬 레커멘드?", ko: "속이 안 좋은데 뭐가 좋을까요?" },
+        { who: "clerk", en: "This one should help.", pron: "디스 원 슈드 헬프.", ko: "이게 도움이 될 거예요." }
       ]
     },
     {
       titleKo: "밴드와 연고를 구매할 때",
       titleEn: "Buying band-aids and ointment",
       lines: [
-        { who: "customer", en: "Could I get some band-aids and ointment?", ko: "밴드하고 연고 좀 주시겠어요?" },
-        { who: "clerk", en: "Sure, anything else?", ko: "네, 더 필요한 거 있으세요?" }
+        { who: "customer", en: "Could I get some band-aids and ointment?", pron: "쿠다이 겟 섬 밴드에이즈 앤 오인트먼트?", ko: "밴드하고 연고 좀 주시겠어요?" },
+        { who: "clerk", en: "Sure, anything else?", pron: "슈어, 애니씽 엘스?", ko: "네, 더 필요한 거 있으세요?" }
       ]
     },
     {
       titleKo: "임신 중 복용 가능 여부를 물어볼 때",
       titleEn: "Asking if it's safe during pregnancy",
       lines: [
-        { who: "customer", en: "Is this safe to take while pregnant?", ko: "이거 임신 중에 먹어도 되나요?" },
-        { who: "clerk", en: "It's best to check with your doctor first.", ko: "의사 선생님께 먼저 확인해보시는 게 좋아요." }
+        { who: "customer", en: "Is this safe to take while pregnant?", pron: "이즈 디스 세이프 투 테이크 와일 프레그넌트?", ko: "이거 임신 중에 먹어도 되나요?" },
+        { who: "clerk", en: "It's best to check with your doctor first.", pron: "잇츠 베스트 투 첵 위드 유어 닥터 퍼스트.", ko: "의사 선생님께 먼저 확인해보시는 게 좋아요." }
       ]
     },
     {
       titleKo: "다른 약과 같이 먹어도 되는지 물어볼 때",
       titleEn: "Asking about drug interactions",
       lines: [
-        { who: "customer", en: "Can I take this with the medicine I'm already on?", ko: "지금 먹는 약이랑 같이 먹어도 되나요?" },
-        { who: "clerk", en: "What are you currently taking?", ko: "지금 어떤 약 드시고 계세요?" }
+        { who: "customer", en: "Can I take this with the medicine I'm already on?", pron: "캔 아이 테이크 디스 위드 더 메디슨 아임 얼레디 온?", ko: "지금 먹는 약이랑 같이 먹어도 되나요?" },
+        { who: "clerk", en: "What are you currently taking?", pron: "왓 아 유 커런틀리 테이킹?", ko: "지금 어떤 약 드시고 계세요?" }
       ]
     },
     {
       titleKo: "영수증을 요청할 때",
       titleEn: "Asking for a receipt",
       lines: [
-        { who: "customer", en: "Could I get a receipt, please?", ko: "영수증 주시겠어요?" },
-        { who: "clerk", en: "Sure, here you go.", ko: "네, 여기 있습니다." }
+        { who: "customer", en: "Could I get a receipt, please?", pron: "쿠다이 겟 어 리시트, 플리즈?", ko: "영수증 주시겠어요?" },
+        { who: "clerk", en: "Sure, here you go.", pron: "슈어, 히어 유 고.", ko: "네, 여기 있습니다." }
       ]
     },
     {
       titleKo: "카드 결제 여부를 확인할 때",
       titleEn: "Confirming card payment",
       lines: [
-        { who: "clerk", en: "How would you like to pay?", ko: "결제는 어떻게 도와드릴까요?" },
-        { who: "customer", en: "By card, please.", ko: "카드로 할게요." }
+        { who: "clerk", en: "How would you like to pay?", pron: "하우 우쥬 라이크 투 페이?", ko: "결제는 어떻게 도와드릴까요?" },
+        { who: "customer", en: "By card, please.", pron: "바이 카드, 플리즈.", ko: "카드로 할게요." }
       ]
     },
     {
       titleKo: "알레르기 약이 있는지 물어볼 때",
       titleEn: "Asking about allergy medicine",
       lines: [
-        { who: "customer", en: "Do you have anything for allergies?", ko: "알레르기 약 있나요?" },
-        { who: "clerk", en: "Yes, this one works well.", ko: "네, 이게 잘 들어요." }
+        { who: "customer", en: "Do you have anything for allergies?", pron: "두 유 해브 애니씽 포 앨러지즈?", ko: "알레르기 약 있나요?" },
+        { who: "clerk", en: "Yes, this one works well.", pron: "예스, 디스 원 웍스 웰.", ko: "네, 이게 잘 들어요." }
       ]
     },
     {
       titleKo: "비타민을 구매할 때",
       titleEn: "Buying vitamins",
       lines: [
-        { who: "customer", en: "Could you recommend a good vitamin?", ko: "괜찮은 비타민 좀 추천해주시겠어요?" },
-        { who: "clerk", en: "This multivitamin is popular.", ko: "이 종합비타민이 인기 많아요." }
+        { who: "customer", en: "Could you recommend a good vitamin?", pron: "쿠쥬 레커멘드 어 굿 바이타민?", ko: "괜찮은 비타민 좀 추천해주시겠어요?" },
+        { who: "clerk", en: "This multivitamin is popular.", pron: "디스 멀티바이타민 이즈 파퓰러.", ko: "이 종합비타민이 인기 많아요." }
       ]
     },
     {
       titleKo: "약을 다 받고 나갈 때",
       titleEn: "Finishing up at the pharmacy",
       lines: [
-        { who: "clerk", en: "Here's your medicine. Get well soon.", ko: "약 나왔습니다. 얼른 나으세요." },
-        { who: "customer", en: "Thank you so much.", ko: "정말 감사합니다." }
+        { who: "clerk", en: "Here's your medicine. Get well soon.", pron: "히얼즈 유어 메디슨. 겟 웰 순.", ko: "약 나왔습니다. 얼른 나으세요." },
+        { who: "customer", en: "Thank you so much.", pron: "땡큐 쏘 머치.", ko: "정말 감사합니다." }
       ]
     }
   ],
@@ -1316,120 +1317,120 @@ const SCENES = {
       titleKo: "카트를 찾을 때",
       titleEn: "Finding a cart",
       lines: [
-        { who: "customer", en: "Excuse me, where can I get a cart?", ko: "카트는 어디서 가져올 수 있나요?" },
-        { who: "clerk", en: "They're right by the entrance.", ko: "입구 바로 옆에 있어요." }
+        { who: "customer", en: "Excuse me, where can I get a cart?", pron: "익스큐즈 미, 웨어 캔 아이 겟 어 카트?", ko: "카트는 어디서 가져올 수 있나요?" },
+        { who: "clerk", en: "They're right by the entrance.", pron: "데얼 라잇 바이 디 엔트런스.", ko: "입구 바로 옆에 있어요." }
       ]
     },
     {
       titleKo: "상품 위치를 물어볼 때",
       titleEn: "Asking where an item is",
       lines: [
-        { who: "customer", en: "Where can I find the milk?", ko: "우유는 어디 있나요?" },
-        { who: "clerk", en: "It's in aisle 5, near the dairy section.", ko: "5번 코너, 유제품 쪽에 있어요." }
+        { who: "customer", en: "Where can I find the milk?", pron: "웨어 캔 아이 파인드 더 밀크?", ko: "우유는 어디 있나요?" },
+        { who: "clerk", en: "It's in aisle 5, near the dairy section.", pron: "잇츠 인 아일 파이브, 니어 더 데어리 섹션.", ko: "5번 코너, 유제품 쪽에 있어요." }
       ]
     },
     {
       titleKo: "시식을 권유받을 때",
       titleEn: "Being offered a sample",
       lines: [
-        { who: "clerk", en: "Would you like to try a sample?", ko: "시식 한번 해보시겠어요?" },
-        { who: "customer", en: "Sure, thank you.", ko: "네, 감사합니다." }
+        { who: "clerk", en: "Would you like to try a sample?", pron: "우쥬 라이크 투 트라이 어 샘플?", ko: "시식 한번 해보시겠어요?" },
+        { who: "customer", en: "Sure, thank you.", pron: "슈어, 땡큐.", ko: "네, 감사합니다." }
       ]
     },
     {
       titleKo: "세일 상품을 물어볼 때",
       titleEn: "Asking about a sale item",
       lines: [
-        { who: "customer", en: "Is this item on sale this week?", ko: "이 상품 이번 주 세일하나요?" },
-        { who: "clerk", en: "Yes, it's 20% off until Sunday.", ko: "네, 일요일까지 20% 할인입니다." }
+        { who: "customer", en: "Is this item on sale this week?", pron: "이즈 디스 아이템 온 세일 디스 윅?", ko: "이 상품 이번 주 세일하나요?" },
+        { who: "clerk", en: "Yes, it's 20% off until Sunday.", pron: "예스, 잇츠 트웬티 퍼센트 오프 언틸 선데이.", ko: "네, 일요일까지 20% 할인입니다." }
       ]
     },
     {
       titleKo: "계산할 때",
       titleEn: "Checking out",
       lines: [
-        { who: "clerk", en: "Did you find everything okay?", ko: "필요한 거 다 찾으셨어요?" },
-        { who: "customer", en: "Yes, I did.", ko: "네, 다 찾았어요." }
+        { who: "clerk", en: "Did you find everything okay?", pron: "디쥬 파인드 에브리씽 오케이?", ko: "필요한 거 다 찾으셨어요?" },
+        { who: "customer", en: "Yes, I did.", pron: "예스, 아이 디드.", ko: "네, 다 찾았어요." }
       ]
     },
     {
       titleKo: "장바구니 봉투를 구매할 때",
       titleEn: "Buying a shopping bag",
       lines: [
-        { who: "customer", en: "Could I get a bag, please?", ko: "봉투 하나 살 수 있을까요?" },
-        { who: "clerk", en: "Sure, that's 50 won.", ko: "네, 50원입니다." }
+        { who: "customer", en: "Could I get a bag, please?", pron: "쿠다이 겟 어 백, 플리즈?", ko: "봉투 하나 살 수 있을까요?" },
+        { who: "clerk", en: "Sure, that's 50 won.", pron: "슈어, 댓츠 피프티 원.", ko: "네, 50원입니다." }
       ]
     },
     {
       titleKo: "포인트를 적립할 때",
       titleEn: "Earning membership points",
       lines: [
-        { who: "clerk", en: "Do you have a membership card?", ko: "회원카드 있으세요?" },
-        { who: "customer", en: "Yes, here it is.", ko: "네, 여기 있어요." }
+        { who: "clerk", en: "Do you have a membership card?", pron: "두 유 해브 어 멤버십 카드?", ko: "회원카드 있으세요?" },
+        { who: "customer", en: "Yes, here it is.", pron: "예스, 히어 잇 이즈.", ko: "네, 여기 있어요." }
       ]
     },
     {
       titleKo: "환불이나 교환을 요청할 때",
       titleEn: "Asking for a refund or exchange",
       lines: [
-        { who: "customer", en: "I'd like to return this, it doesn't work.", ko: "이거 반품하고 싶어요, 작동이 안 돼요." },
-        { who: "clerk", en: "Do you have the receipt with you?", ko: "영수증 가지고 계신가요?" }
+        { who: "customer", en: "I'd like to return this, it doesn't work.", pron: "아이드 라이크 투 리턴 디스, 잇 더즌트 웍.", ko: "이거 반품하고 싶어요, 작동이 안 돼요." },
+        { who: "clerk", en: "Do you have the receipt with you?", pron: "두 유 해브 더 리시트 위드 유?", ko: "영수증 가지고 계신가요?" }
       ]
     },
     {
       titleKo: "유통기한을 확인할 때",
       titleEn: "Checking the expiration date",
       lines: [
-        { who: "customer", en: "Could you check the expiration date on this?", ko: "이거 유통기한 좀 확인해주시겠어요?" },
-        { who: "clerk", en: "It's good until next Friday.", ko: "다음 주 금요일까지 괜찮습니다." }
+        { who: "customer", en: "Could you check the expiration date on this?", pron: "쿠쥬 첵 디 익스퍼레이션 데이트 온 디스?", ko: "이거 유통기한 좀 확인해주시겠어요?" },
+        { who: "clerk", en: "It's good until next Friday.", pron: "잇츠 굿 언틸 넥스트 프라이데이.", ko: "다음 주 금요일까지 괜찮습니다." }
       ]
     },
     {
       titleKo: "무거운 짐 배달을 문의할 때",
       titleEn: "Asking about home delivery",
       lines: [
-        { who: "customer", en: "Do you offer home delivery for heavy items?", ko: "무거운 건 집까지 배달되나요?" },
-        { who: "clerk", en: "Yes, it's 3,000 won for same-day delivery.", ko: "네, 당일 배달은 3,000원입니다." }
+        { who: "customer", en: "Do you offer home delivery for heavy items?", pron: "두 유 오퍼 홈 딜리버리 포 헤비 아이템즈?", ko: "무거운 건 집까지 배달되나요?" },
+        { who: "clerk", en: "Yes, it's 3,000 won for same-day delivery.", pron: "예스, 잇츠 쓰리 싸우전드 원 포 세임-데이 딜리버리.", ko: "네, 당일 배달은 3,000원입니다." }
       ]
     },
     {
       titleKo: "재고가 있는지 물어볼 때",
       titleEn: "Asking if an item is in stock",
       lines: [
-        { who: "customer", en: "Do you have this in stock?", ko: "이거 재고 있나요?" },
-        { who: "clerk", en: "Let me check in the back for you.", ko: "창고에 있는지 확인해볼게요." }
+        { who: "customer", en: "Do you have this in stock?", pron: "두 유 해브 디스 인 스탁?", ko: "이거 재고 있나요?" },
+        { who: "clerk", en: "Let me check in the back for you.", pron: "렛 미 첵 인 더 백 포 유.", ko: "창고에 있는지 확인해볼게요." }
       ]
     },
     {
       titleKo: "회원카드를 만들 때",
       titleEn: "Signing up for a membership card",
       lines: [
-        { who: "customer", en: "I'd like to make a membership card.", ko: "회원카드를 만들고 싶어요." },
-        { who: "clerk", en: "Sure, could I get your phone number?", ko: "네, 전화번호 좀 알려주시겠어요?" }
+        { who: "customer", en: "I'd like to make a membership card.", pron: "아이드 라이크 투 메이크 어 멤버십 카드.", ko: "회원카드를 만들고 싶어요." },
+        { who: "clerk", en: "Sure, could I get your phone number?", pron: "슈어, 쿠다이 겟 유어 폰 넘버?", ko: "네, 전화번호 좀 알려주시겠어요?" }
       ]
     },
     {
       titleKo: "주차 할인을 받을 때",
       titleEn: "Getting parking validated",
       lines: [
-        { who: "customer", en: "Could you stamp my parking ticket?", ko: "주차권 도장 좀 찍어주시겠어요?" },
-        { who: "clerk", en: "Sure, here you go. You get two hours free.", ko: "네, 여기요. 2시간 무료입니다." }
+        { who: "customer", en: "Could you stamp my parking ticket?", pron: "쿠쥬 스탬프 마이 파킹 티켓?", ko: "주차권 도장 좀 찍어주시겠어요?" },
+        { who: "clerk", en: "Sure, here you go. You get two hours free.", pron: "슈어, 히어 유 고. 유 겟 투 아워즈 프리.", ko: "네, 여기요. 2시간 무료입니다." }
       ]
     },
     {
       titleKo: "셀프계산대를 이용할 때",
       titleEn: "Using the self-checkout",
       lines: [
-        { who: "customer", en: "Is this self-checkout easy to use?", ko: "이 셀프계산대 쓰기 어렵나요?" },
-        { who: "clerk", en: "It's simple, just scan and follow the screen.", ko: "간단해요, 스캔하고 화면대로 하시면 됩니다." }
+        { who: "customer", en: "Is this self-checkout easy to use?", pron: "이즈 디스 셀프-체크아웃 이지 투 유즈?", ko: "이 셀프계산대 쓰기 어렵나요?" },
+        { who: "clerk", en: "It's simple, just scan and follow the screen.", pron: "잇츠 심플, 저스트 스캔 앤 팔로우 더 스크린.", ko: "간단해요, 스캔하고 화면대로 하시면 됩니다." }
       ]
     },
     {
       titleKo: "장을 다 보고 나갈 때",
       titleEn: "Finishing up shopping",
       lines: [
-        { who: "clerk", en: "Here's your receipt. Have a nice day!", ko: "영수증 여기 있습니다. 좋은 하루 되세요!" },
-        { who: "customer", en: "Thank you, you too.", ko: "감사합니다, 좋은 하루 되세요." }
+        { who: "clerk", en: "Here's your receipt. Have a nice day!", pron: "히얼즈 유어 리시트. 해브 어 나이스 데이!", ko: "영수증 여기 있습니다. 좋은 하루 되세요!" },
+        { who: "customer", en: "Thank you, you too.", pron: "땡큐, 유 투.", ko: "감사합니다, 좋은 하루 되세요." }
       ]
     }
   ],
@@ -1438,120 +1439,120 @@ const SCENES = {
       titleKo: "번호표를 뽑을 때",
       titleEn: "Taking a number",
       lines: [
-        { who: "customer", en: "Where do I take a number?", ko: "번호표는 어디서 뽑나요?" },
-        { who: "clerk", en: "Right there, by the entrance.", ko: "저기 입구 쪽에 있어요." }
+        { who: "customer", en: "Where do I take a number?", pron: "웨어 두 아이 테이크 어 넘버?", ko: "번호표는 어디서 뽑나요?" },
+        { who: "clerk", en: "Right there, by the entrance.", pron: "라잇 데어, 바이 디 엔트런스.", ko: "저기 입구 쪽에 있어요." }
       ]
     },
     {
       titleKo: "계좌를 개설할 때",
       titleEn: "Opening an account",
       lines: [
-        { who: "customer", en: "I'd like to open a new account.", ko: "계좌를 새로 만들고 싶어요." },
-        { who: "clerk", en: "Sure, could I see your ID, please?", ko: "네, 신분증 좀 보여주시겠어요?" }
+        { who: "customer", en: "I'd like to open a new account.", pron: "아이드 라이크 투 오픈 어 뉴 어카운트.", ko: "계좌를 새로 만들고 싶어요." },
+        { who: "clerk", en: "Sure, could I see your ID, please?", pron: "슈어, 쿠다이 씨 유어 아이디, 플리즈?", ko: "네, 신분증 좀 보여주시겠어요?" }
       ]
     },
     {
       titleKo: "입출금할 때",
       titleEn: "Making a deposit or withdrawal",
       lines: [
-        { who: "customer", en: "I'd like to withdraw 200,000 won.", ko: "20만원 인출하고 싶어요." },
-        { who: "clerk", en: "Sure, please enter your PIN here.", ko: "네, 여기에 비밀번호 입력해주세요." }
+        { who: "customer", en: "I'd like to withdraw 200,000 won.", pron: "아이드 라이크 투 위드드로우 투 헌드레드 싸우전드 원.", ko: "20만원 인출하고 싶어요." },
+        { who: "clerk", en: "Sure, please enter your PIN here.", pron: "슈어, 플리즈 엔터 유어 핀 히어.", ko: "네, 여기에 비밀번호 입력해주세요." }
       ]
     },
     {
       titleKo: "송금할 때",
       titleEn: "Sending a money transfer",
       lines: [
-        { who: "customer", en: "I'd like to transfer money to another account.", ko: "다른 계좌로 송금하고 싶어요." },
-        { who: "clerk", en: "Sure, what's the account number?", ko: "네, 계좌번호가 어떻게 되세요?" }
+        { who: "customer", en: "I'd like to transfer money to another account.", pron: "아이드 라이크 투 트랜스퍼 머니 투 어나더 어카운트.", ko: "다른 계좌로 송금하고 싶어요." },
+        { who: "clerk", en: "Sure, what's the account number?", pron: "슈어, 왓츠 디 어카운트 넘버?", ko: "네, 계좌번호가 어떻게 되세요?" }
       ]
     },
     {
       titleKo: "체크카드를 발급받을 때",
       titleEn: "Getting a debit card issued",
       lines: [
-        { who: "customer", en: "I'd like to get a debit card, please.", ko: "체크카드 하나 만들고 싶어요." },
-        { who: "clerk", en: "Sure, it'll be ready in about ten minutes.", ko: "네, 10분 정도면 나옵니다." }
+        { who: "customer", en: "I'd like to get a debit card, please.", pron: "아이드 라이크 투 겟 어 데빗 카드, 플리즈.", ko: "체크카드 하나 만들고 싶어요." },
+        { who: "clerk", en: "Sure, it'll be ready in about ten minutes.", pron: "슈어, 잇일 비 레디 인 어바웃 텐 미닛츠.", ko: "네, 10분 정도면 나옵니다." }
       ]
     },
     {
       titleKo: "환전할 때",
       titleEn: "Exchanging currency",
       lines: [
-        { who: "customer", en: "I'd like to exchange this for dollars.", ko: "이거 달러로 환전하고 싶어요." },
-        { who: "clerk", en: "Sure, how much would you like to exchange?", ko: "네, 얼마 환전하시겠어요?" }
+        { who: "customer", en: "I'd like to exchange this for dollars.", pron: "아이드 라이크 투 익스체인지 디스 포 달러즈.", ko: "이거 달러로 환전하고 싶어요." },
+        { who: "clerk", en: "Sure, how much would you like to exchange?", pron: "슈어, 하우 머치 우쥬 라이크 투 익스체인지?", ko: "네, 얼마 환전하시겠어요?" }
       ]
     },
     {
       titleKo: "통장을 정리할 때",
       titleEn: "Updating your passbook",
       lines: [
-        { who: "customer", en: "Could you update my passbook, please?", ko: "통장 정리 좀 해주시겠어요?" },
-        { who: "clerk", en: "Sure, please insert it into the machine.", ko: "네, 기계에 넣어주세요." }
+        { who: "customer", en: "Could you update my passbook, please?", pron: "쿠쥬 업데이트 마이 패스북, 플리즈?", ko: "통장 정리 좀 해주시겠어요?" },
+        { who: "clerk", en: "Sure, please insert it into the machine.", pron: "슈어, 플리즈 인서트 잇 인투 더 머신.", ko: "네, 기계에 넣어주세요." }
       ]
     },
     {
       titleKo: "비밀번호를 재설정할 때",
       titleEn: "Resetting your PIN",
       lines: [
-        { who: "customer", en: "I forgot my PIN. Could you help me reset it?", ko: "비밀번호를 잊어버렸어요. 재설정 도와주시겠어요?" },
-        { who: "clerk", en: "Sure, I'll need to verify your identity first.", ko: "네, 먼저 본인 확인부터 하겠습니다." }
+        { who: "customer", en: "I forgot my PIN. Could you help me reset it?", pron: "아이 포갓 마이 핀. 쿠쥬 헬프 미 리셋 잇?", ko: "비밀번호를 잊어버렸어요. 재설정 도와주시겠어요?" },
+        { who: "clerk", en: "Sure, I'll need to verify your identity first.", pron: "슈어, 아일 니드 투 베리파이 유어 아이덴티티 퍼스트.", ko: "네, 먼저 본인 확인부터 하겠습니다." }
       ]
     },
     {
       titleKo: "대출을 상담받을 때",
       titleEn: "Asking about a loan",
       lines: [
-        { who: "customer", en: "I'd like to ask about a personal loan.", ko: "개인 대출 상담을 받고 싶어요." },
-        { who: "clerk", en: "Sure, please have a seat and I'll explain the options.", ko: "네, 앉으시면 안내해드릴게요." }
+        { who: "customer", en: "I'd like to ask about a personal loan.", pron: "아이드 라이크 투 애스크 어바웃 어 퍼스널 론.", ko: "개인 대출 상담을 받고 싶어요." },
+        { who: "clerk", en: "Sure, please have a seat and I'll explain the options.", pron: "슈어, 플리즈 해브 어 시트 앤 아일 익스플레인 디 옵션즈.", ko: "네, 앉으시면 안내해드릴게요." }
       ]
     },
     {
       titleKo: "수수료를 물어볼 때",
       titleEn: "Asking about a fee",
       lines: [
-        { who: "customer", en: "Is there a fee for this transfer?", ko: "이 송금에 수수료가 있나요?" },
-        { who: "clerk", en: "Yes, it's 500 won.", ko: "네, 500원입니다." }
+        { who: "customer", en: "Is there a fee for this transfer?", pron: "이즈 데어 어 피 포 디스 트랜스퍼?", ko: "이 송금에 수수료가 있나요?" },
+        { who: "clerk", en: "Yes, it's 500 won.", pron: "예스, 잇츠 파이브 헌드레드 원.", ko: "네, 500원입니다." }
       ]
     },
     {
       titleKo: "잔액을 확인할 때",
       titleEn: "Checking your balance",
       lines: [
-        { who: "customer", en: "Could you check my account balance?", ko: "제 계좌 잔액 좀 확인해주시겠어요?" },
-        { who: "clerk", en: "Sure, one moment please.", ko: "네, 잠시만요." }
+        { who: "customer", en: "Could you check my account balance?", pron: "쿠쥬 첵 마이 어카운트 밸런스?", ko: "제 계좌 잔액 좀 확인해주시겠어요?" },
+        { who: "clerk", en: "Sure, one moment please.", pron: "슈어, 원 모먼트 플리즈.", ko: "네, 잠시만요." }
       ]
     },
     {
       titleKo: "자동이체를 신청할 때",
       titleEn: "Setting up an automatic transfer",
       lines: [
-        { who: "customer", en: "I'd like to set up an automatic monthly transfer.", ko: "매달 자동이체를 신청하고 싶어요." },
-        { who: "clerk", en: "Sure, what date would you like it to go out?", ko: "네, 며칠에 이체되길 원하세요?" }
+        { who: "customer", en: "I'd like to set up an automatic monthly transfer.", pron: "아이드 라이크 투 셋 업 언 오토매틱 먼슬리 트랜스퍼.", ko: "매달 자동이체를 신청하고 싶어요." },
+        { who: "clerk", en: "Sure, what date would you like it to go out?", pron: "슈어, 왓 데이트 우쥬 라이크 잇 투 고 아웃?", ko: "네, 며칠에 이체되길 원하세요?" }
       ]
     },
     {
       titleKo: "카드 분실을 신고할 때",
       titleEn: "Reporting a lost card",
       lines: [
-        { who: "customer", en: "I lost my card. I'd like to report it.", ko: "카드를 잃어버려서 분실 신고하고 싶어요." },
-        { who: "clerk", en: "I'll cancel it right away for you.", ko: "바로 정지시켜드릴게요." }
+        { who: "customer", en: "I lost my card. I'd like to report it.", pron: "아이 로스트 마이 카드. 아이드 라이크 투 리포트 잇.", ko: "카드를 잃어버려서 분실 신고하고 싶어요." },
+        { who: "clerk", en: "I'll cancel it right away for you.", pron: "아일 캔슬 잇 라잇 어웨이 포 유.", ko: "바로 정지시켜드릴게요." }
       ]
     },
     {
       titleKo: "ATM 사용법을 물어볼 때",
       titleEn: "Asking how to use the ATM",
       lines: [
-        { who: "customer", en: "Could you show me how to use this ATM?", ko: "이 ATM 사용법 좀 알려주시겠어요?" },
-        { who: "clerk", en: "Sure, just insert your card here first.", ko: "네, 먼저 여기에 카드를 넣으세요." }
+        { who: "customer", en: "Could you show me how to use this ATM?", pron: "쿠쥬 쇼 미 하우 투 유즈 디스 에이티엠?", ko: "이 ATM 사용법 좀 알려주시겠어요?" },
+        { who: "clerk", en: "Sure, just insert your card here first.", pron: "슈어, 저스트 인서트 유어 카드 히어 퍼스트.", ko: "네, 먼저 여기에 카드를 넣으세요." }
       ]
     },
     {
       titleKo: "업무를 마치고 나갈 때",
       titleEn: "Finishing up your banking",
       lines: [
-        { who: "clerk", en: "Is there anything else I can help you with?", ko: "더 도와드릴 거 있으세요?" },
-        { who: "customer", en: "No, that's all. Thank you.", ko: "아니요, 이거면 됐어요. 감사합니다." }
+        { who: "clerk", en: "Is there anything else I can help you with?", pron: "이즈 데어 애니씽 엘스 아이 캔 헬프 유 위드?", ko: "더 도와드릴 거 있으세요?" },
+        { who: "customer", en: "No, that's all. Thank you.", pron: "노, 댓츠 올. 땡큐.", ko: "아니요, 이거면 됐어요. 감사합니다." }
       ]
     }
   ],
@@ -1560,120 +1561,120 @@ const SCENES = {
       titleKo: "빈자리가 있는지 물어볼 때",
       titleEn: "Asking if there's a space available",
       lines: [
-        { who: "customer", en: "Do you have any parking spaces left?", ko: "주차 공간 남아 있나요?" },
-        { who: "clerk", en: "Yes, there's space on the second floor.", ko: "네, 2층에 자리 있습니다." }
+        { who: "customer", en: "Do you have any parking spaces left?", pron: "두 유 해브 애니 파킹 스페이시즈 레프트?", ko: "주차 공간 남아 있나요?" },
+        { who: "clerk", en: "Yes, there's space on the second floor.", pron: "예스, 데얼즈 스페이스 온 더 세컨드 플로어.", ko: "네, 2층에 자리 있습니다." }
       ]
     },
     {
       titleKo: "요금을 확인할 때",
       titleEn: "Checking the parking fee",
       lines: [
-        { who: "customer", en: "How much is the parking fee per hour?", ko: "시간당 주차 요금이 얼마예요?" },
-        { who: "clerk", en: "It's 2,000 won for the first hour.", ko: "첫 시간은 2,000원입니다." }
+        { who: "customer", en: "How much is the parking fee per hour?", pron: "하우 머치 이즈 더 파킹 피 퍼 아워?", ko: "시간당 주차 요금이 얼마예요?" },
+        { who: "clerk", en: "It's 2,000 won for the first hour.", pron: "잇츠 투 싸우전드 원 포 더 퍼스트 아워.", ko: "첫 시간은 2,000원입니다." }
       ]
     },
     {
       titleKo: "정산기 사용법을 물어볼 때",
       titleEn: "Asking how to use the payment machine",
       lines: [
-        { who: "customer", en: "How do I pay at this machine?", ko: "이 정산기 어떻게 쓰는 건가요?" },
-        { who: "clerk", en: "Just scan your ticket here first.", ko: "먼저 여기에 주차권을 스캔하세요." }
+        { who: "customer", en: "How do I pay at this machine?", pron: "하우 두 아이 페이 앳 디스 머신?", ko: "이 정산기 어떻게 쓰는 건가요?" },
+        { who: "clerk", en: "Just scan your ticket here first.", pron: "저스트 스캔 유어 티켓 히어 퍼스트.", ko: "먼저 여기에 주차권을 스캔하세요." }
       ]
     },
     {
       titleKo: "정기권을 문의할 때",
       titleEn: "Asking about a monthly pass",
       lines: [
-        { who: "customer", en: "Do you offer a monthly parking pass?", ko: "정기 주차권도 있나요?" },
-        { who: "clerk", en: "Yes, it's 150,000 won a month.", ko: "네, 월 15만원입니다." }
+        { who: "customer", en: "Do you offer a monthly parking pass?", pron: "두 유 오퍼 어 먼슬리 파킹 패스?", ko: "정기 주차권도 있나요?" },
+        { who: "clerk", en: "Yes, it's 150,000 won a month.", pron: "예스, 잇츠 원 헌드레드 피프티 싸우전드 원 어 먼쓰.", ko: "네, 월 15만원입니다." }
       ]
     },
     {
       titleKo: "발렛파킹을 맡길 때",
       titleEn: "Handing over your car for valet",
       lines: [
-        { who: "clerk", en: "Would you like valet parking?", ko: "발렛파킹 하시겠어요?" },
-        { who: "customer", en: "Yes, please. Here are the keys.", ko: "네, 부탁드려요. 여기 키요." }
+        { who: "clerk", en: "Would you like valet parking?", pron: "우쥬 라이크 발레이 파킹?", ko: "발렛파킹 하시겠어요?" },
+        { who: "customer", en: "Yes, please. Here are the keys.", pron: "예스, 플리즈. 히어 아 더 키즈.", ko: "네, 부탁드려요. 여기 키요." }
       ]
     },
     {
       titleKo: "출차 시간을 연장할 때",
       titleEn: "Extending your parking time",
       lines: [
-        { who: "customer", en: "Could I extend my parking by another hour?", ko: "주차 시간 한 시간 더 연장할 수 있을까요?" },
-        { who: "clerk", en: "Sure, that's no problem.", ko: "네, 가능합니다." }
+        { who: "customer", en: "Could I extend my parking by another hour?", pron: "쿠다이 익스텐드 마이 파킹 바이 어나더 아워?", ko: "주차 시간 한 시간 더 연장할 수 있을까요?" },
+        { who: "clerk", en: "Sure, that's no problem.", pron: "슈어, 댓츠 노 프라블럼.", ko: "네, 가능합니다." }
       ]
     },
     {
       titleKo: "장애인 주차구역을 안내받을 때",
       titleEn: "Asking about disabled parking",
       lines: [
-        { who: "customer", en: "Where's the disabled parking area?", ko: "장애인 주차구역이 어디인가요?" },
-        { who: "clerk", en: "It's right near the elevator.", ko: "엘리베이터 바로 옆에 있습니다." }
+        { who: "customer", en: "Where's the disabled parking area?", pron: "웨얼즈 더 디스에이블드 파킹 에어리어?", ko: "장애인 주차구역이 어디인가요?" },
+        { who: "clerk", en: "It's right near the elevator.", pron: "잇츠 라잇 니어 디 엘리베이터.", ko: "엘리베이터 바로 옆에 있습니다." }
       ]
     },
     {
       titleKo: "결제수단을 확인할 때",
       titleEn: "Confirming the payment method",
       lines: [
-        { who: "clerk", en: "How would you like to pay, cash or card?", ko: "결제는 현금으로 하시겠어요, 카드로 하시겠어요?" },
-        { who: "customer", en: "Card, please.", ko: "카드로 할게요." }
+        { who: "clerk", en: "How would you like to pay, cash or card?", pron: "하우 우쥬 라이크 투 페이, 캐시 오어 카드?", ko: "결제는 현금으로 하시겠어요, 카드로 하시겠어요?" },
+        { who: "customer", en: "Card, please.", pron: "카드, 플리즈.", ko: "카드로 할게요." }
       ]
     },
     {
       titleKo: "주차권 할인 도장을 받을 때",
       titleEn: "Getting your ticket validated",
       lines: [
-        { who: "customer", en: "Could you stamp my parking ticket, please?", ko: "주차권 도장 좀 찍어주시겠어요?" },
-        { who: "clerk", en: "Sure, here you go.", ko: "네, 여기요." }
+        { who: "customer", en: "Could you stamp my parking ticket, please?", pron: "쿠쥬 스탬프 마이 파킹 티켓, 플리즈?", ko: "주차권 도장 좀 찍어주시겠어요?" },
+        { who: "clerk", en: "Sure, here you go.", pron: "슈어, 히어 유 고.", ko: "네, 여기요." }
       ]
     },
     {
       titleKo: "출구 위치를 물어볼 때",
       titleEn: "Asking where the exit is",
       lines: [
-        { who: "customer", en: "Where's the exit?", ko: "출구가 어디예요?" },
-        { who: "clerk", en: "It's straight ahead, on your right.", ko: "직진하시면 오른쪽에 있어요." }
+        { who: "customer", en: "Where's the exit?", pron: "웨얼즈 디 엑싯?", ko: "출구가 어디예요?" },
+        { who: "clerk", en: "It's straight ahead, on your right.", pron: "잇츠 스트레이트 어헤드, 온 유어 라잇.", ko: "직진하시면 오른쪽에 있어요." }
       ]
     },
     {
       titleKo: "발렛 맡긴 차를 찾을 때",
       titleEn: "Retrieving your car from valet",
       lines: [
-        { who: "customer", en: "Could I get my car, please? Here's the ticket.", ko: "차 좀 빼주시겠어요? 여기 표요." },
-        { who: "clerk", en: "Sure, it'll take about five minutes.", ko: "네, 5분 정도 걸립니다." }
+        { who: "customer", en: "Could I get my car, please? Here's the ticket.", pron: "쿠다이 겟 마이 카, 플리즈? 히얼즈 더 티켓.", ko: "차 좀 빼주시겠어요? 여기 표요." },
+        { who: "clerk", en: "Sure, it'll take about five minutes.", pron: "슈어, 잇일 테이크 어바웃 파이브 미닛츠.", ko: "네, 5분 정도 걸립니다." }
       ]
     },
     {
       titleKo: "기계식 주차타워를 이용할 때",
       titleEn: "Using a mechanical parking tower",
       lines: [
-        { who: "customer", en: "How does this parking tower work?", ko: "이 기계식 주차 어떻게 이용하나요?" },
-        { who: "clerk", en: "Just park inside and press the button.", ko: "안에 주차하시고 버튼 누르시면 됩니다." }
+        { who: "customer", en: "How does this parking tower work?", pron: "하우 더즈 디스 파킹 타워 웍?", ko: "이 기계식 주차 어떻게 이용하나요?" },
+        { who: "clerk", en: "Just park inside and press the button.", pron: "저스트 파크 인사이드 앤 프레스 더 버튼.", ko: "안에 주차하시고 버튼 누르시면 됩니다." }
       ]
     },
     {
       titleKo: "주차권을 잃어버렸을 때",
       titleEn: "Losing your parking ticket",
       lines: [
-        { who: "customer", en: "I lost my parking ticket. What should I do?", ko: "주차권을 잃어버렸는데 어떻게 해야 하나요?" },
-        { who: "clerk", en: "That's fine, I can look up your car by the plate number.", ko: "괜찮습니다, 차 번호로 확인해드릴게요." }
+        { who: "customer", en: "I lost my parking ticket. What should I do?", pron: "아이 로스트 마이 파킹 티켓. 왓 슈다이 두?", ko: "주차권을 잃어버렸는데 어떻게 해야 하나요?" },
+        { who: "clerk", en: "That's fine, I can look up your car by the plate number.", pron: "댓츠 파인, 아이 캔 룩 업 유어 카 바이 더 플레이트 넘버.", ko: "괜찮습니다, 차 번호로 확인해드릴게요." }
       ]
     },
     {
       titleKo: "야간 주차 요금을 물어볼 때",
       titleEn: "Asking about overnight parking rates",
       lines: [
-        { who: "customer", en: "How much is overnight parking?", ko: "야간 주차 요금은 얼마인가요?" },
-        { who: "clerk", en: "It's a flat rate of 10,000 won.", ko: "정액 만원입니다." }
+        { who: "customer", en: "How much is overnight parking?", pron: "하우 머치 이즈 오버나잇 파킹?", ko: "야간 주차 요금은 얼마인가요?" },
+        { who: "clerk", en: "It's a flat rate of 10,000 won.", pron: "잇츠 어 플랫 레이트 오브 텐 싸우전드 원.", ko: "정액 만원입니다." }
       ]
     },
     {
       titleKo: "출차하며 인사할 때",
       titleEn: "Leaving the parking lot",
       lines: [
-        { who: "clerk", en: "Here's your change. Drive safely.", ko: "거스름돈 여기 있습니다. 안전 운전하세요." },
-        { who: "customer", en: "Thank you, have a good day.", ko: "감사합니다, 좋은 하루 되세요." }
+        { who: "clerk", en: "Here's your change. Drive safely.", pron: "히얼즈 유어 체인지. 드라이브 세이플리.", ko: "거스름돈 여기 있습니다. 안전 운전하세요." },
+        { who: "customer", en: "Thank you, have a good day.", pron: "땡큐, 해브 어 굿 데이.", ko: "감사합니다, 좋은 하루 되세요." }
       ]
     }
   ],
@@ -1682,120 +1683,120 @@ const SCENES = {
       titleKo: "체크인할 때",
       titleEn: "Checking in",
       lines: [
-        { who: "clerk", en: "Welcome. Do you have a reservation?", ko: "어서 오세요. 예약하셨나요?" },
-        { who: "customer", en: "Yes, under the name Kim.", ko: "네, 김으로 예약했어요." }
+        { who: "clerk", en: "Welcome. Do you have a reservation?", pron: "웰컴. 두 유 해브 어 레저베이션?", ko: "어서 오세요. 예약하셨나요?" },
+        { who: "customer", en: "Yes, under the name Kim.", pron: "예스, 언더 더 네임 킴.", ko: "네, 김으로 예약했어요." }
       ]
     },
     {
       titleKo: "예약을 확인할 때",
       titleEn: "Confirming a reservation",
       lines: [
-        { who: "clerk", en: "Let me check. Two nights, one room, is that right?", ko: "확인해볼게요. 2박, 방 하나 맞으시죠?" },
-        { who: "customer", en: "Yes, that's correct.", ko: "네, 맞아요." }
+        { who: "clerk", en: "Let me check. Two nights, one room, is that right?", pron: "렛 미 첵. 투 나이츠, 원 룸, 이즈 댓 라잇?", ko: "확인해볼게요. 2박, 방 하나 맞으시죠?" },
+        { who: "customer", en: "Yes, that's correct.", pron: "예스, 댓츠 커렉트.", ko: "네, 맞아요." }
       ]
     },
     {
       titleKo: "조식 포함 여부를 확인할 때",
       titleEn: "Asking if breakfast is included",
       lines: [
-        { who: "customer", en: "Is breakfast included?", ko: "조식 포함인가요?" },
-        { who: "clerk", en: "Yes, it's served from 7 to 10 on the second floor.", ko: "네, 2층에서 7시부터 10시까지 제공됩니다." }
+        { who: "customer", en: "Is breakfast included?", pron: "이즈 브렉퍼스트 인클루디드?", ko: "조식 포함인가요?" },
+        { who: "clerk", en: "Yes, it's served from 7 to 10 on the second floor.", pron: "예스, 잇츠 서브드 프롬 세븐 투 텐 온 더 세컨드 플로어.", ko: "네, 2층에서 7시부터 10시까지 제공됩니다." }
       ]
     },
     {
       titleKo: "체크아웃 시간을 물어볼 때",
       titleEn: "Asking about checkout time",
       lines: [
-        { who: "customer", en: "What time is checkout?", ko: "체크아웃 시간이 몇 시예요?" },
-        { who: "clerk", en: "It's 11 in the morning.", ko: "오전 11시입니다." }
+        { who: "customer", en: "What time is checkout?", pron: "왓 타임 이즈 체크아웃?", ko: "체크아웃 시간이 몇 시예요?" },
+        { who: "clerk", en: "It's 11 in the morning.", pron: "잇츠 일레븐 인 더 모닝.", ko: "오전 11시입니다." }
       ]
     },
     {
       titleKo: "방을 업그레이드해달라고 할 때",
       titleEn: "Asking for a room upgrade",
       lines: [
-        { who: "customer", en: "Is it possible to upgrade to a bigger room?", ko: "더 큰 방으로 업그레이드가 가능할까요?" },
-        { who: "clerk", en: "Let me check availability for you.", ko: "빈 방 있는지 확인해볼게요." }
+        { who: "customer", en: "Is it possible to upgrade to a bigger room?", pron: "이즈 잇 파서블 투 업그레이드 투 어 비거 룸?", ko: "더 큰 방으로 업그레이드가 가능할까요?" },
+        { who: "clerk", en: "Let me check availability for you.", pron: "렛 미 첵 어베일러빌리티 포 유.", ko: "빈 방 있는지 확인해볼게요." }
       ]
     },
     {
       titleKo: "와이파이 비밀번호를 물어볼 때",
       titleEn: "Asking for the Wi-Fi password",
       lines: [
-        { who: "customer", en: "Could I get the Wi-Fi password?", ko: "와이파이 비밀번호 좀 알 수 있을까요?" },
-        { who: "clerk", en: "Sure, it's on the card in your room.", ko: "네, 방 안에 있는 카드에 적혀 있어요." }
+        { who: "customer", en: "Could I get the Wi-Fi password?", pron: "쿠다이 겟 더 와이파이 패스워드?", ko: "와이파이 비밀번호 좀 알 수 있을까요?" },
+        { who: "clerk", en: "Sure, it's on the card in your room.", pron: "슈어, 잇츠 온 더 카드 인 유어 룸.", ko: "네, 방 안에 있는 카드에 적혀 있어요." }
       ]
     },
     {
       titleKo: "짐을 맡길 때",
       titleEn: "Leaving your luggage",
       lines: [
-        { who: "customer", en: "Could I leave my luggage here for a while?", ko: "짐을 잠시 맡길 수 있을까요?" },
-        { who: "clerk", en: "Of course, we'll keep it safe.", ko: "그럼요, 잘 보관해드릴게요." }
+        { who: "customer", en: "Could I leave my luggage here for a while?", pron: "쿠다이 리브 마이 러기지 히어 포 어 와일?", ko: "짐을 잠시 맡길 수 있을까요?" },
+        { who: "clerk", en: "Of course, we'll keep it safe.", pron: "오브 코스, 위일 킵 잇 세이프.", ko: "그럼요, 잘 보관해드릴게요." }
       ]
     },
     {
       titleKo: "수건을 더 요청할 때",
       titleEn: "Asking for extra towels",
       lines: [
-        { who: "customer", en: "Could we get some extra towels, please?", ko: "수건 좀 더 주시겠어요?" },
-        { who: "clerk", en: "Sure, I'll send some up right away.", ko: "네, 바로 올려드릴게요." }
+        { who: "customer", en: "Could we get some extra towels, please?", pron: "쿠드 위 겟 섬 엑스트라 타월즈, 플리즈?", ko: "수건 좀 더 주시겠어요?" },
+        { who: "clerk", en: "Sure, I'll send some up right away.", pron: "슈어, 아일 센드 섬 업 라잇 어웨이.", ko: "네, 바로 올려드릴게요." }
       ]
     },
     {
       titleKo: "늦은 체크아웃을 요청할 때",
       titleEn: "Asking for a late checkout",
       lines: [
-        { who: "customer", en: "Could I get a late checkout, until 1 o'clock?", ko: "체크아웃을 1시까지 늦출 수 있을까요?" },
-        { who: "clerk", en: "Sure, that's fine.", ko: "네, 가능합니다." }
+        { who: "customer", en: "Could I get a late checkout, until 1 o'clock?", pron: "쿠다이 겟 어 레이트 체크아웃, 언틸 원 어클락?", ko: "체크아웃을 1시까지 늦출 수 있을까요?" },
+        { who: "clerk", en: "Sure, that's fine.", pron: "슈어, 댓츠 파인.", ko: "네, 가능합니다." }
       ]
     },
     {
       titleKo: "룸서비스를 이용할 때",
       titleEn: "Ordering room service",
       lines: [
-        { who: "customer", en: "I'd like to order room service, please.", ko: "룸서비스 주문하고 싶어요." },
-        { who: "clerk", en: "Sure, what would you like?", ko: "네, 무엇을 드릴까요?" }
+        { who: "customer", en: "I'd like to order room service, please.", pron: "아이드 라이크 투 오더 룸 서비스, 플리즈.", ko: "룸서비스 주문하고 싶어요." },
+        { who: "clerk", en: "Sure, what would you like?", pron: "슈어, 왓 우쥬 라이크?", ko: "네, 무엇을 드릴까요?" }
       ]
     },
     {
       titleKo: "근처 관광지를 물어볼 때",
       titleEn: "Asking about nearby attractions",
       lines: [
-        { who: "customer", en: "Is there anything worth seeing nearby?", ko: "근처에 가볼 만한 곳 있나요?" },
-        { who: "clerk", en: "There's a nice park just five minutes away on foot.", ko: "걸어서 5분 거리에 괜찮은 공원이 있어요." }
+        { who: "customer", en: "Is there anything worth seeing nearby?", pron: "이즈 데어 애니씽 워스 시잉 니어바이?", ko: "근처에 가볼 만한 곳 있나요?" },
+        { who: "clerk", en: "There's a nice park just five minutes away on foot.", pron: "데얼즈 어 나이스 파크 저스트 파이브 미닛츠 어웨이 온 풋.", ko: "걸어서 5분 거리에 괜찮은 공원이 있어요." }
       ]
     },
     {
       titleKo: "방 온도 조절을 문의할 때",
       titleEn: "Asking about the room temperature",
       lines: [
-        { who: "customer", en: "How do I adjust the temperature in the room?", ko: "방 온도는 어떻게 조절하나요?" },
-        { who: "clerk", en: "There's a control panel right by the door.", ko: "문 바로 옆에 조절기가 있습니다." }
+        { who: "customer", en: "How do I adjust the temperature in the room?", pron: "하우 두 아이 어저스트 더 템퍼러처 인 더 룸?", ko: "방 온도는 어떻게 조절하나요?" },
+        { who: "clerk", en: "There's a control panel right by the door.", pron: "데얼즈 어 컨트롤 패널 라잇 바이 더 도어.", ko: "문 바로 옆에 조절기가 있습니다." }
       ]
     },
     {
       titleKo: "조식 시간을 물어볼 때",
       titleEn: "Asking about breakfast hours",
       lines: [
-        { who: "customer", en: "What time does breakfast start?", ko: "조식은 몇 시부터예요?" },
-        { who: "clerk", en: "It starts at 7 in the morning.", ko: "아침 7시부터입니다." }
+        { who: "customer", en: "What time does breakfast start?", pron: "왓 타임 더즈 브렉퍼스트 스타트?", ko: "조식은 몇 시부터예요?" },
+        { who: "clerk", en: "It starts at 7 in the morning.", pron: "잇 스타츠 앳 세븐 인 더 모닝.", ko: "아침 7시부터입니다." }
       ]
     },
     {
       titleKo: "체크아웃할 때",
       titleEn: "Checking out",
       lines: [
-        { who: "customer", en: "I'd like to check out, please.", ko: "체크아웃하고 싶어요." },
-        { who: "clerk", en: "Sure, how was your stay?", ko: "네, 편안하게 지내셨나요?" }
+        { who: "customer", en: "I'd like to check out, please.", pron: "아이드 라이크 투 체크 아웃, 플리즈.", ko: "체크아웃하고 싶어요." },
+        { who: "clerk", en: "Sure, how was your stay?", pron: "슈어, 하우 워즈 유어 스테이?", ko: "네, 편안하게 지내셨나요?" }
       ]
     },
     {
       titleKo: "택시를 불러달라고 할 때",
       titleEn: "Asking for a taxi",
       lines: [
-        { who: "customer", en: "Could you call a taxi for me, please?", ko: "택시 좀 불러주시겠어요?" },
-        { who: "clerk", en: "Sure, it'll be here in about five minutes.", ko: "네, 5분 정도면 도착할 거예요." }
+        { who: "customer", en: "Could you call a taxi for me, please?", pron: "쿠쥬 콜 어 택시 포 미, 플리즈?", ko: "택시 좀 불러주시겠어요?" },
+        { who: "clerk", en: "Sure, it'll be here in about five minutes.", pron: "슈어, 잇일 비 히어 인 어바웃 파이브 미닛츠.", ko: "네, 5분 정도면 도착할 거예요." }
       ]
     }
   ],
@@ -1804,120 +1805,120 @@ const SCENES = {
       titleKo: "교통카드를 충전할 때",
       titleEn: "Topping up a transit card",
       lines: [
-        { who: "customer", en: "Excuse me, where can I top up my transit card?", ko: "교통카드 충전은 어디서 하나요?" },
-        { who: "clerk", en: "There's a machine right over there.", ko: "저쪽에 충전기가 있어요." }
+        { who: "customer", en: "Excuse me, where can I top up my transit card?", pron: "익스큐즈 미, 웨어 캔 아이 탑 업 마이 트랜짓 카드?", ko: "교통카드 충전은 어디서 하나요?" },
+        { who: "clerk", en: "There's a machine right over there.", pron: "데얼즈 어 머신 라잇 오버 데어.", ko: "저쪽에 충전기가 있어요." }
       ]
     },
     {
       titleKo: "노선을 안내받을 때",
       titleEn: "Asking which line to take",
       lines: [
-        { who: "customer", en: "Which line do I take to get to City Hall?", ko: "시청역 가려면 몇 호선을 타야 하나요?" },
-        { who: "clerk", en: "Take line 2, it's two stops from here.", ko: "2호선 타시면 여기서 두 정거장이에요." }
+        { who: "customer", en: "Which line do I take to get to City Hall?", pron: "위치 라인 두 아이 테이크 투 겟 투 시티 홀?", ko: "시청역 가려면 몇 호선을 타야 하나요?" },
+        { who: "clerk", en: "Take line 2, it's two stops from here.", pron: "테이크 라인 투, 잇츠 투 스탑스 프롬 히어.", ko: "2호선 타시면 여기서 두 정거장이에요." }
       ]
     },
     {
       titleKo: "환승 방법을 물어볼 때",
       titleEn: "Asking how to transfer",
       lines: [
-        { who: "customer", en: "How do I transfer to line 3 from here?", ko: "여기서 3호선으로 환승하려면 어떻게 하나요?" },
-        { who: "clerk", en: "Follow the signs down that hallway.", ko: "저 통로 따라가시면 표지판이 있어요." }
+        { who: "customer", en: "How do I transfer to line 3 from here?", pron: "하우 두 아이 트랜스퍼 투 라인 쓰리 프롬 히어?", ko: "여기서 3호선으로 환승하려면 어떻게 하나요?" },
+        { who: "clerk", en: "Follow the signs down that hallway.", pron: "팔로우 더 사인즈 다운 댓 홀웨이.", ko: "저 통로 따라가시면 표지판이 있어요." }
       ]
     },
     {
       titleKo: "분실물을 문의할 때",
       titleEn: "Asking about a lost item",
       lines: [
-        { who: "customer", en: "I think I left my umbrella on the train. What should I do?", ko: "지하철에 우산을 두고 내린 것 같아요. 어떻게 해야 하나요?" },
-        { who: "clerk", en: "Please fill out this lost and found form.", ko: "이 분실물 신고서를 작성해주세요." }
+        { who: "customer", en: "I think I left my umbrella on the train. What should I do?", pron: "아이 씽크 아이 레프트 마이 엄브렐라 온 더 트레인. 왓 슈다이 두?", ko: "지하철에 우산을 두고 내린 것 같아요. 어떻게 해야 하나요?" },
+        { who: "clerk", en: "Please fill out this lost and found form.", pron: "플리즈 필 아웃 디스 로스트 앤 파운드 폼.", ko: "이 분실물 신고서를 작성해주세요." }
       ]
     },
     {
       titleKo: "요금이 부족해서 정산할 때",
       titleEn: "Paying the fare balance",
       lines: [
-        { who: "clerk", en: "Your card doesn't have enough balance.", ko: "카드 잔액이 부족합니다." },
-        { who: "customer", en: "Oh, sorry. Where can I top it up?", ko: "아, 죄송해요. 어디서 충전할 수 있나요?" }
+        { who: "clerk", en: "Your card doesn't have enough balance.", pron: "유어 카드 더즌트 해브 이너프 밸런스.", ko: "카드 잔액이 부족합니다." },
+        { who: "customer", en: "Oh, sorry. Where can I top it up?", pron: "오, 쏘리. 웨어 캔 아이 탑 잇 업?", ko: "아, 죄송해요. 어디서 충전할 수 있나요?" }
       ]
     },
     {
       titleKo: "출구 번호를 물어볼 때",
       titleEn: "Asking for the exit number",
       lines: [
-        { who: "customer", en: "Which exit should I take for the museum?", ko: "박물관 가려면 몇 번 출구로 나가야 하나요?" },
-        { who: "clerk", en: "Exit 3 is the closest.", ko: "3번 출구가 제일 가까워요." }
+        { who: "customer", en: "Which exit should I take for the museum?", pron: "위치 엑싯 슈다이 테이크 포 더 뮤지엄?", ko: "박물관 가려면 몇 번 출구로 나가야 하나요?" },
+        { who: "clerk", en: "Exit 3 is the closest.", pron: "엑싯 쓰리 이즈 더 클로시스트.", ko: "3번 출구가 제일 가까워요." }
       ]
     },
     {
       titleKo: "엘리베이터 위치를 물어볼 때",
       titleEn: "Asking where the elevator is",
       lines: [
-        { who: "customer", en: "Is there an elevator? I have a stroller.", ko: "엘리베이터 있나요? 유모차가 있어서요." },
-        { who: "clerk", en: "Yes, it's at the end of the platform.", ko: "네, 승강장 끝 쪽에 있습니다." }
+        { who: "customer", en: "Is there an elevator? I have a stroller.", pron: "이즈 데어 언 엘리베이터? 아이 해브 어 스트롤러.", ko: "엘리베이터 있나요? 유모차가 있어서요." },
+        { who: "clerk", en: "Yes, it's at the end of the platform.", pron: "예스, 잇츠 앳 디 엔드 오브 더 플랫폼.", ko: "네, 승강장 끝 쪽에 있습니다." }
       ]
     },
     {
       titleKo: "막차 시간을 물어볼 때",
       titleEn: "Asking about the last train",
       lines: [
-        { who: "customer", en: "What time is the last train tonight?", ko: "오늘 막차가 몇 시예요?" },
-        { who: "clerk", en: "It's around midnight.", ko: "자정쯤입니다." }
+        { who: "customer", en: "What time is the last train tonight?", pron: "왓 타임 이즈 더 라스트 트레인 투나잇?", ko: "오늘 막차가 몇 시예요?" },
+        { who: "clerk", en: "It's around midnight.", pron: "잇츠 어라운드 미드나잇.", ko: "자정쯤입니다." }
       ]
     },
     {
       titleKo: "1회용 교통카드를 구매할 때",
       titleEn: "Buying a single-use ticket",
       lines: [
-        { who: "customer", en: "I'd like to buy a single-use ticket, please.", ko: "1회용 교통카드 하나 사고 싶어요." },
-        { who: "clerk", en: "Sure, where are you headed?", ko: "네, 어디까지 가세요?" }
+        { who: "customer", en: "I'd like to buy a single-use ticket, please.", pron: "아이드 라이크 투 바이 어 싱글-유즈 티켓, 플리즈.", ko: "1회용 교통카드 하나 사고 싶어요." },
+        { who: "clerk", en: "Sure, where are you headed?", pron: "슈어, 웨어 아 유 헤디드?", ko: "네, 어디까지 가세요?" }
       ]
     },
     {
       titleKo: "정기권을 구매할 때",
       titleEn: "Buying a monthly pass",
       lines: [
-        { who: "customer", en: "I'd like to get a monthly pass, please.", ko: "정기권 하나 구매하고 싶어요." },
-        { who: "clerk", en: "Sure, that's 65,000 won.", ko: "네, 65,000원입니다." }
+        { who: "customer", en: "I'd like to get a monthly pass, please.", pron: "아이드 라이크 투 겟 어 먼슬리 패스, 플리즈.", ko: "정기권 하나 구매하고 싶어요." },
+        { who: "clerk", en: "Sure, that's 65,000 won.", pron: "슈어, 댓츠 식스티파이브 싸우전드 원.", ko: "네, 65,000원입니다." }
       ]
     },
     {
       titleKo: "반대 방향으로 잘못 탔을 때",
       titleEn: "Realizing you took the wrong direction",
       lines: [
-        { who: "customer", en: "I think I got on the wrong direction train. What should I do?", ko: "제가 반대 방향 열차를 탄 것 같아요. 어떻게 해야 하나요?" },
-        { who: "clerk", en: "Just get off at the next stop and cross to the other side.", ko: "다음 역에서 내려서 반대편으로 건너가시면 됩니다." }
+        { who: "customer", en: "I think I got on the wrong direction train. What should I do?", pron: "아이 씽크 아이 갓 온 더 롱 디렉션 트레인. 왓 슈다이 두?", ko: "제가 반대 방향 열차를 탄 것 같아요. 어떻게 해야 하나요?" },
+        { who: "clerk", en: "Just get off at the next stop and cross to the other side.", pron: "저스트 겟 오프 앳 더 넥스트 스탑 앤 크로스 투 디 아더 사이드.", ko: "다음 역에서 내려서 반대편으로 건너가시면 됩니다." }
       ]
     },
     {
       titleKo: "운행 지연을 문의할 때",
       titleEn: "Asking about a delay",
       lines: [
-        { who: "customer", en: "Is line 2 running late today?", ko: "오늘 2호선 지연되고 있나요?" },
-        { who: "clerk", en: "Yes, there's about a 10-minute delay.", ko: "네, 10분 정도 지연되고 있습니다." }
+        { who: "customer", en: "Is line 2 running late today?", pron: "이즈 라인 투 러닝 레이트 투데이?", ko: "오늘 2호선 지연되고 있나요?" },
+        { who: "clerk", en: "Yes, there's about a 10-minute delay.", pron: "예스, 데얼즈 어바웃 어 텐-미닛 딜레이.", ko: "네, 10분 정도 지연되고 있습니다." }
       ]
     },
     {
       titleKo: "분실물 센터를 찾을 때",
       titleEn: "Finding the lost and found center",
       lines: [
-        { who: "customer", en: "Where's the lost and found center?", ko: "분실물 센터가 어디예요?" },
-        { who: "clerk", en: "It's near exit 1, by the station office.", ko: "1번 출구 근처, 역무실 옆에 있습니다." }
+        { who: "customer", en: "Where's the lost and found center?", pron: "웨얼즈 더 로스트 앤 파운드 센터?", ko: "분실물 센터가 어디예요?" },
+        { who: "clerk", en: "It's near exit 1, by the station office.", pron: "잇츠 니어 엑싯 원, 바이 더 스테이션 오피스.", ko: "1번 출구 근처, 역무실 옆에 있습니다." }
       ]
     },
     {
       titleKo: "화장실 위치를 물어볼 때",
       titleEn: "Asking where the restroom is",
       lines: [
-        { who: "customer", en: "Is there a restroom in this station?", ko: "이 역에 화장실 있나요?" },
-        { who: "clerk", en: "Yes, it's before the gates, to your left.", ko: "네, 개찰구 통과 전 왼쪽에 있어요." }
+        { who: "customer", en: "Is there a restroom in this station?", pron: "이즈 데어 어 레스트룸 인 디스 스테이션?", ko: "이 역에 화장실 있나요?" },
+        { who: "clerk", en: "Yes, it's before the gates, to your left.", pron: "예스, 잇츠 비포어 더 게이츠, 투 유어 레프트.", ko: "네, 개찰구 통과 전 왼쪽에 있어요." }
       ]
     },
     {
       titleKo: "게이트가 안 열릴 때 도움을 요청할 때",
       titleEn: "Asking for help when the gate won't open",
       lines: [
-        { who: "customer", en: "The gate won't open for me. Could you help?", ko: "게이트가 안 열리는데 도와주시겠어요?" },
-        { who: "clerk", en: "Let me check your card. Please try again.", ko: "카드 좀 볼게요. 다시 한번 시도해보세요." }
+        { who: "customer", en: "The gate won't open for me. Could you help?", pron: "더 게이트 원트 오픈 포 미. 쿠쥬 헬프?", ko: "게이트가 안 열리는데 도와주시겠어요?" },
+        { who: "clerk", en: "Let me check your card. Please try again.", pron: "렛 미 첵 유어 카드. 플리즈 트라이 어겐.", ko: "카드 좀 볼게요. 다시 한번 시도해보세요." }
       ]
     }
   ],
@@ -1926,120 +1927,120 @@ const SCENES = {
       titleKo: "입장권을 구매할 때",
       titleEn: "Buying an admission ticket",
       lines: [
-        { who: "customer", en: "One adult ticket, please.", ko: "성인 한 장 주세요." },
-        { who: "clerk", en: "Sure, that'll be 8,000 won.", ko: "네, 8,000원입니다." }
+        { who: "customer", en: "One adult ticket, please.", pron: "원 어덜트 티켓, 플리즈.", ko: "성인 한 장 주세요." },
+        { who: "clerk", en: "Sure, that'll be 8,000 won.", pron: "슈어, 댓일 비 에잇 싸우전드 원.", ko: "네, 8,000원입니다." }
       ]
     },
     {
       titleKo: "할인 여부를 확인할 때",
       titleEn: "Asking about a discount",
       lines: [
-        { who: "customer", en: "Is there a student discount?", ko: "학생 할인 되나요?" },
-        { who: "clerk", en: "Yes, with a valid student ID.", ko: "네, 학생증 있으시면 됩니다." }
+        { who: "customer", en: "Is there a student discount?", pron: "이즈 데어 어 스튜던트 디스카운트?", ko: "학생 할인 되나요?" },
+        { who: "clerk", en: "Yes, with a valid student ID.", pron: "예스, 위드 어 밸리드 스튜던트 아이디.", ko: "네, 학생증 있으시면 됩니다." }
       ]
     },
     {
       titleKo: "관람 시간을 물어볼 때",
       titleEn: "Asking about opening hours",
       lines: [
-        { who: "customer", en: "What time do you close today?", ko: "오늘 몇 시에 닫나요?" },
-        { who: "clerk", en: "We close at 6 PM, last entry at 5:30.", ko: "오후 6시 폐관이고, 입장은 5시 30분까지입니다." }
+        { who: "customer", en: "What time do you close today?", pron: "왓 타임 두 유 클로즈 투데이?", ko: "오늘 몇 시에 닫나요?" },
+        { who: "clerk", en: "We close at 6 PM, last entry at 5:30.", pron: "위 클로즈 앳 식스 피엠, 라스트 엔트리 앳 파이브 써티.", ko: "오후 6시 폐관이고, 입장은 5시 30분까지입니다." }
       ]
     },
     {
       titleKo: "오디오 가이드를 대여할 때",
       titleEn: "Renting an audio guide",
       lines: [
-        { who: "customer", en: "Could I rent an audio guide, please?", ko: "오디오 가이드 대여할 수 있을까요?" },
-        { who: "clerk", en: "Sure, it's 3,000 won. Could I see your ID?", ko: "네, 3,000원입니다. 신분증 좀 보여주시겠어요?" }
+        { who: "customer", en: "Could I rent an audio guide, please?", pron: "쿠다이 렌트 언 오디오 가이드, 플리즈?", ko: "오디오 가이드 대여할 수 있을까요?" },
+        { who: "clerk", en: "Sure, it's 3,000 won. Could I see your ID?", pron: "슈어, 잇츠 쓰리 싸우전드 원. 쿠다이 씨 유어 아이디?", ko: "네, 3,000원입니다. 신분증 좀 보여주시겠어요?" }
       ]
     },
     {
       titleKo: "사진 촬영 가능 여부를 물어볼 때",
       titleEn: "Asking if photos are allowed",
       lines: [
-        { who: "customer", en: "Is it okay to take pictures here?", ko: "여기서 사진 찍어도 되나요?" },
-        { who: "clerk", en: "Yes, but no flash, please.", ko: "네, 플래시만 사용하지 말아주세요." }
+        { who: "customer", en: "Is it okay to take pictures here?", pron: "이즈 잇 오케이 투 테이크 픽처스 히어?", ko: "여기서 사진 찍어도 되나요?" },
+        { who: "clerk", en: "Yes, but no flash, please.", pron: "예스, 벗 노 플래시, 플리즈.", ko: "네, 플래시만 사용하지 말아주세요." }
       ]
     },
     {
       titleKo: "짐 보관함을 이용할 때",
       titleEn: "Using a locker",
       lines: [
-        { who: "customer", en: "Is there somewhere I can store my bag?", ko: "짐 보관할 수 있는 곳 있나요?" },
-        { who: "clerk", en: "Yes, the lockers are over there, free of charge.", ko: "네, 저쪽에 무료 보관함이 있습니다." }
+        { who: "customer", en: "Is there somewhere I can store my bag?", pron: "이즈 데어 섬웨어 아이 캔 스토어 마이 백?", ko: "짐 보관할 수 있는 곳 있나요?" },
+        { who: "clerk", en: "Yes, the lockers are over there, free of charge.", pron: "예스, 더 라커즈 아 오버 데어, 프리 오브 차지.", ko: "네, 저쪽에 무료 보관함이 있습니다." }
       ]
     },
     {
       titleKo: "전시 설명을 요청할 때",
       titleEn: "Asking about an exhibit",
       lines: [
-        { who: "customer", en: "Could you tell me more about this piece?", ko: "이 작품에 대해 좀 더 설명해주시겠어요?" },
-        { who: "clerk", en: "Sure, it was painted in the 1920s.", ko: "네, 1920년대에 그려진 작품입니다." }
+        { who: "customer", en: "Could you tell me more about this piece?", pron: "쿠쥬 텔 미 모어 어바웃 디스 피스?", ko: "이 작품에 대해 좀 더 설명해주시겠어요?" },
+        { who: "clerk", en: "Sure, it was painted in the 1920s.", pron: "슈어, 잇 워즈 페인티드 인 더 나인틴 트웨니즈.", ko: "네, 1920년대에 그려진 작품입니다." }
       ]
     },
     {
       titleKo: "기념품샵 위치를 물어볼 때",
       titleEn: "Asking where the gift shop is",
       lines: [
-        { who: "customer", en: "Where's the gift shop?", ko: "기념품샵이 어디 있나요?" },
-        { who: "clerk", en: "It's near the main exit.", ko: "정문 출구 근처에 있습니다." }
+        { who: "customer", en: "Where's the gift shop?", pron: "웨얼즈 더 기프트 샵?", ko: "기념품샵이 어디 있나요?" },
+        { who: "clerk", en: "It's near the main exit.", pron: "잇츠 니어 더 메인 엑싯.", ko: "정문 출구 근처에 있습니다." }
       ]
     },
     {
       titleKo: "도슨트 투어 시간을 물어볼 때",
       titleEn: "Asking about a guided tour",
       lines: [
-        { who: "customer", en: "What time is the next guided tour?", ko: "다음 도슨트 투어가 몇 시예요?" },
-        { who: "clerk", en: "It starts at 2 PM, right by the entrance.", ko: "오후 2시에 입구에서 시작합니다." }
+        { who: "customer", en: "What time is the next guided tour?", pron: "왓 타임 이즈 더 넥스트 가이디드 투어?", ko: "다음 도슨트 투어가 몇 시예요?" },
+        { who: "clerk", en: "It starts at 2 PM, right by the entrance.", pron: "잇 스타츠 앳 투 피엠, 라잇 바이 디 엔트런스.", ko: "오후 2시에 입구에서 시작합니다." }
       ]
     },
     {
       titleKo: "휠체어를 대여할 때",
       titleEn: "Renting a wheelchair",
       lines: [
-        { who: "customer", en: "Could I rent a wheelchair, please?", ko: "휠체어 대여할 수 있을까요?" },
-        { who: "clerk", en: "Sure, it's free. Just leave your ID with us.", ko: "네, 무료입니다. 신분증만 맡겨주세요." }
+        { who: "customer", en: "Could I rent a wheelchair, please?", pron: "쿠다이 렌트 어 윌체어, 플리즈?", ko: "휠체어 대여할 수 있을까요?" },
+        { who: "clerk", en: "Sure, it's free. Just leave your ID with us.", pron: "슈어, 잇츠 프리. 저스트 리브 유어 아이디 위드 어스.", ko: "네, 무료입니다. 신분증만 맡겨주세요." }
       ]
     },
     {
       titleKo: "화장실 위치를 물어볼 때",
       titleEn: "Asking where the restroom is",
       lines: [
-        { who: "customer", en: "Where's the restroom?", ko: "화장실이 어디예요?" },
-        { who: "clerk", en: "It's just around the corner.", ko: "모퉁이 돌면 바로 있습니다." }
+        { who: "customer", en: "Where's the restroom?", pron: "웨얼즈 더 레스트룸?", ko: "화장실이 어디예요?" },
+        { who: "clerk", en: "It's just around the corner.", pron: "잇츠 저스트 어라운드 더 코너.", ko: "모퉁이 돌면 바로 있습니다." }
       ]
     },
     {
       titleKo: "다음 공연 시간을 물어볼 때",
       titleEn: "Asking about the next show",
       lines: [
-        { who: "customer", en: "When's the next performance?", ko: "다음 공연이 언제예요?" },
-        { who: "clerk", en: "It starts in 30 minutes, in the main hall.", ko: "30분 후에 메인홀에서 시작합니다." }
+        { who: "customer", en: "When's the next performance?", pron: "웬즈 더 넥스트 퍼포먼스?", ko: "다음 공연이 언제예요?" },
+        { who: "clerk", en: "It starts in 30 minutes, in the main hall.", pron: "잇 스타츠 인 써티 미닛츠, 인 더 메인 홀.", ko: "30분 후에 메인홀에서 시작합니다." }
       ]
     },
     {
       titleKo: "단체 할인을 문의할 때",
       titleEn: "Asking about a group discount",
       lines: [
-        { who: "customer", en: "Do you offer a group discount for 10 or more people?", ko: "10명 이상이면 단체 할인 되나요?" },
-        { who: "clerk", en: "Yes, that's a 20% discount.", ko: "네, 20% 할인됩니다." }
+        { who: "customer", en: "Do you offer a group discount for 10 or more people?", pron: "두 유 오퍼 어 그룹 디스카운트 포 텐 오어 모어 피플?", ko: "10명 이상이면 단체 할인 되나요?" },
+        { who: "clerk", en: "Yes, that's a 20% discount.", pron: "예스, 댓츠 어 트웬티 퍼센트 디스카운트.", ko: "네, 20% 할인됩니다." }
       ]
     },
     {
       titleKo: "재입장 가능 여부를 물어볼 때",
       titleEn: "Asking about re-entry",
       lines: [
-        { who: "customer", en: "Can I go out and come back in with the same ticket?", ko: "이 표로 나갔다가 다시 들어올 수 있나요?" },
-        { who: "clerk", en: "Yes, just show your ticket at the entrance.", ko: "네, 입구에서 표만 보여주시면 됩니다." }
+        { who: "customer", en: "Can I go out and come back in with the same ticket?", pron: "캔 아이 고 아웃 앤 컴 백 인 위드 더 세임 티켓?", ko: "이 표로 나갔다가 다시 들어올 수 있나요?" },
+        { who: "clerk", en: "Yes, just show your ticket at the entrance.", pron: "예스, 저스트 쇼 유어 티켓 앳 디 엔트런스.", ko: "네, 입구에서 표만 보여주시면 됩니다." }
       ]
     },
     {
       titleKo: "관람을 마치고 나갈 때",
       titleEn: "Leaving after your visit",
       lines: [
-        { who: "clerk", en: "I hope you enjoyed the exhibition.", ko: "전시 즐겁게 보셨길 바라요." },
-        { who: "customer", en: "Yes, it was wonderful. Thank you.", ko: "네, 정말 좋았어요. 감사합니다." }
+        { who: "clerk", en: "I hope you enjoyed the exhibition.", pron: "아이 호프 유 인조이드 디 이그지비션.", ko: "전시 즐겁게 보셨길 바라요." },
+        { who: "customer", en: "Yes, it was wonderful. Thank you.", pron: "예스, 잇 워즈 원더풀. 땡큐.", ko: "네, 정말 좋았어요. 감사합니다." }
       ]
     }
   ]
@@ -2413,6 +2414,7 @@ function openSheet(place, catCode) {
             <div class="who">${l.who === "clerk" ? (STAFF_LABEL[catCode] || "직원") : (CUSTOMER_LABEL[catCode] || "손님")}</div>
             <div class="bubble">
               <div class="en">${l.en}</div>
+              ${l.pron ? `<div class="pron">${l.pron}</div>` : ""}
               <div class="ko">${l.ko}</div>
             </div>
           </div>
