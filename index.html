@@ -535,6 +535,7 @@
       <label for="translateSrcLang">모국어</label>
       <select id="translateSrcLang">
         <option value="ko">한국어</option>
+        <option value="en">영어</option>
         <option value="vi">베트남어</option>
         <option value="zh">중국어</option>
         <option value="tl">필리핀어(타갈로그)</option>
@@ -3209,12 +3210,15 @@ document.getElementById("translateToggleBtn").addEventListener("click", openTran
 document.getElementById("translateCloseBtn").addEventListener("click", closeTranslateModal);
 translateOverlay.addEventListener("click", closeTranslateModal);
 
-// 모국어로 한국어를 고르면 "한국어만/영어+한국어"는 의미가 없으니 영어만 남긴다
+// 모국어와 같은 언어로 변환하는 건 의미가 없으니(한국어→한국어, 영어→영어) 그 옵션은 막는다
 function syncTranslateOutModeOptions() {
   const isKo = translateSrcLang.value === "ko";
+  const isEn = translateSrcLang.value === "en";
   translateOutMode.querySelector('option[value="ko"]').disabled = isKo;
-  translateOutMode.querySelector('option[value="both"]').disabled = isKo;
+  translateOutMode.querySelector('option[value="en"]').disabled = isEn;
+  translateOutMode.querySelector('option[value="both"]').disabled = isKo || isEn;
   if (isKo && translateOutMode.value !== "en") translateOutMode.value = "en";
+  if (isEn && translateOutMode.value !== "ko") translateOutMode.value = "ko";
 }
 translateSrcLang.addEventListener("change", syncTranslateOutModeOptions);
 syncTranslateOutModeOptions();
@@ -3234,7 +3238,7 @@ translateGoBtn.addEventListener("click", async () => {
 
   const srcLang = translateSrcLang.value;
   const outMode = translateOutMode.value;
-  const wantEn = outMode === "both" || outMode === "en";
+  const wantEn = (outMode === "both" || outMode === "en") && srcLang !== "en";
   const wantKo = (outMode === "both" || outMode === "ko") && srcLang !== "ko";
 
   translateError.classList.add("hidden");
