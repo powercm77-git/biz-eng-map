@@ -387,6 +387,8 @@
         <button class="cat-chip" data-cat="AD5">🏨 숙박</button>
         <button class="cat-chip" data-cat="SW8">🚇 지하철</button>
         <button class="cat-chip" data-cat="CT1">🎭 문화시설</button>
+        <button class="cat-chip" data-cat="SC4">🏫 학교</button>
+        <button class="cat-chip" data-cat="PS3">🧸 어린이집</button>
       </div>
       <button class="cat-more-btn" id="catMoreBtn"><span class="cat-ic">⋯</span><span>주변</span></button>
     </div>
@@ -405,6 +407,8 @@
         <button class="cat-grid-item" data-cat="AD5"><span class="cat-grid-ic">🏨</span>숙박</button>
         <button class="cat-grid-item" data-cat="SW8"><span class="cat-grid-ic">🚇</span>지하철</button>
         <button class="cat-grid-item" data-cat="CT1"><span class="cat-grid-ic">🎭</span>문화시설</button>
+        <button class="cat-grid-item" data-cat="SC4"><span class="cat-grid-ic">🏫</span>학교</button>
+        <button class="cat-grid-item" data-cat="PS3"><span class="cat-grid-ic">🧸</span>어린이집</button>
       </div>
     </div>
 
@@ -2061,10 +2065,254 @@ const SCENES = {
         { who: "customer", en: "Yes, it was wonderful. Thank you.", pron: "예스, 잇 워즈 원더풀. 땡큐.", ko: "네, 정말 좋았어요. 감사합니다." }
       ]
     }
+  ],
+  SC4: [
+    {
+      titleKo: "입학 문의",
+      titleEn: "Asking about enrollment",
+      lines: [
+        { who: "clerk", en: "How can I help you today?", pron: "하우 캔 아이 헬프 유 투데이?", ko: "무엇을 도와드릴까요?" },
+        { who: "customer", en: "I'd like to enroll my child in this school.", pron: "아이드 라이크 투 인롤 마이 차일드 인 디스 스쿨.", ko: "저희 아이를 이 학교에 입학시키고 싶어요." }
+      ]
+    },
+    {
+      titleKo: "필요 서류 안내",
+      titleEn: "Required documents",
+      lines: [
+        { who: "clerk", en: "Do you have your child's birth certificate and ID?", pron: "두 유 해브 유어 차일즈 버스 서티피킷 앤 아이디?", ko: "자녀분 출생증명서와 신분증 가지고 계신가요?" },
+        { who: "customer", en: "Yes, here they are.", pron: "예스, 히어 데이 아.", ko: "네, 여기 있습니다." }
+      ]
+    },
+    {
+      titleKo: "학년 확인",
+      titleEn: "Confirming the grade",
+      lines: [
+        { who: "clerk", en: "What grade will your child be entering?", pron: "왓 그레이드 윌 유어 차일드 비 엔터링?", ko: "자녀분이 몇 학년으로 들어가나요?" },
+        { who: "customer", en: "The third grade.", pron: "더 써드 그레이드.", ko: "3학년이요." }
+      ]
+    },
+    {
+      titleKo: "학군 주소 확인",
+      titleEn: "School district address",
+      lines: [
+        { who: "clerk", en: "Could I get your address for the school district?", pron: "쿠다이 겟 유어 어드레스 포 더 스쿨 디스트릭트?", ko: "학군 확인을 위해 주소를 알려주시겠어요?" },
+        { who: "customer", en: "Sure, it's right here on this form.", pron: "슈어, 잇츠 라잇 히어 온 디스 폼.", ko: "네, 이 서류에 적혀 있어요." }
+      ]
+    },
+    {
+      titleKo: "등하교 시간",
+      titleEn: "School hours",
+      lines: [
+        { who: "customer", en: "What time does school start and end?", pron: "왓 타임 더즈 스쿨 스타트 앤 엔드?", ko: "학교는 몇 시에 시작하고 끝나나요?" },
+        { who: "clerk", en: "It starts at 9 and ends at 2:30.", pron: "잇 스타츠 앳 나인 앤 엔즈 앳 투 써티.", ko: "9시에 시작해서 2시 30분에 끝납니다." }
+      ]
+    },
+    {
+      titleKo: "스쿨버스 문의",
+      titleEn: "School bus",
+      lines: [
+        { who: "customer", en: "Is there a school bus available?", pron: "이즈 데어 어 스쿨 버스 어베일러블?", ko: "스쿨버스가 있나요?" },
+        { who: "clerk", en: "Yes, I'll give you the bus schedule.", pron: "예스, 아일 기브 유 더 버스 스케줄.", ko: "네, 버스 시간표를 드릴게요." }
+      ]
+    },
+    {
+      titleKo: "알레르기 안내",
+      titleEn: "Reporting an allergy",
+      lines: [
+        { who: "customer", en: "My child has a peanut allergy. Who should I tell?", pron: "마이 차일드 해즈 어 피넛 얼러지. 후 슈다이 텔?", ko: "저희 아이가 땅콩 알레르기가 있어요. 누구에게 알려야 하나요?" },
+        { who: "clerk", en: "Please let the homeroom teacher and the school nurse know.", pron: "플리즈 렛 더 홈룸 티처 앤 더 스쿨 널스 노우.", ko: "담임 선생님과 보건 선생님께 알려주세요." }
+      ]
+    },
+    {
+      titleKo: "담임 선생님 면담",
+      titleEn: "Meeting the homeroom teacher",
+      lines: [
+        { who: "customer", en: "Could I set up a meeting with the homeroom teacher?", pron: "쿠다이 셋 업 어 미팅 위드 더 홈룸 티처?", ko: "담임 선생님과 면담을 잡을 수 있을까요?" },
+        { who: "clerk", en: "Sure, are you free this Friday afternoon?", pron: "슈어, 아 유 프리 디스 프라이데이 애프터눈?", ko: "네, 이번 주 금요일 오후 괜찮으세요?" }
+      ]
+    },
+    {
+      titleKo: "급식비 문의",
+      titleEn: "Asking about meal fees",
+      lines: [
+        { who: "customer", en: "How much is the school lunch fee?", pron: "하우 머치 이즈 더 스쿨 런치 피?", ko: "급식비는 얼마인가요?" },
+        { who: "clerk", en: "It's 60,000 won a month.", pron: "잇츠 식스티 싸우전드 원 어 먼쓰.", ko: "한 달에 60,000원입니다." }
+      ]
+    },
+    {
+      titleKo: "준비물 안내",
+      titleEn: "What to bring",
+      lines: [
+        { who: "customer", en: "What supplies does my child need?", pron: "왓 서플라이즈 더즈 마이 차일드 니드?", ko: "아이에게 어떤 준비물이 필요한가요?" },
+        { who: "clerk", en: "Just a backpack and indoor shoes for now.", pron: "저스트 어 백팩 앤 인도어 슈즈 포 나우.", ko: "일단 책가방이랑 실내화만 있으면 돼요." }
+      ]
+    },
+    {
+      titleKo: "결석 신고",
+      titleEn: "Reporting an absence",
+      lines: [
+        { who: "customer", en: "My child is sick today and can't come to school.", pron: "마이 차일드 이즈 식 투데이 앤 캔트 컴 투 스쿨.", ko: "아이가 오늘 아파서 학교에 못 가요." },
+        { who: "clerk", en: "Thanks for letting us know. Get well soon.", pron: "땡스 포 레팅 어스 노우. 겟 웰 순.", ko: "알려주셔서 감사해요. 얼른 나으시길 바랄게요." }
+      ]
+    },
+    {
+      titleKo: "조퇴 요청",
+      titleEn: "Requesting early pickup",
+      lines: [
+        { who: "customer", en: "I need to pick up my child early today.", pron: "아이 니드 투 픽 업 마이 차일드 얼리 투데이.", ko: "오늘 아이를 일찍 데리러 가야 해요." },
+        { who: "clerk", en: "Sure, please sign here at the front desk.", pron: "슈어, 플리즈 사인 히어 앳 더 프런트 데스크.", ko: "네, 행정실에서 여기 서명해주세요." }
+      ]
+    },
+    {
+      titleKo: "분실물 문의",
+      titleEn: "Asking about a lost item",
+      lines: [
+        { who: "customer", en: "My child lost a jacket. Is there a lost and found?", pron: "마이 차일드 로스트 어 재킷. 이즈 데어 어 로스트 앤 파운드?", ko: "아이가 겉옷을 잃어버렸어요. 분실물 보관함이 있나요?" },
+        { who: "clerk", en: "Yes, it's next to the main office.", pron: "예스, 잇츠 넥스트 투 더 메인 오피스.", ko: "네, 행정실 옆에 있습니다." }
+      ]
+    },
+    {
+      titleKo: "행사 안내",
+      titleEn: "School event info",
+      lines: [
+        { who: "customer", en: "When is the sports day this year?", pron: "웬 이즈 더 스포츠 데이 디스 이어?", ko: "올해 운동회는 언제인가요?" },
+        { who: "clerk", en: "It's on the second Friday of next month.", pron: "잇츠 온 더 세컨드 프라이데이 오브 넥스트 먼쓰.", ko: "다음 달 둘째 주 금요일입니다." }
+      ]
+    },
+    {
+      titleKo: "상담 마무리",
+      titleEn: "Wrapping up",
+      lines: [
+        { who: "customer", en: "Thank you for your help.", pron: "땡큐 포 유어 헬프.", ko: "도와주셔서 감사합니다." },
+        { who: "clerk", en: "You're welcome. Have a great day.", pron: "유어 웰컴. 해브 어 그레이트 데이.", ko: "천만에요. 좋은 하루 보내세요." }
+      ]
+    }
+  ],
+  PS3: [
+    {
+      titleKo: "첫 등원",
+      titleEn: "First day of daycare",
+      lines: [
+        { who: "clerk", en: "Good morning! Are you here to drop off?", pron: "굿 모닝! 아 유 히어 투 드랍 오프?", ko: "안녕하세요! 등원시키러 오셨나요?" },
+        { who: "customer", en: "Yes, this is my son's first day.", pron: "예스, 디스 이즈 마이 선즈 퍼스트 데이.", ko: "네, 오늘이 저희 아들 첫 등원이에요." }
+      ]
+    },
+    {
+      titleKo: "알레르기 확인",
+      titleEn: "Checking for allergies",
+      lines: [
+        { who: "clerk", en: "Does he have any allergies we should know about?", pron: "더즈 히 해브 애니 얼러지즈 위 슈드 노우 어바웃?", ko: "알고 있어야 할 알레르기가 있나요?" },
+        { who: "customer", en: "No allergies, but he's a picky eater.", pron: "노 얼러지즈, 벗 히즈 어 피키 이터.", ko: "알레르기는 없는데, 편식이 좀 있어요." }
+      ]
+    },
+    {
+      titleKo: "낮잠 시간",
+      titleEn: "Naptime",
+      lines: [
+        { who: "customer", en: "What time is naptime?", pron: "왓 타임 이즈 냅타임?", ko: "낮잠 시간은 언제인가요?" },
+        { who: "clerk", en: "It's usually around 1 o'clock.", pron: "잇츠 유주얼리 어라운드 원 어클락.", ko: "보통 1시쯤이에요." }
+      ]
+    },
+    {
+      titleKo: "우는 아이 안내",
+      titleEn: "If he cries",
+      lines: [
+        { who: "customer", en: "Could you let me know if he cries a lot?", pron: "쿠쥬 렛 미 노우 이프 히 크라이즈 어 랏?", ko: "아이가 많이 울면 알려주시겠어요?" },
+        { who: "clerk", en: "Of course, I'll text you if anything comes up.", pron: "오브 코스, 아일 텍스트 유 이프 애니씽 컴즈 업.", ko: "그럼요, 무슨 일 있으면 문자 드릴게요." }
+      ]
+    },
+    {
+      titleKo: "준비물",
+      titleEn: "What to pack",
+      lines: [
+        { who: "customer", en: "What should I pack in his bag?", pron: "왓 슈다이 팩 인 히즈 백?", ko: "가방에 뭘 챙겨 보내야 할까요?" },
+        { who: "clerk", en: "Just a change of clothes and a water bottle.", pron: "저스트 어 체인지 오브 클로즈 앤 어 워터 바틀.", ko: "여벌 옷이랑 물병만 챙겨주시면 돼요." }
+      ]
+    },
+    {
+      titleKo: "연장보육 비용",
+      titleEn: "After-hours care fee",
+      lines: [
+        { who: "customer", en: "Is there a fee for after-hours care?", pron: "이즈 데어 어 피 포 애프터-아워즈 케어?", ko: "연장 보육에 추가 비용이 있나요?" },
+        { who: "clerk", en: "Yes, it's 5,000 won per hour.", pron: "예스, 잇츠 파이브 싸우전드 원 퍼 아워.", ko: "네, 시간당 5,000원이에요." }
+      ]
+    },
+    {
+      titleKo: "하원 지연 연락",
+      titleEn: "Contact for late pickup",
+      lines: [
+        { who: "customer", en: "Who do I contact if I'm running late for pickup?", pron: "후 두 아이 컨택트 이프 아임 러닝 레이트 포 픽업?", ko: "하원 시간에 늦으면 누구한테 연락해야 하나요?" },
+        { who: "clerk", en: "Just call the front desk directly.", pron: "저스트 콜 더 프런트 데스크 다이렉틀리.", ko: "원 사무실로 바로 전화 주시면 돼요." }
+      ]
+    },
+    {
+      titleKo: "체온 확인",
+      titleEn: "Checking temperature",
+      lines: [
+        { who: "clerk", en: "Your child has a slight fever today.", pron: "유어 차일드 해즈 어 슬라이트 피버 투데이.", ko: "오늘 아이가 미열이 좀 있어요." },
+        { who: "customer", en: "Oh no, should I take him home?", pron: "오 노, 슈다이 테이크 힘 홈?", ko: "어머, 집에 데려가야 할까요?" }
+      ]
+    },
+    {
+      titleKo: "이유식 문의",
+      titleEn: "Asking about baby food",
+      lines: [
+        { who: "customer", en: "Does the daycare provide baby food?", pron: "더즈 더 데이케어 프로바이드 베이비 푸드?", ko: "어린이집에서 이유식을 제공하나요?" },
+        { who: "clerk", en: "Yes, we prepare it fresh every day.", pron: "예스, 위 프리페어 잇 프레시 에브리 데이.", ko: "네, 매일 신선하게 준비해요." }
+      ]
+    },
+    {
+      titleKo: "사진 공유",
+      titleEn: "Sharing photos",
+      lines: [
+        { who: "customer", en: "Do you send photos during the day?", pron: "두 유 센드 포토즈 듀어링 더 데이?", ko: "낮 동안 사진을 보내주시나요?" },
+        { who: "clerk", en: "Yes, through the daycare app.", pron: "예스, 쓰루 더 데이케어 앱.", ko: "네, 어린이집 앱으로 보내드려요." }
+      ]
+    },
+    {
+      titleKo: "예방접종 서류",
+      titleEn: "Vaccination records",
+      lines: [
+        { who: "clerk", en: "Could you bring his vaccination record next time?", pron: "쿠쥬 브링 히즈 백시네이션 레코드 넥스트 타임?", ko: "다음에 예방접종 기록을 가져다주시겠어요?" },
+        { who: "customer", en: "Sure, I'll bring it tomorrow.", pron: "슈어, 아일 브링 잇 터마로우.", ko: "네, 내일 가져올게요." }
+      ]
+    },
+    {
+      titleKo: "휴원 안내",
+      titleEn: "Daycare closure notice",
+      lines: [
+        { who: "clerk", en: "The daycare will be closed this Friday for a holiday.", pron: "더 데이케어 윌 비 클로즈드 디스 프라이데이 포 어 할러데이.", ko: "이번 주 금요일은 공휴일이라 어린이집이 쉽니다." },
+        { who: "customer", en: "Thanks for letting me know.", pron: "땡스 포 레팅 미 노우.", ko: "알려주셔서 감사해요." }
+      ]
+    },
+    {
+      titleKo: "친구 관계",
+      titleEn: "Making friends",
+      lines: [
+        { who: "customer", en: "Has he been making friends?", pron: "해즈 히 빈 메이킹 프렌즈?", ko: "친구들이랑 잘 지내고 있나요?" },
+        { who: "clerk", en: "Yes, he plays well with the other kids.", pron: "예스, 히 플레이즈 웰 위드 디 아더 키즈.", ko: "네, 다른 아이들이랑 잘 놀아요." }
+      ]
+    },
+    {
+      titleKo: "옷 갈아입히기",
+      titleEn: "Changing clothes",
+      lines: [
+        { who: "clerk", en: "He had a little accident, so we changed his clothes.", pron: "히 해드 어 리틀 액시던트, 쏘 위 체인지드 히즈 클로즈.", ko: "실수를 좀 해서 옷을 갈아입혔어요." },
+        { who: "customer", en: "Thank you for taking care of that.", pron: "땡큐 포 테이킹 케어 오브 댓.", ko: "그렇게 챙겨주셔서 감사해요." }
+      ]
+    },
+    {
+      titleKo: "감사 인사",
+      titleEn: "Saying thanks",
+      lines: [
+        { who: "customer", en: "Thank you for taking good care of him.", pron: "땡큐 포 테이킹 굿 케어 오브 힘.", ko: "잘 돌봐주셔서 감사합니다." },
+        { who: "clerk", en: "It's our pleasure. See you tomorrow.", pron: "잇츠 아워 플레저. 씨 유 터마로우.", ko: "저희도 즐거웠어요. 내일 봬요." }
+      ]
+    }
   ]
 };
 
-const CATEGORY_LABEL = { CS2: "편의점", OL7: "주유소", LIB: "도서관", FD6: "음식점", CE7: "카페", HP8: "병원", PM9: "약국", MT1: "대형마트", BK9: "은행", PK6: "주차장", AD5: "숙박", SW8: "지하철", CT1: "문화시설" };
+const CATEGORY_LABEL = { CS2: "편의점", OL7: "주유소", LIB: "도서관", FD6: "음식점", CE7: "카페", HP8: "병원", PM9: "약국", MT1: "대형마트", BK9: "은행", PK6: "주차장", AD5: "숙박", SW8: "지하철", CT1: "문화시설", SC4: "학교", PS3: "어린이집" };
 const CATEGORY_ICON = {
   CS2: { emoji: "🏪", color: "#2E6FF2" },
   OL7: { emoji: "⛽", color: "#F2872E" },
@@ -2078,10 +2326,12 @@ const CATEGORY_ICON = {
   PK6: { emoji: "🅿️", color: "#4267B2" },
   AD5: { emoji: "🏨", color: "#B8860B" },
   SW8: { emoji: "🚇", color: "#00A651" },
-  CT1: { emoji: "🎭", color: "#9B4F96" }
+  CT1: { emoji: "🎭", color: "#9B4F96" },
+  SC4: { emoji: "🏫", color: "#2C5F8A" },
+  PS3: { emoji: "🧸", color: "#D6739C" }
 };
-const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원", CE7: "직원", HP8: "간호사", PM9: "약사", MT1: "직원", BK9: "은행원", PK6: "관리인", AD5: "프런트 직원", SW8: "역무원", CT1: "안내원" };
-const CUSTOMER_LABEL = { LIB: "이용자" };
+const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원", CE7: "직원", HP8: "간호사", PM9: "약사", MT1: "직원", BK9: "은행원", PK6: "관리인", AD5: "프런트 직원", SW8: "역무원", CT1: "안내원", SC4: "교직원", PS3: "교사" };
+const CUSTOMER_LABEL = { LIB: "이용자", SC4: "학부모", PS3: "학부모" };
 const DEFAULT_CENTER = { lat: 36.9922, lng: 127.1127 }; // 경기도 평택시 (위치 정보를 못 가져올 때 기본값)
 
 let map, placesService, geocoder;
