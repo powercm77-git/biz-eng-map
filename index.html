@@ -383,10 +383,21 @@
   .translate-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
   .translate-title { font-size: 16px; font-weight: 800; }
   .translate-close { border: none; background: none; font-size: 18px; cursor: pointer; color: var(--sub); padding: 4px; }
+  .translate-input-wrap { position: relative; }
   .translate-input {
     width: 100%; min-height: 70px; border: 1.5px solid var(--line); border-radius: 10px;
-    padding: 10px; font-size: 14px; font-family: inherit; resize: vertical;
+    padding: 10px; padding-right: 44px; font-size: 14px; font-family: inherit; resize: vertical;
   }
+  .translate-mic-btn {
+    position: absolute; right: 8px; bottom: 8px; width: 30px; height: 30px;
+    border-radius: 50%; border: none; background: #EEF2FF; color: var(--primary);
+    font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .translate-mic-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .translate-mic-btn.listening { background: #FFEAEA; color: #D14343; animation: translateMicPulse 1s ease-in-out infinite; }
+  @keyframes translateMicPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .translate-mic-hint { font-size: 11.5px; color: var(--sub); margin-top: 6px; }
+  .translate-mic-hint.error { color: #D14343; }
   .translate-lang-row { display: flex; gap: 8px; margin-bottom: 8px; }
   .translate-lang-field { flex: 1; min-width: 0; }
   .translate-lang-field label { display: block; font-size: 11px; color: var(--sub); margin-bottom: 3px; }
@@ -403,6 +414,7 @@
   .translate-block + .translate-block { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line); }
   .translate-ko-label { font-size: 11px; color: var(--sub); margin-bottom: 4px; }
   .translate-block .ko { font-size: 15px; font-weight: 700; }
+  .translate-block .ko.failed, .translate-block .en.failed { font-size: 12.5px; font-weight: 500; color: #D14343; }
   .translate-note { font-size: 11px; color: var(--sub); margin-top: 8px; }
   .translate-error { font-size: 13px; color: #D14343; margin-top: 10px; }
 
@@ -557,7 +569,11 @@
       </select>
     </div>
   </div>
-  <textarea class="translate-input" id="translateInput" placeholder="하고 싶은 말을 입력하세요"></textarea>
+  <div class="translate-input-wrap">
+    <textarea class="translate-input" id="translateInput" placeholder="하고 싶은 말을 입력하거나 마이크로 말하세요"></textarea>
+    <button type="button" class="translate-mic-btn" id="translateMicBtn" aria-label="마이크로 입력">🎤</button>
+  </div>
+  <div class="translate-mic-hint hidden" id="translateMicHint"></div>
   <button class="translate-go-btn" id="translateGoBtn">변환하기</button>
   <div class="translate-result hidden" id="translateResult">
     <div class="translate-block hidden" id="translateEnBlock">
@@ -3223,14 +3239,42 @@ function syncTranslateOutModeOptions() {
 translateSrcLang.addEventListener("change", syncTranslateOutModeOptions);
 syncTranslateOutModeOptions();
 
+async function fetchGoogleTranslation(text, sourceLang, targetLang) {
+  const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("google http " + res.status);
+  const data = await res.json();
+  const result = data && data[0] ? data[0].map(seg => seg[0]).join("") : "";
+  if (!result) throw new Error("google empty result");
+  return result;
+}
+
 async function fetchMyMemoryTranslation(text, sourceLang, targetLang) {
   const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
   const res = await fetch(url);
   const data = await res.json();
   const result = data && data.responseData && data.responseData.translatedText;
-  if (!result) throw new Error("no translation");
+  if (!result) throw new Error("mymemory empty result");
   return result;
 }
+
+// 품질이 더 좋은 구글 번역을 우선 쓰고, 막히면(비공식 API라 언제든 막힐 수 있음) MyMemory로 대체
+async function translateText(text, sourceLang, targetLang) {
+  try {
+    return await fetchGoogleTranslation(text, sourceLang, targetLang);
+  } catch (e) {
+    return await fetchMyMemoryTranslation(text, sourceLang, targetLang);
+  }
+}
+
+function containsHangul(str) {
+  return /[가-힣]/.test(str);
+}
+function containsLatin(str) {
+  return /[a-zA-Z]/.test(str);
+}
+const TRANSLATE_KO_FAILED_MSG = "⚠️ 이 문장은 한국어로 정확히 변환되지 않았어요. 표현을 바꿔서 다시 시도해보세요.";
+const TRANSLATE_EN_FAILED_MSG = "이 문장은 영어로 정확히 변환되지 않았어요. 표현을 바꿔서 다시 시도해보세요.";
 
 translateGoBtn.addEventListener("click", async () => {
   const text = translateInput.value.trim();
@@ -3248,30 +3292,98 @@ translateGoBtn.addEventListener("click", async () => {
   translateGoBtn.disabled = true;
   translateGoBtn.textContent = "변환 중…";
 
-  try {
-    const [en, ko] = await Promise.all([
-      wantEn ? fetchMyMemoryTranslation(text, srcLang, "en") : Promise.resolve(null),
-      wantKo ? fetchMyMemoryTranslation(text, srcLang, "ko") : Promise.resolve(null)
-    ]);
+  // 둘 다 요청했을 때 한쪽이 실패해도 나머지 한쪽은 보여주기 위해 allSettled 사용
+  const [enResult, koResult] = await Promise.allSettled([
+    wantEn ? translateText(text, srcLang, "en") : Promise.resolve(null),
+    wantKo ? translateText(text, srcLang, "ko") : Promise.resolve(null)
+  ]);
 
-    if (en) {
-      translateEn.textContent = en;
-      translatePron.textContent = guessKoreanPronunciation(en);
-      translateEnBlock.classList.remove("hidden");
-    }
-    if (ko) {
-      translateKo.textContent = ko;
-      translateKoBlock.classList.remove("hidden");
-    }
+  const en = enResult.status === "fulfilled" ? enResult.value : null;
+  const ko = koResult.status === "fulfilled" ? koResult.value : null;
+  let shownAny = false;
+
+  if (wantEn) {
+    const enOk = en && containsLatin(en);
+    translateEn.textContent = enOk ? en : TRANSLATE_EN_FAILED_MSG;
+    translateEn.classList.toggle("failed", !enOk);
+    translatePron.textContent = enOk ? guessKoreanPronunciation(en) : "";
+    translateEnBlock.classList.remove("hidden");
+    shownAny = true;
+  }
+  if (wantKo) {
+    const koOk = ko && containsHangul(ko);
+    translateKo.textContent = koOk ? ko : TRANSLATE_KO_FAILED_MSG;
+    translateKo.classList.toggle("failed", !koOk);
+    translateKoBlock.classList.remove("hidden");
+    shownAny = true;
+  }
+
+  if (shownAny) {
     translateResult.classList.remove("hidden");
-  } catch (e) {
+  } else {
     translateError.textContent = "번역에 실패했습니다. 잠시 후 다시 시도해주세요.";
     translateError.classList.remove("hidden");
-  } finally {
-    translateGoBtn.disabled = false;
-    translateGoBtn.textContent = "변환하기";
   }
+  translateGoBtn.disabled = false;
+  translateGoBtn.textContent = "변환하기";
 });
+
+// 음성 입력(마이크) — 브라우저 내장 Web Speech API, 지원 안 되면 버튼 비활성화
+const translateMicBtn = document.getElementById("translateMicBtn");
+const translateMicHint = document.getElementById("translateMicHint");
+const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
+const TRANSLATE_SPEECH_LANG = {
+  ko: "ko-KR", en: "en-US", vi: "vi-VN", zh: "zh-CN", tl: "fil-PH", th: "th-TH",
+  mn: "mn-MN", ru: "ru-RU", km: "km-KH", uz: "uz-UZ", ne: "ne-NP", ja: "ja-JP"
+};
+
+if (!SpeechRecognitionCtor) {
+  translateMicBtn.disabled = true;
+  translateMicBtn.title = "이 브라우저는 음성 입력을 지원하지 않습니다";
+} else {
+  let recognizer = null;
+  let isListening = false;
+
+  function showMicHint(msg, isError) {
+    translateMicHint.textContent = msg;
+    translateMicHint.classList.toggle("error", !!isError);
+    translateMicHint.classList.toggle("hidden", !msg);
+  }
+
+  translateMicBtn.addEventListener("click", () => {
+    if (isListening) {
+      recognizer && recognizer.stop();
+      return;
+    }
+    showMicHint("", false);
+    recognizer = new SpeechRecognitionCtor();
+    recognizer.lang = TRANSLATE_SPEECH_LANG[translateSrcLang.value] || "ko-KR";
+    recognizer.interimResults = false;
+    recognizer.maxAlternatives = 1;
+    recognizer.onstart = () => {
+      isListening = true;
+      translateMicBtn.classList.add("listening");
+      showMicHint("듣고 있어요…", false);
+    };
+    recognizer.onresult = (e) => {
+      const transcript = e.results[0][0].transcript;
+      translateInput.value = transcript;
+      showMicHint("", false);
+    };
+    recognizer.onerror = (e) => {
+      showMicHint("음성 인식에 실패했어요. 이 언어는 지원되지 않을 수 있어요 — 직접 입력해주세요.", true);
+    };
+    recognizer.onend = () => {
+      isListening = false;
+      translateMicBtn.classList.remove("listening");
+    };
+    try {
+      recognizer.start();
+    } catch (e) {
+      showMicHint("음성 인식을 시작할 수 없어요. 직접 입력해주세요.", true);
+    }
+  });
+}
 
 translateSpeakBtn.addEventListener("click", () => {
   speakEnglish(translateEn.textContent);
