@@ -2069,6 +2069,7 @@ const DEFAULT_CENTER = { lat: 36.9922, lng: 127.1127 }; // 경기도 평택시 (
 
 let map, placesService, geocoder;
 let markers = [];
+let myLocationMarker = null;
 let currentCat = "CS2";
 let currentSheetPlace = null;
 let roadviewInstance = null;
@@ -2088,6 +2089,23 @@ function buildMarkerImage(catCode) {
   );
 }
 
+function setMyLocationMarker(center) {
+  const position = new kakao.maps.LatLng(center.lat, center.lng);
+  if (myLocationMarker) {
+    myLocationMarker.setPosition(position);
+    return;
+  }
+  myLocationMarker = new kakao.maps.Marker({
+    map,
+    position,
+    zIndex: 10,
+    image: new kakao.maps.MarkerImage(
+      "data:image/svg+xml;base64," + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"><circle cx="9" cy="9" r="7" fill="#2E6FF2" stroke="#fff" stroke-width="3"/></svg>'),
+      new kakao.maps.Size(18, 18)
+    )
+  });
+}
+
 function initMap(center) {
   const container = document.getElementById("map");
   map = new kakao.maps.Map(container, {
@@ -2105,14 +2123,7 @@ function initMap(center) {
   });
   window.addEventListener("resize", () => map.relayout());
 
-  new kakao.maps.Marker({
-    map,
-    position: new kakao.maps.LatLng(center.lat, center.lng),
-    image: new kakao.maps.MarkerImage(
-      "data:image/svg+xml;base64," + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"><circle cx="9" cy="9" r="7" fill="#2E6FF2" stroke="#fff" stroke-width="3"/></svg>'),
-      new kakao.maps.Size(18, 18)
-    )
-  });
+  setMyLocationMarker(center);
 
   searchNearby(center, currentCat);
 
@@ -2452,8 +2463,9 @@ function locateUser(recenter) {
       const center = { lat: pos.coords.latitude, lng: pos.coords.longitude };
       if (!map) {
         initMap(center);
-      } else if (recenter) {
-        map.setCenter(new kakao.maps.LatLng(center.lat, center.lng));
+      } else {
+        setMyLocationMarker(center);
+        if (recenter) map.setCenter(new kakao.maps.LatLng(center.lat, center.lng));
       }
     },
     () => {
