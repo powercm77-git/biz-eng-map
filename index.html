@@ -387,12 +387,22 @@
     width: 100%; min-height: 70px; border: 1.5px solid var(--line); border-radius: 10px;
     padding: 10px; font-size: 14px; font-family: inherit; resize: vertical;
   }
+  .translate-lang-row { display: flex; gap: 8px; margin-bottom: 8px; }
+  .translate-lang-field { flex: 1; min-width: 0; }
+  .translate-lang-field label { display: block; font-size: 11px; color: var(--sub); margin-bottom: 3px; }
+  .translate-lang-field select {
+    width: 100%; border: 1.5px solid var(--line); border-radius: 10px;
+    padding: 8px 6px; font-size: 12.5px; font-family: inherit; color: var(--ink); background: #fff;
+  }
   .translate-go-btn {
     margin-top: 10px; width: 100%; background: var(--primary); color: #fff; border: none;
     border-radius: 10px; padding: 11px; font-size: 14px; font-weight: 700; cursor: pointer;
   }
   .translate-go-btn:disabled { opacity: 0.6; cursor: default; }
   .translate-result { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .translate-block + .translate-block { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line); }
+  .translate-ko-label { font-size: 11px; color: var(--sub); margin-bottom: 4px; }
+  .translate-block .ko { font-size: 15px; font-weight: 700; }
   .translate-note { font-size: 11px; color: var(--sub); margin-top: 8px; }
   .translate-error { font-size: 13px; color: #D14343; margin-top: 10px; }
 
@@ -520,14 +530,46 @@
     <div class="translate-title">즉석 번역</div>
     <button class="translate-close" id="translateCloseBtn">✕</button>
   </div>
-  <textarea class="translate-input" id="translateInput" placeholder="하고 싶은 말을 한글로 입력하세요"></textarea>
-  <button class="translate-go-btn" id="translateGoBtn">영어로 바꾸기</button>
-  <div class="translate-result hidden" id="translateResult">
-    <div class="en-row">
-      <div class="en" id="translateEn"></div>
-      <button type="button" class="speak-btn" id="translateSpeakBtn" aria-label="영어 발음 듣기">🔊</button>
+  <div class="translate-lang-row">
+    <div class="translate-lang-field">
+      <label for="translateSrcLang">모국어</label>
+      <select id="translateSrcLang">
+        <option value="ko">한국어</option>
+        <option value="vi">베트남어</option>
+        <option value="zh">중국어</option>
+        <option value="tl">필리핀어(타갈로그)</option>
+        <option value="th">태국어</option>
+        <option value="mn">몽골어</option>
+        <option value="ru">러시아어</option>
+        <option value="km">캄보디아어</option>
+        <option value="uz">우즈베크어</option>
+        <option value="ne">네팔어</option>
+        <option value="ja">일본어</option>
+      </select>
     </div>
-    <div class="pron" id="translatePron"></div>
+    <div class="translate-lang-field">
+      <label for="translateOutMode">변환 결과</label>
+      <select id="translateOutMode">
+        <option value="both">영어+한국어</option>
+        <option value="en">영어만</option>
+        <option value="ko">한국어만</option>
+      </select>
+    </div>
+  </div>
+  <textarea class="translate-input" id="translateInput" placeholder="하고 싶은 말을 입력하세요"></textarea>
+  <button class="translate-go-btn" id="translateGoBtn">변환하기</button>
+  <div class="translate-result hidden" id="translateResult">
+    <div class="translate-block hidden" id="translateEnBlock">
+      <div class="en-row">
+        <div class="en" id="translateEn"></div>
+        <button type="button" class="speak-btn" id="translateSpeakBtn" aria-label="영어 발음 듣기">🔊</button>
+      </div>
+      <div class="pron" id="translatePron"></div>
+    </div>
+    <div class="translate-block hidden" id="translateKoBlock">
+      <div class="translate-ko-label">한국어</div>
+      <div class="ko" id="translateKo"></div>
+    </div>
     <div class="translate-note">※ 자동 번역·자동 발음이라 정확하지 않을 수 있어요. 미리 준비된 대화(정보/대화 탭)가 더 정확합니다.</div>
   </div>
   <div class="translate-error hidden" id="translateError"></div>
@@ -3142,10 +3184,15 @@ function guessKoreanPronunciation(englishText) {
 const translateOverlay = document.getElementById("translateOverlay");
 const translateModal = document.getElementById("translateModal");
 const translateInput = document.getElementById("translateInput");
+const translateSrcLang = document.getElementById("translateSrcLang");
+const translateOutMode = document.getElementById("translateOutMode");
 const translateGoBtn = document.getElementById("translateGoBtn");
 const translateResult = document.getElementById("translateResult");
+const translateEnBlock = document.getElementById("translateEnBlock");
 const translateEn = document.getElementById("translateEn");
 const translatePron = document.getElementById("translatePron");
+const translateKoBlock = document.getElementById("translateKoBlock");
+const translateKo = document.getElementById("translateKo");
 const translateError = document.getElementById("translateError");
 const translateSpeakBtn = document.getElementById("translateSpeakBtn");
 
@@ -3162,31 +3209,63 @@ document.getElementById("translateToggleBtn").addEventListener("click", openTran
 document.getElementById("translateCloseBtn").addEventListener("click", closeTranslateModal);
 translateOverlay.addEventListener("click", closeTranslateModal);
 
+// 모국어로 한국어를 고르면 "한국어만/영어+한국어"는 의미가 없으니 영어만 남긴다
+function syncTranslateOutModeOptions() {
+  const isKo = translateSrcLang.value === "ko";
+  translateOutMode.querySelector('option[value="ko"]').disabled = isKo;
+  translateOutMode.querySelector('option[value="both"]').disabled = isKo;
+  if (isKo && translateOutMode.value !== "en") translateOutMode.value = "en";
+}
+translateSrcLang.addEventListener("change", syncTranslateOutModeOptions);
+syncTranslateOutModeOptions();
+
+async function fetchMyMemoryTranslation(text, sourceLang, targetLang) {
+  const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  const result = data && data.responseData && data.responseData.translatedText;
+  if (!result) throw new Error("no translation");
+  return result;
+}
+
 translateGoBtn.addEventListener("click", async () => {
   const text = translateInput.value.trim();
   if (!text) return;
 
+  const srcLang = translateSrcLang.value;
+  const outMode = translateOutMode.value;
+  const wantEn = outMode === "both" || outMode === "en";
+  const wantKo = (outMode === "both" || outMode === "ko") && srcLang !== "ko";
+
   translateError.classList.add("hidden");
   translateResult.classList.add("hidden");
+  translateEnBlock.classList.add("hidden");
+  translateKoBlock.classList.add("hidden");
   translateGoBtn.disabled = true;
   translateGoBtn.textContent = "변환 중…";
 
   try {
-    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=ko|en`;
-    const res = await fetch(url);
-    const data = await res.json();
-    const en = data && data.responseData && data.responseData.translatedText;
-    if (!en) throw new Error("no translation");
+    const [en, ko] = await Promise.all([
+      wantEn ? fetchMyMemoryTranslation(text, srcLang, "en") : Promise.resolve(null),
+      wantKo ? fetchMyMemoryTranslation(text, srcLang, "ko") : Promise.resolve(null)
+    ]);
 
-    translateEn.textContent = en;
-    translatePron.textContent = guessKoreanPronunciation(en);
+    if (en) {
+      translateEn.textContent = en;
+      translatePron.textContent = guessKoreanPronunciation(en);
+      translateEnBlock.classList.remove("hidden");
+    }
+    if (ko) {
+      translateKo.textContent = ko;
+      translateKoBlock.classList.remove("hidden");
+    }
     translateResult.classList.remove("hidden");
   } catch (e) {
     translateError.textContent = "번역에 실패했습니다. 잠시 후 다시 시도해주세요.";
     translateError.classList.remove("hidden");
   } finally {
     translateGoBtn.disabled = false;
-    translateGoBtn.textContent = "영어로 바꾸기";
+    translateGoBtn.textContent = "변환하기";
   }
 });
 
