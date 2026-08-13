@@ -5,7 +5,26 @@
 const fs = require("fs");
 const path = require("path");
 
-const LIB_API_KEY = "3582bad0344bcb07b95092507b88b3eadcaa1b501e04ee1548edeb58375ef009";
+function loadEnv() {
+  const envPath = path.join(__dirname, "..", ".env");
+  if (!fs.existsSync(envPath)) return {};
+  const out = {};
+  for (const line of fs.readFileSync(envPath, "utf-8").split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const eq = trimmed.indexOf("=");
+    if (eq === -1) continue;
+    out[trimmed.slice(0, eq).trim()] = trimmed.slice(eq + 1).trim();
+  }
+  return out;
+}
+
+const env = { ...loadEnv(), ...process.env };
+const LIB_API_KEY = env.LIB_API_KEY;
+if (!LIB_API_KEY) {
+  console.error("LIB_API_KEY가 없습니다. 로컬은 .env에 LIB_API_KEY=키값, GitHub Actions는 secrets.LIB_API_KEY를 설정하세요.");
+  process.exit(1);
+}
 const DATA_DIR = path.join(__dirname, "..", "data");
 
 async function fetchJson(url) {
