@@ -228,6 +228,37 @@
   }
   .map-hint-help { color: #9AA3AF; }
 
+  .lib-legend {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 7px 14px;
+    font-size: 11.5px;
+    color: var(--sub);
+    border-bottom: 1px solid var(--line);
+    background: var(--card);
+  }
+  .legend-dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  .legend-dot.on { background: #16A34A; }
+  .legend-dot.off { background: #9CA3AF; }
+  .result-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .result-dot.on { background: #16A34A; }
+  .result-dot.off { background: #9CA3AF; }
+
   /* ---------- Bottom sheet ---------- */
   .sheet-overlay {
     position: fixed;
@@ -491,6 +522,11 @@
     <div class="map-hint">
       <span id="mapHintText">현재 위치 주변 편의점을 찾고 있습니다…</span>
       <span class="map-hint-help">· 마커 눌러 확인</span>
+    </div>
+
+    <div class="lib-legend hidden" id="libLegend">
+      <span><span class="legend-dot on"></span>좌석 정보 있음</span>
+      <span><span class="legend-dot off"></span>정보 없음</span>
     </div>
 
     <div class="results-list" id="resultsList"></div>
@@ -2652,6 +2688,8 @@ const CATEGORY_ICON = {
   PS3: { emoji: "🧸", color: "#D6739C" },
   OFC: { emoji: "🏢", color: "#4B4E6D" }
 };
+// 도서관 마커는 카테고리 고유색 대신 좌석 정보 유무로 색을 바꾼다(2026-08-18 사용자 요청).
+const LIB_SEAT_COLOR = { available: "#16A34A", none: "#9CA3AF" };
 const STAFF_LABEL = { CS2: "점원", OL7: "주유원", LIB: "사서", FD6: "직원", CE7: "직원", HP8: "간호사", PM9: "약사", MT1: "직원", BK9: "은행원", PK6: "관리인", AD5: "프런트 직원", SW8: "역무원", CT1: "안내원", SC4: "교직원", PS3: "교사", OFC: "동료" };
 const CUSTOMER_LABEL = { LIB: "이용자", SC4: "학부모", PS3: "학부모", OFC: "나" };
 const DEFAULT_CENTER = { lat: 36.9922, lng: 127.1127 }; // 경기도 평택시 (위치 정보를 못 가져올 때 기본값)
@@ -2664,10 +2702,11 @@ let currentSheetPlace = null;
 let roadviewInstance = null;
 let roadviewLoadedForKey = null;
 
-function buildMarkerImage(catCode) {
+function buildMarkerImage(catCode, seatStatus) {
   const meta = CATEGORY_ICON[catCode] || { emoji: "📍", color: "#2E6FF2" };
+  const color = (catCode === "LIB" && seatStatus) ? LIB_SEAT_COLOR[seatStatus] : meta.color;
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="44" viewBox="0 0 36 44">
-    <path d="M18 0C8 0 0 8 0 18c0 13 18 26 18 26s18-13 18-26C36 8 28 0 18 0z" fill="${meta.color}"/>
+    <path d="M18 0C8 0 0 8 0 18c0 13 18 26 18 26s18-13 18-26C36 8 28 0 18 0z" fill="${color}"/>
     <circle cx="18" cy="17" r="12.5" fill="#fff"/>
     <text x="18" y="23" font-size="15" text-anchor="middle">${meta.emoji}</text>
   </svg>`;
@@ -2729,8 +2768,23 @@ function clearMarkers() {
 
 function searchNearby(center, catCode) {
   document.getElementById("mapHintText").textContent = `${CATEGORY_LABEL[catCode]} 찾는 중…`;
+  document.getElementById("libLegend").classList.toggle("hidden", catCode !== "LIB");
 
-  const handleResults = (results, status) => {
+  // 도서관 한 곳마다 "매칭되는 도서관인가 → 그 도서관에 현재 좌석 스냅샷 행이 있는가"를
+  // 확인해야 마커 색을 정할 수 있다. index/seats 스냅샷은 fetch 프로미스가 캐시돼 있어
+  // 15곳을 확인해도 실제 네트워크 요청은 처음 한 번뿐이다.
+  const resolveSeatStatus = async (place) => {
+    const lib = await findMatchingLibrary(place);
+    if (!lib) return "none";
+    try {
+      const { rows } = await fetchLibrarySeatRows(lib);
+      return rows.length ? "available" : "none";
+    } catch {
+      return "none";
+    }
+  };
+
+  const handleResults = async (results, status) => {
     if (status !== kakao.maps.services.Status.OK || !results.length) {
       document.getElementById("mapHintText").textContent = "주변에서 찾지 못했습니다. 지도를 움직여보세요.";
       clearMarkers();
@@ -2739,17 +2793,23 @@ function searchNearby(center, catCode) {
     }
     clearMarkers();
     const limited = results.slice(0, 15);
-    limited.forEach(place => {
+    let items = limited.map(place => ({ place, seatStatus: null }));
+    if (catCode === "LIB") {
+      items = await Promise.all(
+        limited.map(async place => ({ place, seatStatus: await resolveSeatStatus(place) }))
+      );
+    }
+    items.forEach(({ place, seatStatus }) => {
       const marker = new kakao.maps.Marker({
         map,
         position: new kakao.maps.LatLng(place.y, place.x),
-        image: buildMarkerImage(catCode)
+        image: buildMarkerImage(catCode, seatStatus)
       });
       kakao.maps.event.addListener(marker, "click", () => openSheet(place, catCode));
       markers.push(marker);
     });
-    renderResultsList(limited, catCode);
-    document.getElementById("mapHintText").textContent = `주변 ${CATEGORY_LABEL[catCode]} ${limited.length}곳 표시됨`;
+    renderResultsList(items, catCode);
+    document.getElementById("mapHintText").textContent = `주변 ${CATEGORY_LABEL[catCode]} ${items.length}곳 표시됨`;
   };
 
   const location = new kakao.maps.LatLng(center.lat, center.lng);
@@ -2769,14 +2829,17 @@ function searchNearby(center, catCode) {
   }
 }
 
-function renderResultsList(results, catCode) {
+function renderResultsList(items, catCode) {
   const list = document.getElementById("resultsList");
   list.innerHTML = "";
-  results.forEach(place => {
+  items.forEach(({ place, seatStatus }) => {
     const item = document.createElement("div");
     item.className = "result-item";
+    const dot = catCode === "LIB"
+      ? `<span class="result-dot ${seatStatus === "available" ? "on" : "off"}"></span>`
+      : "";
     item.innerHTML = `
-      <div class="result-name">${place.place_name}</div>
+      <div class="result-name">${dot}${place.place_name}</div>
       <div class="result-addr">${place.road_address_name || place.address_name || ""}</div>
     `;
     item.addEventListener("click", () => {
