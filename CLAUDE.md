@@ -16,6 +16,11 @@
 >    문제(OAuth App workflow scope)가 있다 — 시간 낭비하지 않으려면 먼저 읽어야 한다.
 > 4. 이 프로젝트는 **넷리파이(Netlify)를 쓰지 않는다.** GitHub Pages다(`main` 브랜치 루트,
 >    빌드 단계 없이 `index.html`을 그대로 서빙). 혼동해서 넷리파이 관련 설정을 찾지 말 것.
+> 5. **★★ 이 저장소는 절대 비공개로 전환하지 말 것(2026-08-18 실제 장애로 확인).**
+>    Free 요금제에서는 저장소를 private으로 바꾸면 GitHub Pages 사이트가 **완전히 내려간다**
+>    (404). `public`으로 되돌려도 자동 복구가 안 되고 Pages를 API로 재생성해야 한다
+>    (`gh api repos/.../pages -X POST -f "source[branch]=main" -f "source[path]=/"`).
+>    자세한 경위는 2-3절 참고.
 
 ---
 
@@ -161,6 +166,34 @@ API가 통했다) → YAML 파서로 재검증 → `gh workflow run`으로 수�
   (songstock의 `logic/integrity_check.py` 같은 것)을 만들 가치가 있다 — 아직 미착수.
 - `apis.data.go.kr` 연결이 가끔 타임아웃 난다(1/2 성공) — 일회성 실패로 판단하지 말고 재시도로
   구분할 것. 워크플로 자체에 재시도 로직을 넣는 것도 고려해볼 만하다(미착수).
+
+## 2-3. GitHub Pages는 저장소를 비공개로 바꾸면 죽는다 (2026-08-18 실제 장애)
+
+사용자가 "코드는 필요할 때만 공개하자"는 원칙으로 이 저장소를 포함해 여러 저장소를
+비공개로 일괄 전환하려 했다. `gh repo edit --visibility private`로 바꾸자
+**GitHub Pages 사이트가 즉시 404로 죽었다.** (참고로 사전에 GitHub 공식 문서를 찾아보고
+"Free/Pro 요금제는 저장소를 비공개로 해도 Pages 사이트는 계속 공개로 뜬다"는 문서 내용을
+믿고 진행했는데, **실제로는 틀렸다** — 적어도 이 계정/시점 기준으로는 즉시 내려갔다.
+문서와 실제 동작이 다를 수 있다는 사례로 기록해둔다.)
+
+- **legacy 빌드**(이 저장소가 씀, `main` 브랜치 루트를 그대로 서빙)는 private 전환 시
+  **즉시** 404, `public`으로 되돌려도 Pages 설정 자체가 사라져서(`GET .../pages`가 404)
+  수동으로 다시 만들어야 복구된다.
+- **workflow 빌드**(healthyplan이 씀, GitHub Actions로 빌드해 `actions/deploy-pages`로
+  배포)는 private 전환 직후엔 잠깐 살아있는 것처럼 보였지만(200) **몇 분 뒤 결국 같이
+  내려갔다**(지연된 반영으로 추정). 복구하려면 Pages를 재생성(`build_type=workflow`로
+  POST)한 다음 배포 워크플로를 수동 재실행(`gh workflow run "Deploy to GitHub Pages"`)해야
+  한다 — 단순 재실행만으로는 안 됨(`actions/deploy-pages`가 "Pages가 활성화돼 있어야
+  배포 가능"이라며 404로 거부하기 때문에 Pages 재생성이 먼저다).
+- 두 경우 다 실제로 겪고 복구까지 완료함(다운타임 각각 수 분). 사용자가 바로 "승인" 요청에
+  응답해줘서 빨리 복구됐다 — **다음에 누군가 비공개 전환을 다시 시도하면 곧바로 같은 장애가
+  재현된다는 뜻이니, 시도 자체를 하지 말 것.**
+
+**결론 — 이 계정의 실제 정책**: songstock·scenemap-app·biz-eng-map-contest처럼 **사람이 직접
+쓰는 개인용/미공개 도구는 비공개로 유지.** biz-eng-map·healthyplan처럼 **GitHub Pages로
+띄워서 남(학생 등)이 URL로 접속해 쓰는 서비스는 공개로 유지**할 수밖에 없다(Enterprise
+요금제가 아닌 한 대안이 없음). "코드는 필요할 때 공개" 원칙은 코드 전용 저장소에는
+적용하되, 이미 배포된 서비스 저장소 두 곳은 예외로 둔다.
 
 ## 3. 알아둘 것
 
