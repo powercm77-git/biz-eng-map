@@ -19,8 +19,9 @@ jobs:
           node-version: "20"
 
       - run: node scripts/fetch-library-data.js
-         env:
-                  LIB_API_KEY: ${{ secrets.LIB_API_KEY }}
+        env:
+          LIB_API_KEY: ${{ secrets.LIB_API_KEY }}
+
       - name: Commit snapshot if changed
         run: |
           git config user.name "github-actions[bot]"
